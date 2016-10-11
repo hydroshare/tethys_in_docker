@@ -1,0 +1,1 @@
+FROM ciwater/postgis:latest
