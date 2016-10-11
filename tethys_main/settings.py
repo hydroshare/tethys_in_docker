@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.getenv('DEBUG').lower() == 'true' else False
+DEBUG = True if os.getenv('DEBUG', "False").lower() == 'true' else False
 
 # List those who should be notified of an error when DEBUG = False as a tuple of (name, email address).
 # i.e.: ADMINS = (('John', 'john@example.com'), ('Mary', 'mary@example.com'))
@@ -218,7 +218,7 @@ GRAVATAR_DFFAULT_SECURE = True
 BYPASS_TETHYS_HOME_PAGE = False
 
 # Use this setting to disable open account signup
-ENABLE_OPEN_SIGNUP = False
+ENABLE_OPEN_SIGNUP = True if os.getenv('ENABLE_OPEN_SIGNUP', "False").lower() == 'true' else False
 
 # Uncomment the following lines and adjust to match your setup to enable emailing capabilities
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

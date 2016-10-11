@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+echo "Installing Tethys platform"
+sleep 3
+python setup.py develop
+echo "Done"

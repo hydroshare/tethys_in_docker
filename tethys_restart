@@ -1,4 +1,41 @@
-docker-compose stop
-wait
-docker-compose up
-wait
+#!/usr/bin/env bash
+# Author: Zhiyu(Drew) Li <zyli2004@gmail.com>
+
+display_usage() {
+    echo "*** Restart Tethys Containers Script***"
+    echo "usage: $0              # restart tethys_main container"
+    echo "usage: $0 all          # restart all containers (tethys_main, postgis, geoserver and etc.)"
+    echo "usage: $0 help         # display this help"
+}
+
+restart_all_containers() {
+    echo "Restart all Tethys containers"
+    docker-compose stop
+    docker-compose up -d
+}
+
+restart_tethys_main_container() {
+    echo "Restart tethys_main container"
+    docker stop tethys_in_docker_main
+    wait
+    docker start tethys_in_docker_main
+}
+
+case_func() {
+    case "$1" in
+        all) restart_all_containers
+            ;;
+        help) display_usage
+            ;;
+        *) display_usage
+            ;;
+    esac
+}
+
+if [  $# -eq 0 ]
+then
+    restart_tethys_main_container
+else
+    case_func $1
+fi
+

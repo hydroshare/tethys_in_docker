@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+
+app_folder=$1
+echo $app_folder
+echo "Installing..."
+docker exec -it tethys_in_docker_main bash -c "cd /apps/$app_folder && \
+                                               python setup.py develop"
+echo "Done"

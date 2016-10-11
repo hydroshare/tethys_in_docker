@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+
+app_name=$1
+
+echo "Uninstalling..."
+docker exec -it tethys_in_docker_main bash -c "rm -f /tethys/tethys_apps/tethysapp/$app_name"
+echo "Done"

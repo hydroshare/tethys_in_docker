@@ -6,6 +6,7 @@ RUN apt-get install -y python-dev python-pip libpq-dev \
 
 ENV PATH /usr/local/bin:$PATH
 
+RUN pip install --upgrade pip
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 

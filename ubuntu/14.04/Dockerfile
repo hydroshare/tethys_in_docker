@@ -15,7 +15,7 @@ RUN cd /src  && \
     cd pip-8.1.2  && \
     python setup.py install  && \
     cd /  && \
-    rm -rvf /src
+    rm -rf /src
 
 ENV PATH /usr/local/bin:$PATH
 

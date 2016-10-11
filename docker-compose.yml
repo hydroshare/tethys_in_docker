@@ -3,27 +3,40 @@ services:
   tethys_in_docker_postgis:
     restart: always
     container_name: tethys_in_docker_postgis
-#    build: ./tethys_postgis/
-#    image: tethys_in_docker_postgis
-    image: ciwater/postgis:latest
+    image: ciwater/postgis:2.1.2
     ports:
       - 5435:5432
 #    volumes:
-#      - tethys_pgdata:/var/lib/postgresql/data/
+#      - ./postgis/var/log/:/var/log
+    env_file: .env
+
+  tethys_in_docker_geoserver:
+    restart: always
+    container_name: tethys_in_docker_geoserver
+    image: ciwater/geoserver:2.8.2-clustered
+    ports:
+      - 8181:8181
+      - 8081:8081
+      - 8082:8082
+      - 8083:8083
+      - 8084:8084
+#    volumes:
+#      - ./geoserver/var/log/:/var/log
+#      - ./geoserver/var/geoserver/data/:/var/geoserver/data
     env_file: .env
 
 
   tethys_in_docker_main:
-    restart: always
     container_name: tethys_in_docker_main
     build: ./tethys_main/
     image: tethys_in_docker_main
     ports:
       - 8000:8000
     volumes:
-      - ./tethys_main/tethys_src/:/tethys
+      - ./tethys/:/tethys
       - ./tethys_main/settings.py:/tethys/tethys_apps/settings.py
-
+      - ./tethys_main/build-tethys:/tethys/build-tethys
+      - ./apps/:/apps
       # Add apps here
 #      - ./apps/snow-inspector/tethysapp/snow_inspector:/tethys/tethys_apps/tethysapp/snow_inspector
 #      - ./apps/test_tethys_1_3/tethysapp/my_first_app_1_3:/tethys/tethys_apps/tethysapp/my_first_app_1_3
@@ -41,6 +54,7 @@ services:
 
     depends_on:
       - tethys_in_docker_postgis
+      - tethys_in_docker_geoserver
 
 #  tethys_in_docker_nginx:
 #    restart: always
