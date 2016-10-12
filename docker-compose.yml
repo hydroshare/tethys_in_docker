@@ -26,6 +26,7 @@ services:
     env_file: .env
 
   tethys_in_docker_main:
+    restart: always
     container_name: tethys_in_docker_main
     build: ./tethys_main/
     image: tethys_in_docker_main
