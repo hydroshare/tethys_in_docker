@@ -18,17 +18,22 @@ sudo ./tethys_rebuild release-candidate-140-1
 
 ####2) install an app:
 
-cd apps
+download the app source if it is not in "apps" folder yet
 
-git clone APP_GIT_URL
+  cd apps
+
+  git clone APP_GIT_URL
 
 ./tethys_install_app APP_FOLDER_NAME
 
-####3) uninstall a app:
+./tethys_restart
+
+####3) uninstall an existing app:
 
 ./tethys_uninstall_app APP_PACKAGE_NAME
 
+./tethys_restart
 
 ####4) create a new app (using tethys scaffold)
 
-./tethys_create_app APP_NAME
+./tethys_create_app NEW_APP_NAME
