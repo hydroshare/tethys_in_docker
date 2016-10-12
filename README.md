@@ -4,9 +4,15 @@ Experimental
 
 How to use:
 
-1) git clone this repo
-2) cd tethys_in_docker
-3) ./tethys_rebuild
-   create super user
-4) visit 127.0.0.1:8000
+*Some usages:
+*0) install latest docker-engine and docker-compose on host
 
+*1) build tethys_in_docker in one command:
+*sudo ./tethys_rebuild release-candidate-140-1
+
+*2) install an app:
+8git clone your app repo to folder "apps"
+*./tethys_install_app APP_FOLDER_NAME
+
+*3) uninstall a app:
+*./tethys_uninstall_app APP_PACKAGE_NAME
