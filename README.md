@@ -12,7 +12,9 @@ sudo ./tethys_rebuild release-candidate-140-1
 
 ####2) install an app:
 cd apps
+
 git clone APP_GIT_URL
+
 ./tethys_install_app APP_FOLDER_NAME
 
 ####3) uninstall a app:
