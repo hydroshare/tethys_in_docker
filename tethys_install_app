@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 app_folder=$1
 echo $app_folder
 echo "Installing..."
