@@ -25,7 +25,6 @@ services:
 #      - ./geoserver/var/geoserver/data/:/var/geoserver/data
     env_file: .env
 
-
   tethys_in_docker_main:
     container_name: tethys_in_docker_main
     build: ./tethys_main/
