@@ -192,7 +192,7 @@ STATICFILES_FINDERS = (
 )
 
 # Uncomment the next line for production installation
-#STATIC_ROOT = '/var/www/tethys/static'
+STATIC_ROOT = '/var/www/tethys/static'
 
 # Tethys Workspaces
 #TETHYS_WORKSPACES_ROOT = '/var/www/tethys/workspaces'

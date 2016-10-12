@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 echo "*** Rebuild Tethys_in_Docker ***"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPT_DIR
 
 if [  $# -eq 0 ]
 then
@@ -23,10 +25,12 @@ git clone https://github.com/tethysplatform/tethys.git
 cd tethys
 echo "Using branch " $branch_name
 git checkout $branch_name
-cd ../
+cd ..
 cp -f tethys/requirements.txt tethys_main/
-echo "Build images...."
+rm -rf static
+mkdir -p static
 
+echo "Build images...."
 docker-compose build
 echo "Start containers...."
 docker-compose up -d
@@ -39,10 +43,11 @@ echo "Migrate DB...."
 
 docker exec -it tethys_in_docker_main bash -c "/bin/bash build-tethys && \
                                                        python manage.py migrate && \
+                                                       python manage.py collectstatic --noinput && \
                                                        python manage.py createsuperuser"
 # docker exec -it tethys_in_docker_main python manage.py migrate
 # docker exec -it tethys_in_docker_main python manage.py createsuperuser
 echo "Restart containers...."
-docker-compose restart
+docker restart tethys_in_docker_main
 wait
 echo "Done. Visit 127.0.0.1:8000"
