@@ -19,16 +19,19 @@ docker rm -f $(docker ps -a -q -f name=tethys_in_docker*)
 echo "Remove unused data volumes...."
 docker volume rm $(docker volume ls -qf dangling=true)
 
-echo "Clone Tethys repo...."
+# create required folders
 rm -rf tethys
+rm -rf static
+mkdir -p static
+mddir -p apps
+
+echo "Clone Tethys repo...."
 git clone https://github.com/tethysplatform/tethys.git
 cd tethys
 echo "Using branch " $branch_name
 git checkout $branch_name
 cd ..
 cp -f tethys/requirements.txt tethys_main/
-rm -rf static
-mkdir -p static
 
 echo "Build images...."
 docker-compose build
