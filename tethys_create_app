@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+APP_NAME=$1
+USER_NAME=$(whoami)
+USER_ID=$(id -u)
+GROUP_ID=$(id -g)
+echo $APP_NAME
+echo $USER_NAME
+echo $USER_ID
+echo $GROUP_ID
+
+docker exec -it tethys_in_docker_main bash -c "groupadd -g $GROUP_ID $USER_NAME && \
+                                               useradd  -g $GROUP_ID -u $USER_ID $USER_NAME
+                                               cd /apps && \
+                                               tethys scaffold $APP_NAME && \
+                                               chown -R $USER_NAME:$USER_NAME /apps"
