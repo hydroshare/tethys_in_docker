@@ -23,7 +23,6 @@ docker volume rm $(docker volume ls -qf dangling=true)
 rm -rf tethys
 rm -rf static
 mkdir -p static
-mddir -p apps
 
 echo "Clone Tethys repo...."
 git clone https://github.com/tethysplatform/tethys.git
