@@ -5,5 +5,8 @@ echo $app_folder
 echo "Installing..."
 docker exec -it tethys_in_docker_main bash -c "cd /apps/$app_folder && \
                                                python setup.py develop  && \
-                                               python /tethys/manage.py collectstatic --noinput"
+                                               python /tethys/manage.py collectstatic --noinput && \
+                                               chown -R tethys-user:tethys-group /tethys && \
+                                               chown -R tethys-user:tethys-group /apps && \
+                                               chown -R tethys-user:tethys-group /var/www/tethys/static"
 echo "Done"

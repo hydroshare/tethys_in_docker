@@ -8,5 +8,10 @@ RUN pip install gunicorn==19.6.0
 ### END - App-specific Additions ###
 
 RUN mkdir /tethys
+
+RUN groupadd tethys-group
+RUN useradd -g tethys-group tethys-user
+
 WORKDIR /tethys
 
+CMD ["/bin/bash"]

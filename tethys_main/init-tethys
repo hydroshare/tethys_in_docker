@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+USER_ID=$1
+GROUP_ID=$2
+
+echo "User ID passed in"
+echo $USER_ID
+echo "Group ID passed in"
+echo $GROUP_ID
+
+usermod -u $USER_ID tethys-user
+groupmod -g $GROUP_ID tethys-group
+mkdir -p /home/tethys-user
+# cp -rf /root/.tethyscluster /home/tethys-user
+chown -R tethys-user:tethys-group /home/tethys-user
+
+python setup.py develop
+python manage.py migrate
+python manage.py collectstatic -v 0 --noinput
+chown -R tethys-user:tethys-group /tethys
+chown -R tethys-user:tethys-group /apps
+chown -R tethys-user:tethys-group /var/www/tethys/static
+python manage.py createsuperuser
+
+
+#echo "Installing Tethys Platform"
+#sleep 3
+#runuser -p -u tethys-user -g tethys-group python setup.py develop
+#echo "Done"

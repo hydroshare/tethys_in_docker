@@ -3,6 +3,17 @@ echo "*** Rebuild Tethys_in_Docker ***"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPT_DIR
 
+USER_NAME=$(whoami)
+USER_ID=$(id -u)
+GROUP_ID=$(id -g)
+
+echo "User Name"
+echo $USER_NAME
+echo "User ID"
+echo $USER_ID
+echo "Group ID"
+echo $GROUP_ID
+
 if [  $# -eq 0 ]
 then
     branch_name=release-candidate-140-1
@@ -39,17 +50,20 @@ echo "Start containers...."
 docker-compose up -d
 wait
 sleep 10
-echo "Migrate DB...."
-#docker-compose run --rm tethys_in_docker_main bash -c "/bin/bash build-tethys && \
-#                                                       python manage.py migrate && \
-#                                                       python manage.py createsuperuser"
+echo "Running init-tethys script"
 
-docker exec -it tethys_in_docker_main bash -c "/bin/bash build-tethys && \
-                                                       python manage.py migrate && \
-                                                       python manage.py collectstatic --noinput && \
-                                                       python manage.py createsuperuser"
-# docker exec -it tethys_in_docker_main python manage.py migrate
-# docker exec -it tethys_in_docker_main python manage.py createsuperuser
+#docker exec -it tethys_in_docker_main bash -c "usermod -u $USER_ID tethys-user && \
+#                                               groupmod -g $GROUP_ID tethys-group && \
+#                                               chown -R tethys-user:tethys-group /tethys && \
+#                                               chown -R tethys-user:tethys-group /apps && \
+#                                               chown -R tethys-user:tethys-group /var/www/tethys/static && \
+#                                               /bin/bash build-tethys && \
+#                                               python manage.py migrate && \
+#                                               python manage.py collectstatic --noinput && \
+#                                               python manage.py createsuperuser"
+
+docker exec -it tethys_in_docker_main /bin/bash init-tethys $USER_ID $GROUP_ID
+
 echo "Restart containers...."
 docker restart tethys_in_docker_main
 wait

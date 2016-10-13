@@ -35,18 +35,19 @@ services:
     volumes:
       - ./tethys/:/tethys
       - ./tethys_main/settings.py:/tethys/tethys_apps/settings.py
-      - ./tethys_main/build-tethys:/tethys/build-tethys
+      - ./tethys_main/init-tethys:/tethys/init-tethys
       - ./static/:/var/www/tethys/static
       - ./apps/:/apps
 
     env_file: .env
-    environment:
-      # change to False to activate production mode
-      DEBUG: 'True'
+#    environment:
+#      # change to False to activate production mode
+#      DEBUG: 'True'
 
     # use gunicore server
     #command: /usr/local/bin/gunicorn --log-file=- tethys_portal.wsgi:application -w 2 -b :8000
     # use django development server
+    # command: runuser -p -u tethys-user -g tethys-group python manage.py runserver 0.0.0.0:8000
     command: python manage.py runserver 0.0.0.0:8000
 
     depends_on:
