@@ -24,7 +24,6 @@ fi
 echo "Remove existing containers...."
 docker stop $(docker ps -a -q -f name=tethys_in_docker*)
 docker rm -f $(docker ps -a -q -f name=tethys_in_docker*)
-#docker rmi -f $(docker images | grep tethys_in_docker)
 
 # remove all unused data volumes
 echo "Remove unused data volumes...."
@@ -35,6 +34,8 @@ rm -rf tethys
 rm -rf static
 mkdir -p static
 mkdir -p apps
+mkdir -p tethys_main/logs
+mkdir -p nginx/logs
 
 echo "Clone Tethys repo...."
 git clone https://github.com/tethysplatform/tethys.git
@@ -52,19 +53,9 @@ wait
 sleep 10
 echo "Running init-tethys script"
 
-#docker exec -it tethys_in_docker_main bash -c "usermod -u $USER_ID tethys-user && \
-#                                               groupmod -g $GROUP_ID tethys-group && \
-#                                               chown -R tethys-user:tethys-group /tethys && \
-#                                               chown -R tethys-user:tethys-group /apps && \
-#                                               chown -R tethys-user:tethys-group /var/www/tethys/static && \
-#                                               /bin/bash build-tethys && \
-#                                               python manage.py migrate && \
-#                                               python manage.py collectstatic --noinput && \
-#                                               python manage.py createsuperuser"
-
-docker exec -it tethys_in_docker_main /bin/bash init-tethys $USER_ID $GROUP_ID
+docker exec -it tethys_in_docker_main /bin/bash /tethys_main/init-tethys $USER_ID $GROUP_ID
 
 echo "Restart containers...."
 docker restart tethys_in_docker_main
 wait
-echo "Done. Visit 127.0.0.1:8000"
+echo "Rebuild Done."

@@ -1,0 +1,8 @@
+[14/Oct/2016 22:55:35] ERROR [tethys.tethys_apps.utilities:353] relation "tethys_apps_tethysapp" does not exist
+LINE 1: ...ethys_apps_tethysapp"."show_in_apps_library" FROM "tethys_ap...
+                                                             ^
+
+[14/Oct/2016 22:55:35] ERROR [tethys:36] relation "django_content_type" does not exist
+LINE 1: ..."."app_label", "django_content_type"."model" FROM "django_co...
+                                                             ^
+

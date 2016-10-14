@@ -35,7 +35,8 @@ services:
     volumes:
       - ./tethys/:/tethys
       - ./tethys_main/settings.py:/tethys/tethys_apps/settings.py
-      - ./tethys_main/init-tethys:/tethys/init-tethys
+      - ./tethys_main/:/tethys_main
+      - ./tethys_main/gunicorn-supervisor.conf:/etc/supervisor/conf.d/gunicorn-supervisor.conf
       - ./static/:/var/www/tethys/static
       - ./apps/:/apps
 
@@ -45,10 +46,11 @@ services:
 #      DEBUG: 'True'
 
     # use gunicore server
-    #command: /usr/local/bin/gunicorn --log-file=- tethys_portal.wsgi:application -w 2 -b :8000
+    command: /tethys_main/run-gunicorn
+
     # use django development server
-    # command: runuser -p -u tethys-user -g tethys-group python manage.py runserver 0.0.0.0:8000
-    command: python manage.py runserver 0.0.0.0:8000
+    #command: runuser -u tethys-user -g tethys-group /bin/bash /tethys_main/run-server
+    #command: python manage.py runserver 0.0.0.0:8000
 
     depends_on:
       - tethys_in_docker_postgis
@@ -62,8 +64,8 @@ services:
       - "80:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    volumes_from:
-      - tethys_in_docker_main
+      - ./static/:/var/www/tethys/static
+      - ./nginx/logs/:/var/log/nginx
     depends_on:
       - tethys_in_docker_main
 

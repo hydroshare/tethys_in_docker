@@ -1,0 +1,363 @@
+[2016-10-14 22:41:14 +0000] [10] [DEBUG] Current configuration:
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7f785171e398>
+  pythonpath: None
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 3
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7f785171e0c8>
+  pre_fork: <function pre_fork at 0x7f785171e230>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: /tethys_main/logs/gunicorn_access.log
+  group: 1000
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 9
+  proc_name: tethys_in_docker_main
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x7f7851790ed8>
+  pre_exec: <function pre_exec at 0x7f785171e938>
+  worker_tmp_dir: None
+  post_worker_init: <function post_worker_init at 0x7f785171e500>
+  limit_request_fields: 100
+  on_exit: <function on_exit at 0x7f7851722050>
+  config: None
+  logconfig: None
+  check_config: False
+  statsd_prefix: 
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7f785171eaa0>
+  post_request: <function post_request at 0x7f785171eb90>
+  user: 1000
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7f785171e668>
+  threads: 1
+  max_requests: 1000
+  limit_request_line: 4094
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  worker_exit: <function worker_exit at 0x7f785171ecf8>
+  chdir: /tethys
+  paste: None
+  default_proc_name: tethys_portal.wsgi:application
+  errorlog: /tethys_main/logs/gunicorn_error.log
+  loglevel: debug
+  capture_output: False
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  daemon: False
+  ciphers: TLSv1
+  on_starting: <function on_starting at 0x7f7851790d70>
+  worker_abort: <function worker_abort at 0x7f785171e7d0>
+  bind: [':8000']
+  raw_env: ['HOME=/home/tethys-user']
+  reload: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7f785171ee60>
+  timeout: 300
+  ca_certs: None
+  django_settings: None
+  tmp_upload_dir: None
+  keyfile: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+[2016-10-14 22:41:14 +0000] [10] [INFO] Starting gunicorn 19.6.0
+[2016-10-14 22:41:14 +0000] [10] [DEBUG] Arbiter booted
+[2016-10-14 22:41:14 +0000] [10] [INFO] Listening at: http://0.0.0.0:8000 (10)
+[2016-10-14 22:41:14 +0000] [10] [INFO] Using worker: sync
+[2016-10-14 22:41:14 +0000] [15] [INFO] Booting worker with pid: 15
+[2016-10-14 22:41:14 +0000] [16] [INFO] Booting worker with pid: 16
+[2016-10-14 22:41:15 +0000] [17] [INFO] Booting worker with pid: 17
+[2016-10-14 22:41:15 +0000] [22] [INFO] Booting worker with pid: 22
+[2016-10-14 22:41:15 +0000] [25] [INFO] Booting worker with pid: 25
+[2016-10-14 22:41:15 +0000] [26] [INFO] Booting worker with pid: 26
+[2016-10-14 22:41:15 +0000] [28] [INFO] Booting worker with pid: 28
+[2016-10-14 22:41:15 +0000] [30] [INFO] Booting worker with pid: 30
+[2016-10-14 22:41:15 +0000] [31] [INFO] Booting worker with pid: 31
+[2016-10-14 22:41:15 +0000] [10] [DEBUG] 9 workers
+[2016-10-14 22:41:38 +0000] [17] [DEBUG] GET /apps/sdfsdf
+[2016-10-14 22:55:23 +0000] [9] [DEBUG] Current configuration:
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7f3700279398>
+  pythonpath: None
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 3
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7f37002790c8>
+  pre_fork: <function pre_fork at 0x7f3700279230>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: /tethys_main/logs/gunicorn_access.log
+  group: 1000
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 9
+  proc_name: tethys_in_docker_main
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x7f3700271ed8>
+  pre_exec: <function pre_exec at 0x7f3700279938>
+  worker_tmp_dir: None
+  post_worker_init: <function post_worker_init at 0x7f3700279500>
+  limit_request_fields: 100
+  on_exit: <function on_exit at 0x7f370027d050>
+  config: None
+  logconfig: None
+  check_config: False
+  statsd_prefix: 
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7f3700279aa0>
+  post_request: <function post_request at 0x7f3700279b90>
+  user: 1000
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7f3700279668>
+  threads: 1
+  max_requests: 1000
+  limit_request_line: 4094
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  worker_exit: <function worker_exit at 0x7f3700279cf8>
+  chdir: /tethys
+  paste: None
+  default_proc_name: tethys_portal.wsgi:application
+  errorlog: /tethys_main/logs/gunicorn_error.log
+  loglevel: debug
+  capture_output: False
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  daemon: False
+  ciphers: TLSv1
+  on_starting: <function on_starting at 0x7f3700271d70>
+  worker_abort: <function worker_abort at 0x7f37002797d0>
+  bind: [':8000']
+  raw_env: ['HOME=/home/tethys-user']
+  reload: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7f3700279e60>
+  timeout: 300
+  ca_certs: None
+  django_settings: None
+  tmp_upload_dir: None
+  keyfile: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+[2016-10-14 22:55:23 +0000] [9] [INFO] Starting gunicorn 19.6.0
+[2016-10-14 22:55:23 +0000] [9] [DEBUG] Arbiter booted
+[2016-10-14 22:55:23 +0000] [9] [INFO] Listening at: http://0.0.0.0:8000 (9)
+[2016-10-14 22:55:23 +0000] [9] [INFO] Using worker: sync
+[2016-10-14 22:55:23 +0000] [14] [INFO] Booting worker with pid: 14
+[2016-10-14 22:55:23 +0000] [15] [INFO] Booting worker with pid: 15
+[2016-10-14 22:55:23 +0000] [18] [INFO] Booting worker with pid: 18
+[2016-10-14 22:55:23 +0000] [21] [INFO] Booting worker with pid: 21
+[2016-10-14 22:55:23 +0000] [24] [INFO] Booting worker with pid: 24
+[2016-10-14 22:55:23 +0000] [25] [INFO] Booting worker with pid: 25
+[2016-10-14 22:55:23 +0000] [26] [INFO] Booting worker with pid: 26
+[2016-10-14 22:55:23 +0000] [29] [INFO] Booting worker with pid: 29
+[2016-10-14 22:55:23 +0000] [9] [DEBUG] 9 workers
+[2016-10-14 22:55:23 +0000] [30] [INFO] Booting worker with pid: 30
+[2016-10-14 22:55:58 +0000] [8] [DEBUG] Current configuration:
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7ff61e391398>
+  pythonpath: None
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 3
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7ff61e3910c8>
+  pre_fork: <function pre_fork at 0x7ff61e391230>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: /tethys_main/logs/gunicorn_access.log
+  group: 1000
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 9
+  proc_name: tethys_in_docker_main
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x7ff61e385ed8>
+  pre_exec: <function pre_exec at 0x7ff61e391938>
+  worker_tmp_dir: None
+  post_worker_init: <function post_worker_init at 0x7ff61e391500>
+  limit_request_fields: 100
+  on_exit: <function on_exit at 0x7ff61e396050>
+  config: None
+  logconfig: None
+  check_config: False
+  statsd_prefix: 
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7ff61e391aa0>
+  post_request: <function post_request at 0x7ff61e391b90>
+  user: 1000
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7ff61e391668>
+  threads: 1
+  max_requests: 1000
+  limit_request_line: 4094
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  worker_exit: <function worker_exit at 0x7ff61e391cf8>
+  chdir: /tethys
+  paste: None
+  default_proc_name: tethys_portal.wsgi:application
+  errorlog: /tethys_main/logs/gunicorn_error.log
+  loglevel: debug
+  capture_output: False
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  daemon: False
+  ciphers: TLSv1
+  on_starting: <function on_starting at 0x7ff61e385d70>
+  worker_abort: <function worker_abort at 0x7ff61e3917d0>
+  bind: [':8000']
+  raw_env: ['HOME=/home/tethys-user']
+  reload: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7ff61e391e60>
+  timeout: 300
+  ca_certs: None
+  django_settings: None
+  tmp_upload_dir: None
+  keyfile: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+[2016-10-14 22:55:58 +0000] [8] [INFO] Starting gunicorn 19.6.0
+[2016-10-14 22:55:58 +0000] [8] [DEBUG] Arbiter booted
+[2016-10-14 22:55:58 +0000] [8] [INFO] Listening at: http://0.0.0.0:8000 (8)
+[2016-10-14 22:55:58 +0000] [8] [INFO] Using worker: sync
+[2016-10-14 22:55:58 +0000] [13] [INFO] Booting worker with pid: 13
+[2016-10-14 22:55:58 +0000] [16] [INFO] Booting worker with pid: 16
+[2016-10-14 22:55:58 +0000] [19] [INFO] Booting worker with pid: 19
+[2016-10-14 22:55:58 +0000] [20] [INFO] Booting worker with pid: 20
+[2016-10-14 22:55:58 +0000] [23] [INFO] Booting worker with pid: 23
+[2016-10-14 22:55:58 +0000] [24] [INFO] Booting worker with pid: 24
+[2016-10-14 22:55:58 +0000] [27] [INFO] Booting worker with pid: 27
+[2016-10-14 22:55:58 +0000] [28] [INFO] Booting worker with pid: 28
+[2016-10-14 22:55:59 +0000] [29] [INFO] Booting worker with pid: 29
+[2016-10-14 22:55:59 +0000] [8] [DEBUG] 9 workers
+[2016-10-14 22:56:04 +0000] [28] [DEBUG] GET /
+[2016-10-14 22:56:33 +0000] [20] [DEBUG] GET /
+[2016-10-14 22:56:37 +0000] [16] [DEBUG] GET /accounts/login/
+[2016-10-14 22:56:40 +0000] [16] [DEBUG] POST /accounts/login/
+[2016-10-14 22:56:40 +0000] [29] [DEBUG] GET /apps/
+[2016-10-14 22:56:42 +0000] [29] [DEBUG] GET /apps/
+[2016-10-14 22:59:46 +0000] [9] [DEBUG] Current configuration:
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7fecab278398>
+  pythonpath: None
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 3
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7fecab2780c8>
+  pre_fork: <function pre_fork at 0x7fecab278230>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: /tethys_main/logs/gunicorn_access.log
+  group: 1000
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 9
+  proc_name: tethys_in_docker_main
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x7fecab26ced8>
+  pre_exec: <function pre_exec at 0x7fecab278938>
+  worker_tmp_dir: None
+  post_worker_init: <function post_worker_init at 0x7fecab278500>
+  limit_request_fields: 100
+  on_exit: <function on_exit at 0x7fecab27d050>
+  config: None
+  logconfig: None
+  check_config: False
+  statsd_prefix: 
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7fecab278aa0>
+  post_request: <function post_request at 0x7fecab278b90>
+  user: 1000
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7fecab278668>
+  threads: 1
+  max_requests: 1000
+  limit_request_line: 4094
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  worker_exit: <function worker_exit at 0x7fecab278cf8>
+  chdir: /tethys
+  paste: None
+  default_proc_name: tethys_portal.wsgi:application
+  errorlog: /tethys_main/logs/gunicorn_error.log
+  loglevel: debug
+  capture_output: False
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  daemon: False
+  ciphers: TLSv1
+  on_starting: <function on_starting at 0x7fecab26cd70>
+  worker_abort: <function worker_abort at 0x7fecab2787d0>
+  bind: [':8000']
+  raw_env: ['HOME=/home/tethys-user']
+  reload: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7fecab278e60>
+  timeout: 300
+  ca_certs: None
+  django_settings: None
+  tmp_upload_dir: None
+  keyfile: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+[2016-10-14 22:59:46 +0000] [9] [INFO] Starting gunicorn 19.6.0
+[2016-10-14 22:59:46 +0000] [9] [DEBUG] Arbiter booted
+[2016-10-14 22:59:46 +0000] [9] [INFO] Listening at: http://0.0.0.0:8000 (9)
+[2016-10-14 22:59:46 +0000] [9] [INFO] Using worker: sync
+[2016-10-14 22:59:46 +0000] [14] [INFO] Booting worker with pid: 14
+[2016-10-14 22:59:46 +0000] [15] [INFO] Booting worker with pid: 15
+[2016-10-14 22:59:46 +0000] [18] [INFO] Booting worker with pid: 18
+[2016-10-14 22:59:46 +0000] [19] [INFO] Booting worker with pid: 19
+[2016-10-14 22:59:46 +0000] [20] [INFO] Booting worker with pid: 20
+[2016-10-14 22:59:46 +0000] [21] [INFO] Booting worker with pid: 21
+[2016-10-14 22:59:46 +0000] [22] [INFO] Booting worker with pid: 22
+[2016-10-14 22:59:46 +0000] [23] [INFO] Booting worker with pid: 23
+[2016-10-14 22:59:46 +0000] [24] [INFO] Booting worker with pid: 24
+[2016-10-14 22:59:46 +0000] [9] [DEBUG] 9 workers

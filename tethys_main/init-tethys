@@ -7,23 +7,20 @@ echo "User ID passed in"
 echo $USER_ID
 echo "Group ID passed in"
 echo $GROUP_ID
+#cp /tethys_main/gunicorn-supervisor.conf /etc/supervisor/conf.d/gunicorn-supervisor.conf
 
+echo "set ids of User 'tethys-user' and Group 'tethys-group' in container to match ids of running user on host"
 usermod -u $USER_ID tethys-user
 groupmod -g $GROUP_ID tethys-group
-mkdir -p /home/tethys-user
-# cp -rf /root/.tethyscluster /home/tethys-user
-chown -R tethys-user:tethys-group /home/tethys-user
 
 python setup.py develop
 python manage.py migrate
 python manage.py collectstatic -v 0 --noinput
+
+echo "change ownership of folders to tethys-user:tethys-group"
 chown -R tethys-user:tethys-group /tethys
 chown -R tethys-user:tethys-group /apps
 chown -R tethys-user:tethys-group /var/www/tethys/static
+chown -R tethys-user:tethys-group /tethys_main
+
 python manage.py createsuperuser
-
-
-#echo "Installing Tethys Platform"
-#sleep 3
-#runuser -p -u tethys-user -g tethys-group python setup.py develop
-#echo "Done"

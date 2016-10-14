@@ -36,15 +36,47 @@ ADMINS = ()
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '[%(asctime)s] %(levelname)s %(message)s',
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+    },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
+        },
+        'catch-all': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': '/tethys_main/logs/tethys_debug.log',
+            'formatter': 'verbose',
+            'maxBytes': 1024*1024*5,  # 5MB
+            'backupCount': 10,
+        },
+        'catch-warn': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': '/tethys_main/logs/tethys_error.log',
+            'formatter': 'verbose',
+            'maxBytes': 1024*1024*5,  # 5MB
+            'backupCount': 10,
         },
     },
     'loggers': {
         'django': {
             'handlers': ['console'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'WARNING'),
+        },
+        # logger for all
+        '': {
+            'handlers': ['catch-all', 'catch-warn'],
+            'propagate': False,
+            'level': 'DEBUG'
         },
     },
 }

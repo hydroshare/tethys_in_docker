@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+NAME=tethys_in_docker_main
+
+# the user to run as
+USER=tethys-user
+
+# the group to run as
+GROUP=tethys-group
+
+# env
+# TethysCluster uses os.path.expanduser('~') to get home folder path of running user,
+which returns value of HOME in environment variables
+ENV_VARIABLES=HOME=/home/tethys-user
+
+# path to logfile
+GUNICORN_ERROR_LOG=/tethys_main/logs/gunicorn_error.log
+GUNICORN_ACCESS_LOG=/tethys_main/logs/gunicorn_access.log
+
+# port
+BIND_PORT=:8000
+
+# how many worker processes should Gunicorn spawn
+NUM_WORKERS=$(python -c "exec(\"import multiprocessing\nprint( multiprocessing.cpu_count() * 2 + 1)\")")
+
+# timeout period in seconds
+TIMEOUT_PERIOD=300
+
+# maximum number of requests a worker will process before restarting
+MAX_REQUESTS=1000
+
+/usr/local/bin/gunicorn tethys_portal.wsgi:application \
+--name $NAME \
+--workers $NUM_WORKERS \
+--bind $BIND_PORT \
+--user $USER \
+--group $GROUP \
+--timeout $TIMEOUT_PERIOD \
+--max-requests $MAX_REQUESTS \
+--env $ENV_VARIABLES \
+--log-file $GUNICORN_ERROR_LOG \
+--access-logfile $GUNICORN_ACCESS_LOG \
+--log-level debug

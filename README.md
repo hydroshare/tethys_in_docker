@@ -14,7 +14,7 @@ git clone this repo
 
 ####1) build tethys_in_docker in one command:
 
-sudo ./tethys_rebuild release-candidate-140-1
+./tethys_rebuild release-candidate-140-1
 
 ####2) install an app:
 
