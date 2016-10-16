@@ -14,6 +14,8 @@ git clone this repo
 
 ####1) build tethys_in_docker in one command:
 
+Note: this script will remove existing tethys_main, postgis and ngnix containers, so DB will be gone, apps need to re-install
+
 ./tethys_rebuild release-candidate-140-1
 
 ####2) install an app:
@@ -24,7 +26,9 @@ download the app source if it is not in "apps" folder yet
 
   git clone APP_GIT_URL
 
-./tethys_install_app APP_FOLDER_NAME
+./tethys_install_app APP_FOLDER_NAME (install a specific app)
+
+./tethys_install_app (install all apps in folder 'apps')
 
 ./tethys_restart
 
