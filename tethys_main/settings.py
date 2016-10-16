@@ -25,8 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True if os.getenv('DEBUG', "False").lower() == 'true' else False
-DEBUG = True
+DEBUG = True if os.getenv('DEBUG', "False").lower() == 'true' else False
 
 # List those who should be notified of an error when DEBUG = False as a tuple of (name, email address).
 # i.e.: ADMINS = (('John', 'john@example.com'), ('Mary', 'mary@example.com'))

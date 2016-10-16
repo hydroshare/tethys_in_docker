@@ -1,12 +1,49 @@
 #!/usr/bin/env bash
 
-app_folder=$1
-echo $app_folder
-echo "Installing..."
-docker exec -it tethys_in_docker_main bash -c "cd /apps/$app_folder && \
+install_one_app() {
+    echo "install_one_app"
+    echo $1
+    app_folder_name=$1
+    echo $app_folder
+    echo "Installing" $app_folder "..."
+    docker exec -it tethys_in_docker_main bash -c "cd /apps/$app_folder_name && \
                                                python setup.py develop  && \
                                                python /tethys/manage.py collectstatic --noinput && \
                                                chown -R tethys-user:tethys-group /tethys && \
                                                chown -R tethys-user:tethys-group /apps && \
                                                chown -R tethys-user:tethys-group /var/www/tethys/static"
-echo "Done"
+    echo "Done"
+}
+
+install_all_apps() {
+    echo "install_all_apps"
+    cd apps
+    pwd
+    for f in */; do
+        if [ -d ${f} ]; then
+            # Will not run if no directories are available
+            app_folder_name=${f}
+            echo "Installing" ${app_folder_name} "..."
+            docker exec -it tethys_in_docker_main bash -c "cd /apps/$app_folder_name && \
+                                                           python setup.py develop"
+        fi
+    done
+
+    docker exec -it tethys_in_docker_main bash -c "python /tethys/manage.py collectstatic --noinput && \
+                                               chown -R tethys-user:tethys-group /tethys && \
+                                               chown -R tethys-user:tethys-group /apps && \
+                                               chown -R tethys-user:tethys-group /var/www/tethys/static"
+    echo "Done"
+}
+
+echo $#
+echo $1
+
+if [  $# -eq 0 ]
+then
+    # install a specific app
+    install_all_apps
+else
+    # install all apps in folder apps
+    install_one_app  $1
+fi

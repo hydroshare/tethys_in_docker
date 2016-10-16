@@ -1,0 +1,14 @@
+tethys_in_docker_geoserver:
+  restart: always
+  container_name: tethys_in_docker_geoserver
+  image: ciwater/geoserver:2.8.2-clustered
+  ports:
+    - 8181:8181
+    - 8081:8081
+    - 8082:8082
+    - 8083:8083
+    - 8084:8084
+#    volumes:
+#      - ./geoserver/var/log/:/var/log
+#      - ./geoserver/var/geoserver/data/:/var/geoserver/data
+  env_file: geoserver.env
