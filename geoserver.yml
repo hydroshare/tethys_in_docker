@@ -1,5 +1,5 @@
 tethys_in_docker_geoserver:
-  restart: always
+#  restart: always
   container_name: tethys_in_docker_geoserver
   image: ciwater/geoserver:2.8.2-clustered
   ports:

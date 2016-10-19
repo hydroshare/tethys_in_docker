@@ -1,7 +1,7 @@
 version: '2'
 services:
   tethys_in_docker_postgis:
-    restart: always
+#    restart: always
     container_name: tethys_in_docker_postgis
     image: ciwater/postgis:2.1.2
     ports:
@@ -11,7 +11,7 @@ services:
     env_file: tethys_main.env
 
   tethys_in_docker_main:
-    restart: always
+#    restart: always
     container_name: tethys_in_docker_main
     build: ./tethys_main/
     image: tethys_in_docker_main
@@ -28,20 +28,23 @@ services:
     env_file: tethys_main.env
     environment:
       # change to False to activate production mode
-      DEBUG: 'False'
+      DEBUG: 'True'
 
-    # use gunicore server
-    command: /tethys_main/run-gunicorn
-
-    # use django development server
+    # start django development server
     #command: runuser -u tethys-user -g tethys-group /bin/bash /tethys_main/run-server
     #command: python manage.py runserver 0.0.0.0:8000
+
+    # start gunicore server
+    #command: /tethys_main/run-gunicorn
+
+    # start supervisor + gunicorn
+    command: /tethys_main/startup
 
     depends_on:
       - tethys_in_docker_postgis
 
   tethys_in_docker_nginx:
-    restart: always
+#    restart: always
     image: nginx:1.11.4
     container_name: tethys_in_docker_nginx
     ports:
