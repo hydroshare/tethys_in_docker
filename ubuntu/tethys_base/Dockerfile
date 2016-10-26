@@ -7,9 +7,10 @@ RUN apt-get install -y build-essential python-dev python-pip libpq-dev \
 ENV PATH /usr/local/bin:$PATH
 
 RUN pip install --upgrade pip
-COPY requirements.txt /tmp
-RUN pip install -r /tmp/requirements.txt && \
-    rm -f /tmp/requirements.txt
+
+COPY requirements.txt /
+RUN pip install -r /requirements.txt && \
+    rm -f /requirements.txt
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
