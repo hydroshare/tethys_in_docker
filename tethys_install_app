@@ -47,3 +47,5 @@ else
     # install all apps in folder apps
     install_one_app  $1
 fi
+
+docker exec -it tethys_in_docker_main bash -c "tethys syncstores all --manage /tethys/manage.py"
