@@ -19,7 +19,8 @@ RUN apt-get install --fix-missing -y ca-certificates \
                                      git-core \
                                      supervisor \
                                      vim \
-                                     postgresql-client
+                                     postgresql-client \
+                                     python-tk
 
 ENV PATH /usr/local/bin:$PATH
 # update pip
