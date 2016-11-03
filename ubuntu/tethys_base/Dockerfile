@@ -56,7 +56,7 @@ RUN tar xzvf /tmp/phreeqpy-0.2.0.tar.gz --directory /tmp && \
     rm -rf /tmp/phreeqpy-0.2.0
 
 # link iphreeqc python wrapper to iphreeqc lib
-RUN cp /usr/lib/libiphreeqc.so /usr/local/lib/python2.7/dist-packages/phreeqpy/iphreeqc/phreeqpy-0.2.0-py2.7.egg && \
+RUN cp /usr/lib/libiphreeqc.so /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg/phreeqpy/iphreeqc && \
     rm /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg/phreeqpy/iphreeqc/libiphreeqc.so.0.0.0 && \
     mv /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg/phreeqpy/iphreeqc/libiphreeqc.so /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg/phreeqpy/iphreeqc/libiphreeqc.so.0.0.0
 
