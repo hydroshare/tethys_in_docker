@@ -26,7 +26,7 @@ ENV PATH /usr/local/bin:$PATH
 RUN pip install --upgrade pip
 
 # compile and install GDAL and its python wrapper
-COPY lib_src/gdal-2.1.2.tar.gz /tmp
+COPY lib_src/gdal-2.1.2.tar.gz /tmp/
 RUN tar xzvf /tmp/gdal-2.1.2.tar.gz --directory /tmp && \
     rm -f /tmp/gdal-2.1.2.tar.gz && \
     cd /tmp/gdal-2.1.2 && \
@@ -34,7 +34,7 @@ RUN tar xzvf /tmp/gdal-2.1.2.tar.gz --directory /tmp && \
     make && \
     make install && \
     ldconfig && \
-    rm -rf /tmp/gdal-*
+    rm -rf /tmp/gdal-2.1.2
 
 # install netCDF4 dependencies
 RUN apt-get install --fix-missing -y zlib1g-dev \
@@ -48,12 +48,12 @@ RUN apt-get install --fix-missing -y zlib1g-dev \
 #RUN pip install --no-cache-dir "django-guardian>=1.4.6, <1.5"
 
 # install tethys system requirements.txt
-COPY requirements.txt /tmp
+COPY requirements.txt /tmp/
 RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
     rm -f /tmp/requirements.txt
 
 # install extra common python libs used by apps
-COPY extra_requirements.txt /tmp
+COPY extra_requirements.txt /tmp/
 RUN pip install --no-cache-dir -r /tmp/extra_requirements.txt && \
     rm -f /tmp/extra_requirements.txt
 
