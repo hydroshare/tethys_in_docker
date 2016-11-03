@@ -5,4 +5,7 @@ app_name=$1
 
 echo "Uninstalling..."
 docker exec -it tethys_in_docker_main bash -c "rm -f /tethys/tethys_apps/tethysapp/$app_name"
+echo "Restart all Tethys containers"
+docker-compose stop
+docker-compose up -d
 echo "Done"

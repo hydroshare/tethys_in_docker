@@ -36,6 +36,34 @@ RUN tar xzvf /tmp/gdal-2.1.2.tar.gz --directory /tmp && \
     ldconfig && \
     rm -rf /tmp/gdal-2.1.2
 
+# compile and install phreeqc
+COPY lib_src/iphreeqc-3.3.3-10424.tar.gz /tmp/
+RUN tar xzvf /tmp/iphreeqc-3.3.3-10424.tar.gz --directory /tmp && \
+    rm -f /tmp/iphreeqc-3.3.3-10424.tar.gz && \
+    cd /tmp/iphreeqc-3.3.3-10424 && \
+    ./configure --prefix=/usr && \
+    make && \
+    make install && \
+    ldconfig && \
+    rm -rf /tmp/iphreeqc-3.3.3-10424
+
+# install iphreeqc python wrapper
+COPY lib_src/phreeqpy-0.2.0.tar.gz /tmp/
+RUN tar xzvf /tmp/phreeqpy-0.2.0.tar.gz --directory /tmp && \
+    rm -f /tmp/phreeqpy-0.2.0.tar.gz && \
+    cd /tmp/phreeqpy-0.2.0 && \
+    python setup.py install && \
+    rm -rf /tmp/phreeqpy-0.2.0
+
+# link iphreeqc python wrapper to iphreeqc lib
+RUN cp /usr/lib/libiphreeqc.so /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg
+/tmp/phreeqpy-0.2.0/ && \
+    rm /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg
+/tmp/phreeqpy-0.2.0/libiphreeqc.so.0.0.0 && \
+    mv /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg
+/tmp/phreeqpy-0.2.0/libiphreeqc.so /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg
+/tmp/phreeqpy-0.2.0/libiphreeqc.so.0.0.0
+
 # install netCDF4 dependencies
 RUN apt-get install --fix-missing -y zlib1g-dev \
                                      libhdf5-serial-dev \

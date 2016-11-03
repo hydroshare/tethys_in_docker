@@ -49,3 +49,6 @@ else
 fi
 
 docker exec -it tethys_in_docker_main bash -c "tethys syncstores all --manage /tethys/manage.py"
+echo "Restart all Tethys containers"
+docker-compose stop
+docker-compose up -d
