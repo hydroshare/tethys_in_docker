@@ -1,21 +1,61 @@
-# This Dockerfile is using the requirements.txt of Tethys 1.4.0-candidate
+# This Dockerfile is using the requirements.txt files from Tethys 1.4.0-candidate
 # https://github.com/tethysplatform/tethys/commit/2f4f7f7d3a01313a50d5b09d7b9b520ba9475cae
 
 FROM ubuntu:16.04
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y && apt-get install -y software-properties-common
 
-RUN apt-get install --fix-missing -y apt-utils python-dev python-pip libpq-dev \
-    libxml2-dev libxslt1-dev libssl-dev libffi-dev git-core supervisor
+RUN apt-get install --fix-missing -y ca-certificates \
+                                     apt-utils \
+                                     build-essential \
+                                     wget \
+                                     python-dev \
+                                     python-pip \
+                                     net-tools \
+                                     libpq-dev \
+                                     libxml2-dev \
+                                     libxslt1-dev \
+                                     libssl-dev \
+                                     libffi-dev \
+                                     git-core \
+                                     supervisor \
+                                     vim \
+                                     postgresql-client
 
 ENV PATH /usr/local/bin:$PATH
-
+# update pip
 RUN pip install --upgrade pip
 
-COPY requirements.txt /
-RUN pip install -r /requirements.txt && \
-    rm -f /requirements.txt
+# compile and install GDAL and its python wrapper
+COPY lib_src/gdal-2.1.2.tar.gz /tmp
+RUN tar xzvf /tmp/gdal-2.1.2.tar.gz --directory /tmp && \
+    rm -f /tmp/gdal-2.1.2.tar.gz && \
+    cd /tmp/gdal-2.1.2 && \
+    ./configure --with-python --prefix=/usr && \
+    make && \
+    make install && \
+    ldconfig && \
+    rm -rf /tmp/gdal-*
 
-RUN pip install gunicorn==19.6.0
+# install netCDF4 dependencies
+RUN apt-get install --fix-missing -y zlib1g-dev \
+                                     libhdf5-serial-dev \
+                                     libnetcdf-dev
+
+# fix broken pip installation in requirements.txt
+#RUN pip install --no-cache-dir "Paste>=2.0.3, <2.1"
+#RUN pip install --no-cache-dir "PasteDeploy>=1.5.2, <1.6"
+#RUN pip install --no-cache-dir "PasteScript>=2.0.2, <2.1"
+#RUN pip install --no-cache-dir "django-guardian>=1.4.6, <1.5"
+
+# install tethys system requirements.txt
+COPY requirements.txt /tmp
+RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
+    rm -f /tmp/requirements.txt
+
+# install extra common python libs used by apps
+COPY extra_requirements.txt /tmp
+RUN pip install --no-cache-dir -r /tmp/extra_requirements.txt && \
+    rm -f /tmp/extra_requirements.txt
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
