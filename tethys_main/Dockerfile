@@ -1,11 +1,9 @@
 #FROM zhiyuli/ubuntu:16.04-onbuild
 #FROM python:2.7-onbuild
 #FROM zhiyuli/tethys_base:1.4.0-candidate
-FROM zhiyuli/updated_tethys
+FROM zhiyuli/tethys_base:1.4-rc_1.1
 
 ### Begin - App-specific Additions ###
-#RUN pip install django-termsandconditions==1.1.9
-#RUN pip install django-guardian==1.4.6
 RUN apt-get update && apt-get install --fix-missing -y supervisor
 RUN pip install gunicorn==19.6.0
 ### END - App-specific Additions ###
