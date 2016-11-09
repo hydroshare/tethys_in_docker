@@ -47,17 +47,19 @@ LOGGING = {
     },
     'handlers': {
         'console': {
+            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
+            'formatter': 'simple'
         },
-        'catch-all': {
+        'log-all': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': '/tethys_main/logs/tethys_debug.log',
             'formatter': 'verbose',
-            'maxBytes': 1024*1024*5,  # 5MB
+            'maxBytes': 1024*1024*5,  # 15MB
             'backupCount': 10,
         },
-        'catch-warn': {
+        'log-error': {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': '/tethys_main/logs/tethys_error.log',
@@ -67,13 +69,14 @@ LOGGING = {
         },
     },
     'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'WARNING'),
-        },
+        # 'django': {
+        #     'handlers': ['console'],
+        #     'level': os.getenv('DJANGO_LOG_LEVEL', 'WARNING'),
+        #     'propagate': True,
+        # },
         # logger for all
         '': {
-            'handlers': ['catch-all', 'catch-warn'],
+            'handlers': ['log-all', 'log-error', 'console'],
             'propagate': False,
             'level': 'DEBUG'
         },
@@ -114,7 +117,8 @@ MIDDLEWARE_CLASSES = (
 )
 
 AUTHENTICATION_BACKENDS = (
-#    'tethys_services.backends.hydroshare.HydroShareOAuth2',
+    'tethys_services.backends.hydroshare.HydroShareOAuth2',
+    'tethys_services.backends.hydroshare_beta.HydroShareOAuth2',
 #    'social.backends.linkedin.LinkedinOAuth2',
 #    'social.backends.google.GoogleOAuth2',
 #    'social.backends.facebook.FacebookOAuth2',
@@ -284,8 +288,14 @@ SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = ''
 SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = ''
 
 ## HydroShare
-SOCIAL_AUTH_HYDROSHARE_KEY = ''
-SOCIAL_AUTH_HYDROSHARE_SECRET = ''
+SOCIAL_AUTH_HYDROSHARE_KEY = 'Kq1MrUlnVqq9gXOKpQJzXGqXROQ5zWQRQlOPHv8V'
+SOCIAL_AUTH_HYDROSHARE_SECRET = 'ONyUEpBan5Kbet8EC9EtmT05pvIDbPvo8PLszosjDVG4NTITxFCpZrEq0RNRZdefPkPfMRiLkB8EIpvTbgjFByfAqmr32xaRItZFjqo1rszLIyiXbaNcKh3GWc1toKAQ'
+
+
+## HydroShare
+SOCIAL_AUTH_HYDROSHARE_BETA_KEY = 'qreNznQDzuZUFm0HSa4vx9csrpiskamA8jU5G4Go'
+SOCIAL_AUTH_HYDROSHARE_BETA_SECRET = '4vDKVX7Ln8CH8rPqsR9D0O9Psx6TBA6cJuvwu1ISoAyWIjP4SDqKAbsVBW3QxcGUpYsBncQJdGdtfUe54MiJeGnC7FryV2OGOsfOqSsPqPqPUnk0Ziw069SMSHH4yUCt'
+
 
 # Django Guardian Settings
 ANONYMOUS_USER_ID = -1
@@ -293,3 +303,6 @@ ANONYMOUS_USER_ID = -1
 # GUARDIAN_RENDER_403 = False  # Mutually exclusive with GUARDIAN_RAISE_403
 # GUARDIAN_TEMPLATE_403 = ''
 # ANONYMOUS_DEFAULT_USERNAME_VALUE = 'anonymous'
+
+# django is behind a proxy server that handles https for django
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
