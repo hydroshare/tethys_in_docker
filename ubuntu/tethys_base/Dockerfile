@@ -20,7 +20,8 @@ RUN apt-get install --fix-missing -y ca-certificates \
                                      supervisor \
                                      vim \
                                      postgresql-client \
-                                     python-tk
+                                     python-tk \
+                                     iputils-ping
 
 ENV PATH /usr/local/bin:$PATH
 # update pip
