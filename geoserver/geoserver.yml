@@ -18,6 +18,7 @@ tethys_in_docker_geoserver:
     # these two ports should always be same???
     # same values should be set for PORT_SSL_EXTERNAL and PORT_SSL_INTERNAL respectively in geoserver.yml
     - "8443:8443"
+
   volumes:
     - ../common_files/certs/:/certs
     - ./gen_runtime_dynamic_files_ssl.py:/tmp/gen_runtime_dynamic_files.py
