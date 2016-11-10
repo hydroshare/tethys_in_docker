@@ -26,6 +26,7 @@ services:
       - ./tethys_main/gunicorn-supervisor.conf:/etc/supervisor/conf.d/gunicorn-supervisor.conf
       - ./static/:/var/www/tethys/static
       - ./apps/:/apps
+     # - /projects/water/nwm/:/projects/water/nwm
 
     env_file: tethys_main.env
     environment:
