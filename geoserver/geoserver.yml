@@ -1,16 +1,24 @@
 tethys_in_docker_geoserver:
+
 #  restart: always
+
   container_name: tethys_in_docker_geoserver
+
   image: ciwater/geoserver:2.8.2-clustered
-  ports:
-    - 8181:8181
-    - 8081:8081
-    - 8082:8082
-    - 8083:8083
-    - 8084:8084
-    # this port should be same as internal ssl port
-    - 8443:8443
-  volumes:
-    - ./certs/:/certs
-    - ./geoserver_ssl.conf:/etc/nginx/sites-enabled/default
+
   env_file: geoserver.env
+
+  ports:
+    - "8181:8181"
+#    - "8081:8081"
+#    - "8082:8082"
+#    - "8083:8083"
+#    - "8084:8084"
+
+    # these two ports should always be same???
+    # same values should be set for PORT_SSL_EXTERNAL and PORT_SSL_INTERNAL respectively in geoserver.yml
+    - "8443:8443"
+  volumes:
+    - ../common_files/certs/:/certs
+    - ./gen_runtime_dynamic_files_ssl.py:/tmp/gen_runtime_dynamic_files.py
+    - ./geoserver_ssl_template.conf:/tmp/geoserver_ssl_template.conf

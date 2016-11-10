@@ -55,7 +55,7 @@ services:
       - "443:443"
     volumes:
       #- ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/certs/:/certs
+      - ./common_files/certs/:/certs
       - ./nginx/ssl.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./static/:/var/www/tethys/static
