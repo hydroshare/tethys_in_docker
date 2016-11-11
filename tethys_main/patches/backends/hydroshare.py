@@ -58,6 +58,16 @@ class HydroShareOAuth2(BaseOAuth2):
 
         data['hs_restclient'] = hs_restclient_para_dict
 
+        # backward compatible
+        token_dict = {
+            'access_token': data['access_token'],
+            'token_type': data['token_type'],
+            'expires_in': data['expires_in'],
+            'refresh_token': data['refresh_token'],
+            'scope': data['scope']
+        }
+        data['token_dict'] = token_dict
+
         return data
 
     def get_user_details(self, response):
