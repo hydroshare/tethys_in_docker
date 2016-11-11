@@ -21,7 +21,11 @@ RUN apt-get install --fix-missing -y ca-certificates \
                                      vim \
                                      postgresql-client \
                                      python-tk \
-                                     iputils-ping
+                                     iputils-ping \
+                                     namp \
+                                     telnet \
+                                     netcat
+
 
 ENV PATH /usr/local/bin:$PATH
 # update pip

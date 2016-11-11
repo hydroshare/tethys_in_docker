@@ -10,10 +10,10 @@ tethys_in_docker_geoserver:
 
   ports:
     - "8181:8181"
-#    - "8081:8081"
-#    - "8082:8082"
-#    - "8083:8083"
-#    - "8084:8084"
+    - "8081:8081"
+    - "8082:8082"
+    - "8083:8083"
+    - "8084:8084"
 
     # these two ports should always be same???
     # same values should be set for PORT_SSL_EXTERNAL and PORT_SSL_INTERNAL respectively in geoserver.yml
