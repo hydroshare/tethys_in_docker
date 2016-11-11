@@ -22,7 +22,7 @@ RUN apt-get install --fix-missing -y ca-certificates \
                                      postgresql-client \
                                      python-tk \
                                      iputils-ping \
-                                     namp \
+                                     nmap \
                                      telnet \
                                      netcat
 
