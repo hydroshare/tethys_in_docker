@@ -1,8 +1,8 @@
-tethys_in_docker_geoserver:
+tethys_in_docker_geoserver_standalone:
 
 #  restart: always
 
-  container_name: tethys_in_docker_geoserver
+  container_name: tethys_in_docker_geoserver_standalone
 
   image: ciwater/geoserver:2.8.2-clustered
 

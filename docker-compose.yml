@@ -5,7 +5,7 @@ services:
     container_name: tethys_in_docker_postgis
     image: ciwater/postgis:2.1.2
     ports:
-      - 5435:5432
+      - "5435:5432"
 #    volumes:
 #      - ./postgis/var/log/:/var/log
     env_file: tethys_main.env
@@ -16,7 +16,7 @@ services:
     build: ./tethys_main/
     image: tethys_in_docker_main
     ports:
-      - 8000:8000
+      - "8000:8000"
     volumes:
       - ./tethys/:/tethys
       - ./tethys_main/settings.py:/tethys/tethys_apps/settings.py
@@ -62,6 +62,21 @@ services:
       - ./nginx/logs/:/var/log/nginx
     depends_on:
       - tethys_in_docker_main
+      - tethys_in_docker_geoserver
+
+  tethys_in_docker_geoserver:
+#    restart: always
+    image: ciwater/geoserver:2.8.2-clustered
+    container_name: tethys_in_docker_geoserver
+    ports:
+      - "8181:8181"
+      - "8081:8081"
+      - "8082:8082"
+      - "8083:8083"
+      - "8084:8084"
+    env_file: ./geoserver/geoserver.env
+    volumes:
+      - ./geoserver/template_nginx_config_new.conf:/tmp/template_nginx_config
 
 #volumes:
 #  tethys_pgdata:
