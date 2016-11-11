@@ -22,14 +22,13 @@ else
 fi
 
 echo "Stop running containers...."
-docker stop tethys_in_docker_nginx
-docker stop tethys_in_docker_main
-docker stop tethys_in_docker_postgis
+docker-compose stop
 
 echo "Remove existing containers...."
 docker rm -f tethys_in_docker_nginx
 docker rm -f tethys_in_docker_main
 docker rm -f tethys_in_docker_postgis
+# docker rm -f tethys_in_docker_geoserver
 
 # remove all unused data volumes
 echo "Remove unused data volumes...."
