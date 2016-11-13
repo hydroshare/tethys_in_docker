@@ -48,7 +48,8 @@ services:
 
   tethys_in_docker_nginx:
 #    restart: always
-    image: nginx:1.11.5
+    # image: nginx:1.11.5
+    image: zhiyuli/nginx-extras-lua-json:1.10
     container_name: tethys_in_docker_nginx
     ports:
       - "80:80"
@@ -60,13 +61,15 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./static/:/var/www/tethys/static
       - ./nginx/logs/:/var/log/nginx
+      - ./nginx/logger.lua:/etc/nginx/logger.lua
     depends_on:
       - tethys_in_docker_main
       - tethys_in_docker_geoserver
 
   tethys_in_docker_geoserver:
 #    restart: always
-    image: ciwater/geoserver:2.8.2-clustered
+    #image: ciwater/geoserver:2.8.2-clustered
+    image: zhiyuli/geoserver:2.8.2-clustered-1.1
     container_name: tethys_in_docker_geoserver
     ports:
       - "8181:8181"
@@ -76,7 +79,12 @@ services:
       - "8084:8084"
     env_file: ./geoserver/geoserver.env
     volumes:
-      - ./geoserver/template_nginx_config_new.conf:/tmp/template_nginx_config
+      - ./geoserver/logs/:/var/log/nginx
+      - ./geoserver/logs/:/var/geoserver/node1/logs
+      - ./geoserver/logs/:/var/geoserver/node2/logs
+      - ./geoserver/logs/:/var/geoserver/node3/logs
+      - ./geoserver/logs/:/var/geoserver/node4/logs
+      - ./geoserver/logs/:/var/log/supervisor
 
 #volumes:
 #  tethys_pgdata:

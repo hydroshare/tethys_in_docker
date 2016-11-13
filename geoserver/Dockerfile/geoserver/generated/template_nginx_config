@@ -1,0 +1,63 @@
+upstream backend {
+  least_conn;
+  {% for port in http_ports %}
+  server localhost:{{ port }};
+  {% endfor %}
+}
+
+upstream rest {
+  least_conn;
+  {% for rest_port in rest_ports %}
+  server localhost:{{ rest_port }};
+  {% endfor %}
+}
+
+server {
+  listen 8181;
+
+  server_name tethys_in_docker_geoserver;
+  resolver tethys_in_docker_geoserver;
+
+  client_max_body_size 4G;
+
+  proxy_set_header Host $host;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-Forwarded-Proto $scheme;
+
+  set $log_line '';
+  access_log  '/var/log/nginx/nginx_resp.log' 'json';
+  access_log  /var/log/nginx/nginx_proxy.log upstreamlog;
+  log_by_lua '
+    local cjson = require "cjson"
+    local json = cjson.new()
+    local log_line = {}
+
+    log_line.response = {}
+    log_line.response.headers = ngx.resp.get_headers()
+
+    ngx.var.log_line = json.encode(log_line)
+  ';
+
+  location /geoserver/ {
+    proxy_pass http://backend;
+  }
+
+  # Pass web and login requests to first node
+  location /geoserver/j_spring_security {
+    proxy_pass http://localhost:{{ http_ports[0] }};
+  }
+
+  location /geoserver/web/ {
+    proxy_pass http://localhost:{{ http_ports[0] }};
+  }
+
+  # Pass REST requests to the nodes enabled for REST
+  location /geoserver/rest/ {
+    proxy_pass http://rest;
+  }
+
+  location /geoserver/gwc/rest/ {
+    proxy_pass http://rest;
+  }
+}
