@@ -19,25 +19,36 @@ server {
   resolver tethys_in_docker_geoserver;
 
   client_max_body_size 4G;
+  charset         utf-8;
 
   proxy_set_header Host $host;
   proxy_set_header X-Real-IP $remote_addr;
   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
   proxy_set_header X-Forwarded-Proto $scheme;
 
-  set $log_line '';
-  access_log  '/var/log/nginx/nginx_resp.log' 'json';
-  access_log  /var/log/nginx/nginx_proxy.log upstreamlog;
-  log_by_lua '
-    local cjson = require "cjson"
-    local json = cjson.new()
-    local log_line = {}
+  access_log  /var/log/nginx/nginx_upstream.log upstreamlog;
 
-    log_line.response = {}
-    log_line.response.headers = ngx.resp.get_headers()
-
-    ngx.var.log_line = json.encode(log_line)
-  ';
+  # access_log  '/var/log/nginx/nginx_headers.log' 'json';
+  #set $log_line '';
+  #log_by_lua '
+  #  local cjson = require "cjson"
+  #  local json = cjson.new()
+  #  local log_line = {}
+  #
+  #  log_line.request = {}
+  #  log_line.request.remoteAddress = ngx.var.remote_addr
+  #  log_line.request.protocol = ngx.var.server_protocol
+  #  log_line.request.method = ngx.req.get_method()
+  #  log_line.request.url = {}
+  #  log_line.request.url.host = ngx.var.host
+  #  log_line.request.url.uri = ngx.var.request_uri
+  #  log_line.request.headers = ngx.req.get_headers()
+  #
+  #  log_line.response = {}
+  #  log_line.response.headers = ngx.resp.get_headers()
+  #
+  #  ngx.var.log_line = json.encode(log_line)
+  #';
 
   location /geoserver/ {
     proxy_pass http://backend;
