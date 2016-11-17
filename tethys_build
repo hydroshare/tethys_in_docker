@@ -41,6 +41,10 @@ rm -rf tethys/.*
 rm -rf static/*
 rm -rf logs/*
 
+mkdir -p tethys
+mkdir -p static
+mkdir -p logs
+
 echo "Clone Tethys repo...."
 git clone https://github.com/tethysplatform/tethys.git tethys
 cd tethys
