@@ -8,6 +8,7 @@ echo $USER_ID
 echo "Group ID passed in"
 echo $GROUP_ID
 
+cd /tethys
 python setup.py develop
 python manage.py migrate
 python manage.py collectstatic -v 0 --noinput
@@ -21,5 +22,6 @@ chown -R tethys-user:tethys-group /tethys
 chown -R tethys-user:tethys-group /apps
 chown -R tethys-user:tethys-group /var/www/tethys/static
 chown -R tethys-user:tethys-group /tethys_main
+chown -R tethys-user:tethys-group /logs
 
 python manage.py createsuperuser

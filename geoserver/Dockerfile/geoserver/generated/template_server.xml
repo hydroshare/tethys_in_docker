@@ -135,7 +135,7 @@
              Documentation at: /docs/config/valve.html
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-               prefix="geoserver_localhost_access_log_{{ http_port }}." suffix=".txt"
+               prefix="geoserver_tomcat_access_{{ http_port }}." suffix=".log"
                pattern="remote_ip: %a; remote_host: %h; host: &quot;%{host}i&quot;; x-real-ip: &quot;%{x-real-ip}i&quot;; request_proto: %H; local_ip: %A; local_port: %p; local_server_name: %v; referer: &quot;%{Referer}i&quot; &quot;%{User-Agent}i&quot;; x-forwarded-for: &quot;%{x-forwarded-for}i&quot;; x-forwarded-by: &quot;%{x-forwarded-by}i&quot;; x-forwarded-proto: &quot;%{x-forwarded-proto}i&quot;; %l %u %t &quot;%r&quot; %s %b" />
 
         <!--

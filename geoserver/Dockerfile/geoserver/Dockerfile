@@ -10,12 +10,18 @@ MAINTAINER Nathan Swain nswain@aquaveo.com
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install -y wget sudo ssh unzip vim
 RUN apt-get install -y software-properties-common
-RUN apt-get install -y python-pip python-dev nginx-extras luajit lua-cjson supervisor net-tools \
+RUN apt-get install -y python-dev nginx-extras luajit lua-cjson supervisor \
+                                    net-tools \
                                     iputils-ping \
                                     nmap \
                                     telnet \
                                     netcat \
                                     nano
+# install latest pip
+RUN wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py  && \
+    python /tmp/get-pip.py  && \
+    rm -f /tmp/get-pip.py && \
+    pip install --upgrade pip
 
 # Install Java and Tomcat ---------------------------------------------------------------------------------------------#
 RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \

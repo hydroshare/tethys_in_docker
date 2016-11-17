@@ -13,8 +13,8 @@ which returns value of HOME in environment variables
 ENV_VARIABLES=HOME=/home/tethys-user
 
 # path to logfile
-GUNICORN_ERROR_LOG=/tethys_main/logs/gunicorn_error.log
-GUNICORN_ACCESS_LOG=/tethys_main/logs/gunicorn_access.log
+GUNICORN_ERROR_LOG=/logs/tethys_gunicorn_error.log
+GUNICORN_ACCESS_LOG=/logs/tethys_gunicorn_access.log
 
 # port
 BIND_PORT=:8000

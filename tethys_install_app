@@ -7,18 +7,12 @@ install_one_app() {
     echo $app_folder
     echo "Installing" $app_folder "..."
     docker exec -it tethys_in_docker_main bash -c "cd /apps/$app_folder_name && \
-                                               python setup.py develop  && \
-                                               python /tethys/manage.py collectstatic --noinput && \
-                                               chown -R tethys-user:tethys-group /tethys && \
-                                               chown -R tethys-user:tethys-group /apps && \
-                                               chown -R tethys-user:tethys-group /var/www/tethys/static"
-    echo "Done"
+                                               python setup.py develop"
 }
 
 install_all_apps() {
     echo "install_all_apps"
     cd apps
-    pwd
     for f in */; do
         if [ -d ${f} ]; then
             # Will not run if no directories are available
@@ -28,16 +22,12 @@ install_all_apps() {
                                                            python setup.py develop"
         fi
     done
-
-    docker exec -it tethys_in_docker_main bash -c "python /tethys/manage.py collectstatic --noinput && \
-                                               chown -R tethys-user:tethys-group /tethys && \
-                                               chown -R tethys-user:tethys-group /apps && \
-                                               chown -R tethys-user:tethys-group /var/www/tethys/static"
-    echo "Done"
 }
 
 echo $#
 echo $1
+
+docker exec -it tethys_in_docker_main bash -c "python /tethys/setup.py develop"
 
 if [  $# -eq 0 ]
 then
@@ -48,7 +38,12 @@ else
     install_one_app  $1
 fi
 
+echo "Syncstores DB..."
 docker exec -it tethys_in_docker_main bash -c "tethys syncstores all --manage /tethys/manage.py"
-echo "Restart all Tethys containers"
-docker-compose stop
-docker-compose up -d
+docker exec -it tethys_in_docker_main bash -c "python /tethys/manage.py collectstatic --noinput && \
+                                               chown -R tethys-user:tethys-group /tethys && \
+                                               chown -R tethys-user:tethys-group /apps && \
+                                               chown -R tethys-user:tethys-group /var/www/tethys/static"
+echo "Restart Tethys main container"
+docker restart tethys_in_docker_main
+echo "Done"

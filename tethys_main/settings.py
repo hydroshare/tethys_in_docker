@@ -54,7 +54,7 @@ LOGGING = {
         'log-all': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/tethys_main/logs/tethys_debug.log',
+            'filename': '/logs/tethys_django_debug.log',
             'formatter': 'verbose',
             'maxBytes': 1024*1024*5,  # 15MB
             'backupCount': 10,
@@ -62,7 +62,7 @@ LOGGING = {
         'log-error': {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/tethys_main/logs/tethys_error.log',
+            'filename': '/logs/tethys_django_error.log',
             'formatter': 'verbose',
             'maxBytes': 1024*1024*5,  # 5MB
             'backupCount': 10,
