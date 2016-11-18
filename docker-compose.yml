@@ -20,7 +20,9 @@ services:
     volumes:
       - ./tethys/:/tethys
       - ./tethys_main/settings.py:/tethys/tethys_apps/settings.py
-      - ./tethys_main/patches/backends/:/tethys/tethys_services/backends
+      - ./tethys_main/patches/backends/hs_restclient_helper.py:/tethys/tethys_services/backends/hs_restclient_helper.py
+      - ./tethys_main/patches/backends/hydroshare.py:/tethys/tethys_services/backends/hydroshare.py
+      - ./tethys_main/patches/backends/hydroshare_beta.py:/tethys/tethys_services/backends/hydroshare_beta.py
       - ./tethys_main/patches/login.html:/tethys/templates/tethys_portal/accounts/login.html
       - ./tethys_main/:/tethys_main
       - ./tethys_main/gunicorn-supervisor.conf:/etc/supervisor/conf.d/gunicorn-supervisor.conf
@@ -69,7 +71,7 @@ services:
   tethys_in_docker_geoserver:
 #    restart: always
     #image: ciwater/geoserver:2.8.2-clustered
-    image: zhiyuli/geoserver:2.8.2-clustered-1.4
+    image: zhiyuli/geoserver:2.8.2-clustered-1.5
     container_name: tethys_in_docker_geoserver
     ports:
       - "8181:8181"

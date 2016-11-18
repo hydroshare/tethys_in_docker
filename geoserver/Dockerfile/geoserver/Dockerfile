@@ -7,16 +7,25 @@ FROM ubuntu:16.04
 MAINTAINER Nathan Swain nswain@aquaveo.com
 
 # Apt setup -----------------------------------------------------------------------------------------------------------#
-RUN apt-get update -y && apt-get upgrade -y
-RUN apt-get install -y wget sudo ssh unzip vim
-RUN apt-get install -y software-properties-common
-RUN apt-get install -y python-dev nginx-extras luajit lua-cjson supervisor \
-                                    net-tools \
-                                    iputils-ping \
-                                    nmap \
-                                    telnet \
-                                    netcat \
-                                    nano
+RUN apt-get update -y && apt-get dist-upgrade -y
+RUN apt-get install -y --fix-missing software-properties-common
+RUN apt-get install -y --fix-missing   wget \
+                                       sudo \
+                                       ssh \
+                                       unzip \
+                                       vim \
+                                       python-dev \
+                                       nginx-extras \
+                                       luajit \
+                                       lua-cjson \
+                                       supervisor \
+                                       net-tools \
+                                       iputils-ping \
+                                       nmap \
+                                       telnet \
+                                       netcat \
+                                       nano
+
 # install latest pip
 RUN wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py  && \
     python /tmp/get-pip.py  && \
@@ -77,6 +86,7 @@ ENV MAX_MEMORY 1024
 ENV MIN_MEMORY 1024
 ENV GDAL_DATA /usr/local/lib/gdal-data
 ENV LD_LIBRARY_PATH /usr/local/lib
+
 #set to ignore parts requiring license
 #http://demo.geo-solutions.it/share/github/imageio-ext/releases/1.1.X/1.1.12/native/gdal/linux/notes_on_ECW_and_JP2ECW.txt
 ENV GDAL_SKIP JP2ECW
@@ -84,12 +94,17 @@ ENV GDAL_SKIP JP2ECW
 COPY apache-tomcat-7.tar.gz /tmp/
 COPY geoserver* /tmp/
 COPY generated/* /tmp/
+COPY netcdf4-ubuntu16-binary.tar.gz /tmp/
 
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt && \
     rm requirements.txt && \
+    tar xvzf netcdf4-ubuntu16-binary.tar.gz && \
+    cp -rf netcdf4/* /usr/local/ && \
+    rm -rf netcdf4 && \
+    rm -f netcdf4-ubuntu16-binary.tar.gz && \
     tar zxf apache-tomcat-7.tar.gz && \
-    mv apache-tomcat-7.0.68 $CATALINA_HOME && \
+    mv apache-tomcat-7.0.73 $CATALINA_HOME && \
     rm apache-tomcat-7.tar.gz && \
     mkdir -p $GEOSERVER_HOME/data/ && \
     mkdir -p $GEOSERVER_HOME/tmp_data/ && \
