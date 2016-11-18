@@ -68,18 +68,6 @@ LOGGING = {
             'backupCount': 10,
         },
     },
-    # 'loggers': {
-    #     # 'django': {
-    #     #     'handlers': ['console'],
-    #     #     'level': os.getenv('DJANGO_LOG_LEVEL', 'WARNING'),
-    #     #     'propagate': True,
-    #     # },
-    #     # logger for all
-    #     '': {
-    #         'handlers': ['log-all', 'log-error', 'console'],
-    #         'propagate': False,
-    #         'level': 'DEBUG'
-    #     },
     'root': {
         'level': 'DEBUG',
         'handlers': ['console', 'log-all', 'log-error']
