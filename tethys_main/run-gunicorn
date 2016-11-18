@@ -39,4 +39,4 @@ MAX_REQUESTS=1000
 --env $ENV_VARIABLES \
 --log-file $GUNICORN_ERROR_LOG \
 --access-logfile $GUNICORN_ACCESS_LOG \
---log-level debug
+--log-level error
