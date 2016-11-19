@@ -47,7 +47,7 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'DEBUG',
+            'level': 'ERROR',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
@@ -59,18 +59,19 @@ LOGGING = {
             'maxBytes': 1024*1024*5,  # 15MB
             'backupCount': 10,
         },
-        'log-error': {
-            'level': 'ERROR',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/logs/tethys_django_error.log',
-            'formatter': 'verbose',
-            'maxBytes': 1024*1024*5,  # 5MB
-            'backupCount': 10,
-        },
+        # 'log-error': {
+        #     'level': 'ERROR',
+        #     'class': 'logging.handlers.RotatingFileHandler',
+        #     'filename': '/logs/tethys_django_error.log',
+        #     'formatter': 'verbose',
+        #     'maxBytes': 1024*1024*5,  # 5MB
+        #     'backupCount': 10,
+        # },
     },
     'root': {
         'level': 'DEBUG',
-        'handlers': ['console', 'log-all', 'log-error']
+        # 'handlers': ['console', 'log-all', 'log-error']
+        'handlers': ['console', 'log-all']
     },
 
 }
@@ -283,8 +284,8 @@ SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = ''
 #SOCIAL_AUTH_HYDROSHARE_KEY = 'Kq1MrUlnVqq9gXOKpQJzXGqXROQ5zWQRQlOPHv8V'
 #SOCIAL_AUTH_HYDROSHARE_SECRET = 'ONyUEpBan5Kbet8EC9EtmT05pvIDbPvo8PLszosjDVG4NTITxFCpZrEq0RNRZdefPkPfMRiLkB8EIpvTbgjFByfAqmr32xaRItZFjqo1rszLIyiXbaNcKh3GWc1toKAQ'
 ## www_127.0.0.1-https
-SOCIAL_AUTH_HYDROSHARE_KEY = '4lmgtEoHJUVI3jwcKzsAEi7qaxvMFAKYBEuXKzpR'
-SOCIAL_AUTH_HYDROSHARE_SECRET = 'fzReMSDBdDbnayT5ghbr8fvutkI5asTlPebIMBpRw6yGKC1XmHTIUJOAz9rjEKQubh5q8y7AcWoyDz0LXq1w1ypsvhP6I6cs4KXpWnMdkSmrz0utsueorDQwkdaJ9Uqi'
+SOCIAL_AUTH_HYDROSHARE_KEY = 'y8w6FPhW1c5jGMsSfkkNyZ5LPt1v3SaLibkktRHz'
+SOCIAL_AUTH_HYDROSHARE_SECRET = 'yWGer4UOwkUyTYzpP15BU7SNzRZRt7H0iwxO5YhnC1bNJLyWU0eB0iPFRAhr9b4TM8tQdDOUvD5kqg86I3gxhiUjU5ay7kqN3VbnwNs1B9BCeXiVkMRRqvfiXYcYgMLP'
 
 
 ## beta-127.0.0.1-https

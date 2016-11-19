@@ -9,7 +9,7 @@ GROUP=tethys-group
 
 # env
 # TethysCluster uses os.path.expanduser('~') to get home folder path of running user,
-which returns value of HOME in environment variables
+# which returns value of HOME in environment variables
 ENV_VARIABLES=HOME=/home/tethys-user
 
 # path to logfile
@@ -37,6 +37,6 @@ MAX_REQUESTS=1000
 --timeout $TIMEOUT_PERIOD \
 --max-requests $MAX_REQUESTS \
 --env $ENV_VARIABLES \
---log-file $GUNICORN_ERROR_LOG \
 --access-logfile $GUNICORN_ACCESS_LOG \
 --log-level error
+#--log-file $GUNICORN_ERROR_LOG

@@ -70,6 +70,7 @@ ENV PATH /usr/local/bin:$PATH
 #    mv /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg/phreeqpy/iphreeqc/libiphreeqc.so /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg/phreeqpy/iphreeqc/libiphreeqc.so.0.0.0
 
 # install gdal binary
+ENV GDAL_DATA /usr/share/gdal
 # COPY lib_src/gdal-2.1.2-ubuntu16-binary.tar.gz /tmp/
 RUN cd /tmp && \
     wget https://www.hydroshare.org/django_irods/download/2fdadb064d6a4d2e925fd9bac3b71a56/data/contents/gdal-2.1.2-ubuntu16-binary.tar.gz && \
