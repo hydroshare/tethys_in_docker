@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+restore_tethys_default_table() {
+
+    echo "Restoring tethys_default table from $1"
+    echo "Input password for db user tethys_super:"
+    psql -d tethys_default -h localhost -p 5435 -U tethys_super -W < $1
+}
+
+
+if [  $# -eq 0 ]
+then
+    # restore from tethys_default.backup
+    restore_tethys_default_table tethys_default.backup
+else
+    # restore from user-specific file
+    restore_tethys_default_table $1
+fi
+
+
+echo "Done"

@@ -59,6 +59,7 @@ docker-compose build
 echo "Start containers...."
 docker-compose up -d
 sleep 10
+./tethys_db_restore
 
 echo "Running init-tethys script"
 docker exec -it tethys_in_docker_main /bin/bash /tethys_main/init-tethys $USER_ID $GROUP_ID

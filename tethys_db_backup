@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+now=$(date +"%Y-%m-%d_%H-%M-%S")
+echo "Input password for db user tethys_super:"
+pg_dump -d tethys_default -h localhost -p 5435 -U tethys_super -W  > tethys_default.backup_$now
+
+echo "Saved to tethys_default.backup_$now"
