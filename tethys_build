@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-echo "*** Rebuild Tethys_in_Docker ***"
+echo "*** Building Tethys_in_Docker ***"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPT_DIR
 
@@ -25,11 +25,35 @@ echo "Stop running containers...."
 docker-compose stop
 
 echo "Remove existing containers...."
-docker rm -f tethys_in_docker_nginx
 docker rm -f tethys_in_docker_main
-docker rm -f tethys_in_docker_postgis
-docker rm -f tethys_in_docker_geoserver
-docker rmi tethys_in_docker_main
+docker rm -f tethys_in_docker_nginx
+
+# remove exiting logs
+read -p "Remove existing logs (default: No)? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo "Input sudo password to remove existing logs"
+    sudo rm -rf logs/*
+fi
+
+# remove geoserver
+read -p "Remove existing geoserver container (default: No)? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    docker rm -f tethys_in_docker_geoserver
+fi
+
+
+DB_REMOVED="N"
+read -p "Remove existing DB (default: No)?" -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    docker rm -f tethys_in_docker_postgis
+    DB_REMOVED="Y"
+fi
 
 # remove all unused docker data volumes
 echo "Remove unused docker data volumes...."
@@ -59,12 +83,33 @@ docker-compose build
 echo "Start containers...."
 docker-compose up -d
 sleep 10
-./tethys_db_restore
+
+DB_RESTORED="N"
+if [ $DB_REMOVED = "Y" ]
+then
+    read -p "Restore db table tethys_default from tethys_default.backup (default: No)?" -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        ./tethys_db_restore
+        DB_RESTORED="Y"
+    fi
+fi
 
 echo "Running init-tethys script"
 docker exec -it tethys_in_docker_main /bin/bash /tethys_main/init-tethys $USER_ID $GROUP_ID
 
-echo "Restart main container...."
+if [ $DB_RESTORED = "N" ] && [ $DB_REMOVED = "Y" ]
+then
+    read -p "Create a new Tethys Admin user (default: No)? " -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        docker exec -it tethys_in_docker_main python manage.py createsuperuser
+    fi
+fi
+
+echo "Restarting main container...."
 docker restart tethys_in_docker_main
 wait
-echo "Rebuild Done."
+echo "Done."

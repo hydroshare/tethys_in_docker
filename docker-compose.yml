@@ -43,13 +43,13 @@ services:
 
     # start django development server
     #command: runuser -u tethys-user -g tethys-group /bin/bash /tethys_main/run-server
-    command: python manage.py runserver 0.0.0.0:8000
+    #command: python manage.py runserver 0.0.0.0:8000
 
     # start gunicore server
     #command: /tethys_main/run-gunicorn
 
     # start supervisor + gunicorn
-    #command: /tethys_main/startup
+    command: /tethys_main/startup
 
     depends_on:
       - tethys_in_docker_postgis
