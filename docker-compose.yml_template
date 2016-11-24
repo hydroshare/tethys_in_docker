@@ -62,9 +62,9 @@ services:
     volumes:
       - ./nginx/certs/:/certs
        # Do not remove following 3 lines. they are placeholders
-      - ./nginx/certs/cert-chain.crt:/certs/cert-chain.crt
-      - ./nginx/certs/server.crt:/certs/server.crt
-      - ./nginx/certs/server.key:/certs/server.key
+      ####<TETHYS_NGINX_SSL_CERT_CHAIN_CRT>:/certs/cert-chain.crt
+      ####<TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT>:/certs/server.crt
+      ####<TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY>:/certs/server.key
       - ./nginx/ssl.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/files/tethys_favicon.ico:/var/www/tethys_favicon.ico

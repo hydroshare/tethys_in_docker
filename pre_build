@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+### Local Config ###
+CONFIG_FOLDER='./config'
+CONFIG_FILE='config.yaml'
+HOME_DIR=${PWD}
+
+# Read config.yaml into environment
+sed -e "s/:[^:\/\/]/=/g;s/$//g;s/ *=/=/g" ${CONFIG_FOLDER}/${CONFIG_FILE} > ${CONFIG_FOLDER}/config.sh
+sed -i 's/#.*$//' ${CONFIG_FOLDER}/config.sh
+sed -i '/^\s*$/d' ${CONFIG_FOLDER}/config.sh
+while read line; do export $line; done < <(cat ${CONFIG_FOLDER}/config.sh)
+
+############################### PostGIS #######################################
+# postgis.env
+sed -e 's/<TETHYS_POSTGIS_TETHYS_DEFAULT_PASS>/'"${TETHYS_POSTGIS_TETHYS_DEFAULT_PASS}"'/' \
+    -e 's/<TETHYS_POSTGIS_TETHYS_DB_MANAGER_PASS>/'"${TETHYS_POSTGIS_TETHYS_DB_MANAGER_PASS}"'/' \
+    -e 's/<TETHYS_POSTGIS_TETHYS_SUPER_PASS>/'"${TETHYS_POSTGIS_TETHYS_SUPER_PASS}"'/' \
+    ./postgis/postgis.env_template >./postgis/postgis.env
+
+
+# docker-compose.yml
+cp -f ./docker-compose.yml_template ./docker-compose.yml
+if [[ ${TETHYS_MAIN_MOUNT_RENCI_FOLDER} =~ ^[Yy]$ ]]
+then
+    sed -i 's!####<TETHYS_MAIN_MOUNT_RENCI_FOLDER>!- '${TETHYS_MAIN_MOUNT_RENCI_FOLDER_PATH}:${TETHYS_MAIN_MOUNT_RENCI_FOLDER_PATH}'!' \
+        ./docker-compose.yml
+fi
+
+if [[ ${TETHYS_NGINX_SSL_CERT_USE_PRODUCTION} =~ ^[Yy]$ ]]
+then
+    sed -i 's!####<TETHYS_NGINX_SSL_CERT_CHAIN_CRT>!- '${TETHYS_NGINX_SSL_CERT_CHAIN_CRT}'!' \
+        ./docker-compose.yml
+    sed -i 's!####<TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT>!- '${TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT}'!' \
+        ./docker-compose.yml
+    sed -i 's!####<TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY>!- '${TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY}'!' \
+        ./docker-compose.yml
+fi
+
+###############################  Nginx ###############################
+# ssl.conf
+sed 's/<TETHYS_NGINX_DOMAIN_NAME>/'"${TETHYS_NGINX_DOMAIN_NAME}"'/' ./nginx/ssl.conf_template >./nginx/ssl.conf
+
+
+###############################  GeoServer ###############################
+# geoserver.env
+sed -e 's/<TETHYS_GEOSERVER_ENABLED_NODES>/'"${TETHYS_GEOSERVER_ENABLED_NODES}"'/' \
+    -e 's/<TETHYS_GEOSERVER_REST_NODES>/'"${TETHYS_GEOSERVER_REST_NODES}"'/' \
+    -e 's/<TETHYS_GEOSERVER_NUM_CORES>/'"${TETHYS_GEOSERVER_NUM_CORES}"'/' \
+    -e 's/<TETHYS_GEOSERVER_MAX_TIMEOUT>/'"${TETHYS_GEOSERVER_MAX_TIMEOUT}"'/' \
+    -e 's/<TETHYS_GEOSERVER_MAX_MEMORY>/'"${TETHYS_GEOSERVER_MAX_MEMORY}"'/' \
+    -e 's/<TETHYS_GEOSERVER_MIN_MEMORY>/'"${TETHYS_GEOSERVER_MIN_MEMORY}"'/' \
+    -e 's/<TETHYS_GEOSERVER_GEOSERVER_FILEBROWSER_HIDEFS>/'"${TETHYS_GEOSERVER_GEOSERVER_FILEBROWSER_HIDEFS}"'/' \
+    ./geoserver/geoserver.env_template >./geoserver/geoserver.env
+
+###############################  Tethys_Main ###############################
+# settings.py
+sed -e 's/<TETHYS_MAIN_SECRET_KEY>/'"${TETHYS_MAIN_SECRET_KEY}"'/' \
+    -e 's/<TETHYS_MAIN_DEBUG>/'"${TETHYS_MAIN_DEBUG}"'/' \
+    -e 's/<TETHYS_POSTGIS_TETHYS_DEFAULT_PASS>/'"${TETHYS_POSTGIS_TETHYS_DEFAULT_PASS}"'/' \
+    -e 's/<TETHYS_POSTGIS_TETHYS_DB_MANAGER_PASS>/'"${TETHYS_POSTGIS_TETHYS_DB_MANAGER_PASS}"'/' \
+    -e 's/<TETHYS_POSTGIS_TETHYS_SUPER_PASS>/'"${TETHYS_POSTGIS_TETHYS_SUPER_PASS}"'/' \
+    -e 's/<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_KEY>/'"${TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_KEY}"'/' \
+    -e 's/<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_SECRET>/'"${TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_SECRET}"'/' \
+    -e 's/<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_KEY>/'"${TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_KEY}"'/' \
+    -e 's/<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_SECRET>/'"${TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_SECRET}"'/' \
+    ./tethys_main/settings.py_template >./tethys_main/settings.py
+
+if [[ ${TETHYS_MAIN_HYDROSHARE_BACKEND} =~ ^[Yy]$ ]]
+then
+    sed -i 's/####<TETHYS_MAIN_HYDROSHARE_BACKEND>/'"${TETHYS_MAIN_HYDROSHARE_BACKEND_MODULE}"'/' \
+        ./tethys_main/settings.py
+fi
+
+if [[ ${TETHYS_MAIN_HYDROSHARE_BETA_BACKEND} =~ ^[Yy]$ ]]
+then
+    sed -i 's/####<TETHYS_MAIN_HYDROSHARE_BETA_BACKEND>/'"${TETHYS_MAIN_HYDROSHARE_BETA_BACKEND_MODULE}"'/' \
+        ./tethys_main/settings.py
+fi
+
+

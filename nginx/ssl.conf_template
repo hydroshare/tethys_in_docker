@@ -1,22 +1,18 @@
 server {
     listen          80;
-    server_name     10.2.115.39;
+    server_name     <TETHYS_NGINX_DOMAIN_NAME>;
     return          301 https://$server_name$request_uri;
 }
 
 server {
     listen          443 ssl;
-    server_name     10.2.115.39;
+    server_name     <TETHYS_NGINX_DOMAIN_NAME>;
 
     if ($http_host != $server_name) {
         rewrite ^ https://$server_name$request_uri permanent;
     }
 
-    #access_log      /logs/nginx_access_ssl.log main;
-    #access_log      /logs/nginx_upstream_ssl.log upstreamlog;
-    #access_log      /logs/nginx_access.log main;
     access_log      /logs/nginx_access.log upstreamlog;
-    #error_log       /logs/nginx_error_ssl.log error;
 
     # access_log  '/logs/nginx_headers.log' 'json';
     #set $log_line '';

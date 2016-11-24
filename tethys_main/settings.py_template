@@ -22,10 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "x3j_)sm^ko56ygkhn83^g6_b)^6j3clqe9ct8*4*u_nk0w"
+SECRET_KEY = "<TETHYS_MAIN_SECRET_KEY>"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = <TETHYS_MAIN_DEBUG>
 
 # List those who should be notified of an error when DEBUG = False as a tuple of (name, email address).
 # i.e.: ADMINS = (('John', 'john@example.com'), ('Mary', 'mary@example.com'))
@@ -102,7 +102,7 @@ MIDDLEWARE_CLASSES = (
 
 AUTHENTICATION_BACKENDS = (
     # Do not remove following line. it is placeholder for 'tethys_services.backends.hydroshare.HydroShareOAuth2',
-    "tethys_services.backends.hydroshare.HydroShareOAuth2",
+    ####<TETHYS_MAIN_HYDROSHARE_BACKEND>,
     # Do not remove following line. it is placeholder for 'tethys_services.backends.hydroshare_beta.HydroShareOAuth2',
     ####<TETHYS_MAIN_HYDROSHARE_BETA_BACKEND>,
     #'social.backends.linkedin.LinkedinOAuth2',
@@ -130,7 +130,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tethys_default',
         'USER': 'tethys_default',
-        'PASSWORD': 'pass1',
+        'PASSWORD': '<TETHYS_POSTGIS_TETHYS_DEFAULT_PASS>',
         'HOST': 'tethys_in_docker_postgis',
         'PORT': '5432'
     }
@@ -141,14 +141,14 @@ TETHYS_DATABASES = {
     'tethys_db_manager': {
         'NAME': 'tethys_db_manager',
         'USER': 'tethys_db_manager',
-        'PASSWORD': 'pass2',
+        'PASSWORD': '<TETHYS_POSTGIS_TETHYS_DB_MANAGER_PASS>',
         'HOST': 'tethys_in_docker_postgis',
         'PORT': '5432'
     },
     'tethys_super': {
         'NAME': 'tethys_super',
         'USER': 'tethys_super',
-        'PASSWORD': 'pass3',
+        'PASSWORD': '<TETHYS_POSTGIS_TETHYS_SUPER_PASS>',
         'HOST': 'tethys_in_docker_postgis',
         'PORT': '5432'
     }
@@ -275,13 +275,13 @@ SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = ''
 
 
 ## www-https
-SOCIAL_AUTH_HYDROSHARE_KEY = 'y8w6FPhW1c5jGMsSfkkNyZ5LPt1v3SaLibkktRHz'
-SOCIAL_AUTH_HYDROSHARE_SECRET = 'yWGer4UOwkUyTYzpP15BU7SNzRZRt7H0iwxO5YhnC1bNJLyWU0eB0iPFRAhr9b4TM8tQdDOUvD5kqg86I3gxhiUjU5ay7kqN3VbnwNs1B9BCeXiVkMRRqvfiXYcYgMLP'
+SOCIAL_AUTH_HYDROSHARE_KEY = '<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_KEY>'
+SOCIAL_AUTH_HYDROSHARE_SECRET = '<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_SECRET>'
 
 
 ## beta-https
-SOCIAL_AUTH_HYDROSHARE_BETA_KEY = '654321'
-SOCIAL_AUTH_HYDROSHARE_BETA_SECRET = 'EDCBA'
+SOCIAL_AUTH_HYDROSHARE_BETA_KEY = '<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_KEY>'
+SOCIAL_AUTH_HYDROSHARE_BETA_SECRET = '<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_SECRET>'
 
 
 # Django Guardian Settings
