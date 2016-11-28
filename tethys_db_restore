@@ -11,7 +11,7 @@ restore_tethys_default_table() {
 if [  $# -eq 0 ]
 then
     # restore from tethys_default.backup
-    restore_tethys_default_table ./postgis/db_backup/tethys_default.backup
+    restore_tethys_default_table ./tethys_default.backup
 else
     # restore from user-specific file
     restore_tethys_default_table $1
