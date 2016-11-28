@@ -4,8 +4,9 @@ services:
 #    restart: always
     container_name: tethys_in_docker_postgis
     image: ciwater/postgis:2.1.2
-    ports:
-      - "5435:5432"
+    # Do not remove following 2 lines. They are placeholders.
+    #_#_#_#<TETHYS_POSTGIS_OPEN_PORTS>#_#_#_#
+    #_#_#_#<TETHYS_POSTGIS_MAP_INTERNAL_5432_TO>#_#_#_#
     volumes:
       - ./logs/:/var/log/supervisor
       - ./logs/:/var/log/postgis
@@ -20,8 +21,9 @@ services:
     container_name: tethys_in_docker_main
     build: ./tethys_main/
     image: tethys_in_docker_main
-    ports:
-      - "8000:8000"
+    # Do not remove following 2 lines. They are placeholders.
+    #_#_#_#<TETHYS_MAIN_OPEN_PORTS>#_#_#_#
+    #_#_#_#<TETHYS_MAIN_MAP_INTERNAL_8000_TO>#_#_#_#
     volumes:
       - ./tethys/:/tethys
       - ./tethys_main/settings.py:/tethys/tethys_apps/settings.py
@@ -36,7 +38,7 @@ services:
       - ./logs/:/logs
       # - /projects/water/nwm/:/projects/water/nwm
       # Do not remove following line. it is placeholder
-      ####<TETHYS_MAIN_MOUNT_RENCI_FOLDER>
+      #_#_#_#<TETHYS_MAIN_MOUNT_RENCI_FOLDER>#_#_#_#
 
     # start django development server
     #command: runuser -u tethys-user -g tethys-group /bin/bash /tethys_main/run-server
@@ -62,9 +64,9 @@ services:
     volumes:
       - ./nginx/certs/:/certs
        # Do not remove following 3 lines. they are placeholders
-      ####<TETHYS_NGINX_SSL_CERT_CHAIN_CRT>:/certs/cert-chain.crt
-      ####<TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT>:/certs/server.crt
-      ####<TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY>:/certs/server.key
+      #_#_#_#<TETHYS_NGINX_SSL_CERT_CHAIN_CRT>#_#_#_#:/certs/cert-chain.crt
+      #_#_#_#<TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT>#_#_#_#:/certs/server.crt
+      #_#_#_#<TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY>#_#_#_#:/certs/server.key
       - ./nginx/ssl.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/files/tethys_favicon.ico:/var/www/tethys_favicon.ico
@@ -80,12 +82,13 @@ services:
 #    restart: always
     image: zhiyuli/geoserver:2.8.2-clustered-1.7
     container_name: tethys_in_docker_geoserver
-    ports:
-      - "8181:8181"
-      - "8081:8081"
-      - "8082:8082"
-      - "8083:8083"
-      - "8084:8084"
+    # Do not remove following 6 lines. They are placeholders.
+    #_#_#_#<TETHYS_GEOSERVER_OPEN_PORTS>#_#_#_#
+    #_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8181_TO>#_#_#_#
+    #_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8081_TO>#_#_#_#
+    #_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8082_TO>#_#_#_#
+    #_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8083_TO>#_#_#_#
+    #_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8084_TO>#_#_#_#
     env_file: ./geoserver/geoserver.env
     volumes:
       - ./logs/:/var/log/nginx
@@ -94,3 +97,15 @@ services:
       - ./logs/:/var/geoserver/node3/logs
       - ./logs/:/var/geoserver/node4/logs
       - ./logs/:/var/log/supervisor
+
+  tethys_in_docker_n52wps:
+#    restart: always
+    image: ciwater/n52wps:3.3.0
+    container_name: tethys_in_docker_n52wps
+    # Do not remove following 2 lines. They are placeholders.
+    #_#_#_#<TETHYS_N52WPS_OPEN_PORTS>#_#_#_#
+    #_#_#_#<TETHYS_N52WPS_MAP_INTERNAL_8080_TO>#_#_#_#
+    env_file: ./n52wps/n52wps.env
+    #volumes:
+    #  - ./logs/n52wps/tomcat7/:/var/log/tomcat7
+    #  - ./logs/n52wps/supervisor/:/var/log/supervisor

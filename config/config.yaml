@@ -1,18 +1,34 @@
-### tethys_nginx
+################################## config all settings here ###################################
+
+################################################ tethys_nginx ############################################
+# change ssl.conf
 TETHYS_NGINX_DOMAIN_NAME: 10.2.115.39
 
-### postgis
-TETHYS_POSTGIS_TETHYS_DEFAULT_PASS: pass1
-TETHYS_POSTGIS_TETHYS_DB_MANAGER_PASS: pass2
-TETHYS_POSTGIS_TETHYS_SUPER_PASS: pass3
+# change docker-compose.yml
+TETHYS_NGINX_IMAGE: nginx:1.11.5
+# Y or N
+TETHYS_NGINX_SSL_CERT_USE_PRODUCTION: Y
+TETHYS_NGINX_SSL_CERT_CHAIN_CRT: ./nginx/certs/cert-chain.crt
+TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT: ./nginx/certs/server.crt
+TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY: ./nginx/certs/server.key
 
-### tethys_main
-# Do not contain pound sign # or and sign &
-TETHYS_MAIN_SECRET_KEY: x3j_)sm^ko56ygkhn83^g6_b)^6j3clqe9ct8*4*u_nk0w
+################################################ tethys_postgis ##################################################
+# change postgis.env
+TETHYS_POSTGIS_TETHYS_DEFAULT_PASS: pass_default
+TETHYS_POSTGIS_TETHYS_DB_MANAGER_PASS: pass_db_manageer
+TETHYS_POSTGIS_TETHYS_SUPER_PASS: pass_super
+TETHYS_POSTGIS_OPEN_PORTS: Y
+TETHYS_POSTGIS_MAP_INTERNAL_5432_TO: 5435
+
+############################################## tethys_main ################################################
+# change settings.py
+# Do not contain 'pound sign #' or 'and sign &'
+TETHYS_MAIN_SECRET_KEY: czh30tzX56F%+$v(a@&m*)*5%(p+(p1i6271i7l_63mer3m6+b
 
 # python boolean variable: True or False
 TETHYS_MAIN_DEBUG: True
 
+# OAuth Login
 # Y or N
 TETHYS_MAIN_HYDROSHARE_BACKEND: Y
 # python string
@@ -27,18 +43,15 @@ TETHYS_MAIN_HYDROSHARE_BETA_BACKEND_MODULE: "tethys_services.backends.hydroshare
 TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_KEY: 654321
 TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_SECRET: EDCBA
 
-# docker-compose.yml
+# change docker-compose.yml
 # Y or N
 TETHYS_MAIN_MOUNT_RENCI_FOLDER: N
 TETHYS_MAIN_MOUNT_RENCI_FOLDER_PATH: /projects/water/nwm/
+TETHYS_MAIN_OPEN_PORTS: Y
+TETHYS_MAIN_MAP_INTERNAL_8000_TO: 8000
 
-# Y or N
-TETHYS_NGINX_SSL_CERT_USE_PRODUCTION: Y
-TETHYS_NGINX_SSL_CERT_CHAIN_CRT: ./nginx/certs/cert-chain.crt
-TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT: ./nginx/certs/server.crt
-TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY: ./nginx/certs/server.key
-
-### tethys_geoserver
+############################################## tethys_geoserver ##############################################
+# change geoserver.env
 TETHYS_GEOSERVER_ENABLED_NODES: 2
 TETHYS_GEOSERVER_REST_NODES: 2
 TETHYS_GEOSERVER_NUM_CORES: 2
@@ -47,3 +60,21 @@ TETHYS_GEOSERVER_MAX_MEMORY: 2048
 TETHYS_GEOSERVER_MIN_MEMORY: 1024
 # limit file browser to data folder only
 TETHYS_GEOSERVER_GEOSERVER_FILEBROWSER_HIDEFS: true
+
+# Y or N
+TETHYS_GEOSERVER_OPEN_PORTS: Y
+TETHYS_GEOSERVER_MAP_INTERNAL_8181_TO: 8181
+TETHYS_GEOSERVER_MAP_INTERNAL_8081_TO: 8081
+TETHYS_GEOSERVER_MAP_INTERNAL_8082_TO: 8082
+TETHYS_GEOSERVER_MAP_INTERNAL_8083_TO: 8083
+TETHYS_GEOSERVER_MAP_INTERNAL_8084_TO: 8084
+
+############################################ tethys_n52wps #####################################################
+# change n52wps.env
+TETHYS_N52WPS_USERNAME: wps
+TETHYS_N52WPS_PASSWORD: wps
+
+# change docker-compose.yml
+# Y or N
+TETHYS_N52WPS_OPEN_PORTS: Y
+TETHYS_N52WPS_MAP_INTERNAL_8080_TO: 8282

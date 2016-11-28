@@ -21,6 +21,8 @@ else
     branch_name=$1
 fi
 
+./tethys_change_permission
+
 echo "Stop running containers...."
 docker-compose stop
 
@@ -33,8 +35,7 @@ read -p "Remove existing logs (default: No)? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    echo "Input sudo password to remove existing logs"
-    sudo rm -rf logs/*
+    rm -rf logs/*
 fi
 
 # remove geoserver
@@ -45,6 +46,13 @@ then
     docker rm -f tethys_in_docker_geoserver
 fi
 
+# remove n52wps
+read -p "Remove existing 52 north wps container (default: No)? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    docker rm -f tethys_in_docker_n52wps
+fi
 
 DB_REMOVED="N"
 read -p "Remove existing DB (default: No)?" -n 1 -r
@@ -63,11 +71,13 @@ docker volume rm $(docker volume ls -qf dangling=true)
 rm -rf tethys/*
 rm -rf tethys/.*
 rm -rf static/*
-rm -rf logs/*
 
 mkdir -p tethys
 mkdir -p static
 mkdir -p logs
+mkdir -p logs/n52wps
+mkdir -p logs/n52wps/supervisor
+mkdir -p logs/n52wps/tomcat7
 
 echo "Clone Tethys repo...."
 git clone https://github.com/tethysplatform/tethys.git tethys
@@ -76,6 +86,9 @@ echo "Using branch " $branch_name
 git checkout $branch_name
 cd ..
 cp -f tethys/requirements.txt tethys_main/
+
+# generate all config files
+./tethys_pre_build
 
 echo "Build images...."
 docker-compose build

@@ -102,9 +102,9 @@ MIDDLEWARE_CLASSES = (
 
 AUTHENTICATION_BACKENDS = (
     # Do not remove following line. it is placeholder for 'tethys_services.backends.hydroshare.HydroShareOAuth2',
-    ####<TETHYS_MAIN_HYDROSHARE_BACKEND>,
+    #_#_#_#<TETHYS_MAIN_HYDROSHARE_BACKEND>#_#_#_#,
     # Do not remove following line. it is placeholder for 'tethys_services.backends.hydroshare_beta.HydroShareOAuth2',
-    ####<TETHYS_MAIN_HYDROSHARE_BETA_BACKEND>,
+    #_#_#_#<TETHYS_MAIN_HYDROSHARE_BETA_BACKEND>#_#_#_#,
     #'social.backends.linkedin.LinkedinOAuth2',
     #'social.backends.google.GoogleOAuth2',
     #'social.backends.facebook.FacebookOAuth2',

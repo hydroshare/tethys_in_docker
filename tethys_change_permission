@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-docker exec -it tethys_in_docker_main bash -c "python /tethys/manage.py collectstatic --noinput && \
-                                               chown -R tethys-user:tethys-group /tethys && \
+docker exec -it tethys_in_docker_main bash -c "chown -R tethys-user:tethys-group /tethys && \
                                                chown -R tethys-user:tethys-group /apps && \
                                                chown -R tethys-user:tethys-group /var/www/tethys/static && \
                                                chown -R tethys-user:tethys-group /logs"

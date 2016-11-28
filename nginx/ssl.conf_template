@@ -92,9 +92,16 @@ server {
         proxy_redirect http://$server_name:8181/ https://$server_name/;
     }
 
+    # n52wps
+    location /wps/ {
+        proxy_pass http://tethys_in_docker_n52wps:8080;
+        proxy_redirect http://$server_name:8080/ https://$server_name/;
+    }
+
     # gunicorn django server
     location / {
         proxy_pass http://tethys_in_docker_main:8000;
+        proxy_redirect off;
     }
 
 }

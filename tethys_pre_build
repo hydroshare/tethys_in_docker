@@ -18,29 +18,69 @@ sed -e 's/<TETHYS_POSTGIS_TETHYS_DEFAULT_PASS>/'"${TETHYS_POSTGIS_TETHYS_DEFAULT
     -e 's/<TETHYS_POSTGIS_TETHYS_SUPER_PASS>/'"${TETHYS_POSTGIS_TETHYS_SUPER_PASS}"'/' \
     ./postgis/postgis.env_template >./postgis/postgis.env
 
-
-# docker-compose.yml
+############################### docker-compose.yml ####################################
 cp -f ./docker-compose.yml_template ./docker-compose.yml
+
 if [[ ${TETHYS_MAIN_MOUNT_RENCI_FOLDER} =~ ^[Yy]$ ]]
 then
-    sed -i 's!####<TETHYS_MAIN_MOUNT_RENCI_FOLDER>!- '${TETHYS_MAIN_MOUNT_RENCI_FOLDER_PATH}:${TETHYS_MAIN_MOUNT_RENCI_FOLDER_PATH}'!' \
+    sed -i 's!#_#_#_#<TETHYS_MAIN_MOUNT_RENCI_FOLDER>#_#_#_#!- '${TETHYS_MAIN_MOUNT_RENCI_FOLDER_PATH}:${TETHYS_MAIN_MOUNT_RENCI_FOLDER_PATH}'!' \
         ./docker-compose.yml
 fi
 
 if [[ ${TETHYS_NGINX_SSL_CERT_USE_PRODUCTION} =~ ^[Yy]$ ]]
 then
-    sed -i 's!####<TETHYS_NGINX_SSL_CERT_CHAIN_CRT>!- '${TETHYS_NGINX_SSL_CERT_CHAIN_CRT}'!' \
+    sed -i 's!#_#_#_#<TETHYS_NGINX_SSL_CERT_CHAIN_CRT>#_#_#_#!- '${TETHYS_NGINX_SSL_CERT_CHAIN_CRT}'!' \
         ./docker-compose.yml
-    sed -i 's!####<TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT>!- '${TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT}'!' \
+    sed -i 's!#_#_#_#<TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT>#_#_#_#!- '${TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT}'!' \
         ./docker-compose.yml
-    sed -i 's!####<TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY>!- '${TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY}'!' \
+    sed -i 's!#_#_#_#<TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY>#_#_#_#!- '${TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY}'!' \
+        ./docker-compose.yml
+fi
+
+
+if [[ ${TETHYS_POSTGIS_OPEN_PORTS} =~ ^[Yy]$ ]]
+then
+    sed -i 's!#_#_#_#<TETHYS_POSTGIS_OPEN_PORTS>#_#_#_#!ports:!' \
+        ./docker-compose.yml
+    sed -i 's!#_#_#_#<TETHYS_POSTGIS_MAP_INTERNAL_5432_TO>#_#_#_#!- "'${TETHYS_POSTGIS_MAP_INTERNAL_5432_TO}':5432"!' \
+        ./docker-compose.yml
+fi
+
+if [[ ${TETHYS_MAIN_OPEN_PORTS} =~ ^[Yy]$ ]]
+then
+    sed -i 's!#_#_#_#<TETHYS_MAIN_OPEN_PORTS>#_#_#_#!ports:!' \
+        ./docker-compose.yml
+    sed -i 's!#_#_#_#<TETHYS_MAIN_MAP_INTERNAL_8000_TO>#_#_#_#!- "'${TETHYS_MAIN_MAP_INTERNAL_8000_TO}':8000"!' \
+        ./docker-compose.yml
+fi
+
+if [[ ${TETHYS_GEOSERVER_OPEN_PORTS} =~ ^[Yy]$ ]]
+then
+    sed -i 's!#_#_#_#<TETHYS_GEOSERVER_OPEN_PORTS>#_#_#_#!ports:!' \
+        ./docker-compose.yml
+    sed -i 's!#_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8181_TO>#_#_#_#!- "'${TETHYS_GEOSERVER_MAP_INTERNAL_8181_TO}':8181"!' \
+        ./docker-compose.yml
+    sed -i 's!#_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8081_TO>#_#_#_#!- "'${TETHYS_GEOSERVER_MAP_INTERNAL_8081_TO}':8081"!' \
+        ./docker-compose.yml
+    sed -i 's!#_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8082_TO>#_#_#_#!- "'${TETHYS_GEOSERVER_MAP_INTERNAL_8082_TO}':8082"!' \
+        ./docker-compose.yml
+    sed -i 's!#_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8083_TO>#_#_#_#!- "'${TETHYS_GEOSERVER_MAP_INTERNAL_8083_TO}':8083"!' \
+        ./docker-compose.yml
+    sed -i 's!#_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8084_TO>#_#_#_#!- "'${TETHYS_GEOSERVER_MAP_INTERNAL_8084_TO}':8084"!' \
+        ./docker-compose.yml
+fi
+
+if [[ ${TETHYS_N52WPS_OPEN_PORTS} =~ ^[Yy]$ ]]
+then
+    sed -i 's!#_#_#_#<TETHYS_N52WPS_OPEN_PORTS>#_#_#_#!ports:!' \
+        ./docker-compose.yml
+    sed -i 's!#_#_#_#<TETHYS_N52WPS_MAP_INTERNAL_8080_TO>#_#_#_#!- "'${TETHYS_N52WPS_MAP_INTERNAL_8080_TO}':8080"!' \
         ./docker-compose.yml
 fi
 
 ###############################  Nginx ###############################
 # ssl.conf
 sed 's/<TETHYS_NGINX_DOMAIN_NAME>/'"${TETHYS_NGINX_DOMAIN_NAME}"'/' ./nginx/ssl.conf_template >./nginx/ssl.conf
-
 
 ###############################  GeoServer ###############################
 # geoserver.env
@@ -68,14 +108,20 @@ sed -e 's/<TETHYS_MAIN_SECRET_KEY>/'"${TETHYS_MAIN_SECRET_KEY}"'/' \
 
 if [[ ${TETHYS_MAIN_HYDROSHARE_BACKEND} =~ ^[Yy]$ ]]
 then
-    sed -i 's/####<TETHYS_MAIN_HYDROSHARE_BACKEND>/'"${TETHYS_MAIN_HYDROSHARE_BACKEND_MODULE}"'/' \
+    sed -i 's/#_#_#_#<TETHYS_MAIN_HYDROSHARE_BACKEND>#_#_#_#/'"${TETHYS_MAIN_HYDROSHARE_BACKEND_MODULE}"'/' \
         ./tethys_main/settings.py
 fi
 
 if [[ ${TETHYS_MAIN_HYDROSHARE_BETA_BACKEND} =~ ^[Yy]$ ]]
 then
-    sed -i 's/####<TETHYS_MAIN_HYDROSHARE_BETA_BACKEND>/'"${TETHYS_MAIN_HYDROSHARE_BETA_BACKEND_MODULE}"'/' \
+    sed -i 's/#_#_#_#<TETHYS_MAIN_HYDROSHARE_BETA_BACKEND>#_#_#_#/'"${TETHYS_MAIN_HYDROSHARE_BETA_BACKEND_MODULE}"'/' \
         ./tethys_main/settings.py
 fi
 
-
+###############################  Tethys_N52WPS ###############################
+# n52wps.env
+cp -f ./n52wps/n52wps.env_template ./n52wps/n52wps.env
+sed -i 's/<TETHYS_N52WPS_USERNAME>/'"${TETHYS_N52WPS_USERNAME}"'/' \
+        ./n52wps/n52wps.env
+sed -i 's/<TETHYS_N52WPS_PASSWORD>/'"${TETHYS_N52WPS_PASSWORD}"'/' \
+        ./n52wps/n52wps.env
