@@ -2,6 +2,6 @@
 
 now=$(date +"%Y-%m-%d_%H-%M-%S")
 echo "Input password for db user tethys_super:"
-pg_dump -d tethys_default -h localhost -p 5435 -U tethys_super -W  > ./postgis/db_backup/tethys_default.backup_$now
-
-echo "Saved to ./postgis/db_backup/tethys_default.backup_$now"
+pg_dump -d tethys_default -h localhost -p 5435 -U tethys_super -W  > ./tethys_default.backup_$now
+cp -f ./tethys_default.backup_$now ./tethys_default.backup
+echo "Saved to ./tethys_default.backup_$now"
