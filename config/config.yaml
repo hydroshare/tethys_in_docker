@@ -4,8 +4,6 @@
 # change ssl.conf
 TETHYS_NGINX_DOMAIN_NAME: 10.2.115.39
 
-# change docker-compose.yml
-TETHYS_NGINX_IMAGE: nginx:1.11.5
 # Y or N
 TETHYS_NGINX_SSL_CERT_USE_PRODUCTION: Y
 TETHYS_NGINX_SSL_CERT_CHAIN_CRT: ./nginx/certs/cert-chain.crt
@@ -27,6 +25,13 @@ TETHYS_MAIN_SECRET_KEY: czh30tzX56F%+$v(a@&m*)*5%(p+(p1i6271i7l_63mer3m6+b
 
 # python boolean variable: True or False
 TETHYS_MAIN_DEBUG: True
+TETHYS_MAIN_BYPASS_TETHYS_HOME_PAGE: False
+TETHYS_MAIN_ENABLE_OPEN_SIGNUP: True
+
+# python string (default: '/accounts/login/')
+# see: https://docs.djangoproject.com/en/1.10/ref/settings/#login-url
+# set to login through HydroShare OAuth:  '/oauth2/login/hydroshare/'
+TETHYS_MAIN_LOGIN_URL: '/accounts/login/'
 
 # OAuth Login
 # Y or N
@@ -68,6 +73,16 @@ TETHYS_GEOSERVER_MAP_INTERNAL_8081_TO: 8081
 TETHYS_GEOSERVER_MAP_INTERNAL_8082_TO: 8082
 TETHYS_GEOSERVER_MAP_INTERNAL_8083_TO: 8083
 TETHYS_GEOSERVER_MAP_INTERNAL_8084_TO: 8084
+
+# change tethys_main/settings.py
+# these settings are used by some legacy apps that dont read GeoServer info from Tethys Spatial Dataset Service
+# Y or N: if Y, both GEOSERVER_URL_BASE and GEOSERVER_URL_SSL_BASE in settings.py will be
+#         https://${TETHYS_NGINX_DOMAIN_NAME}:${TETHYS_GEOSERVER_SSL_ON_PORT}
+TETHYS_GEOSERVER_FORCE_SSL: Y
+TETHYS_GEOSERVER_HTTP_ON_PORT: 80
+TETHYS_GEOSERVER_SSL_ON_PORT: 443
+TETHYS_GEOSERVER_USER_NAME: admin
+TETHYS_GEOSERVER_USER_PASSWORD: geoserver
 
 ############################################ tethys_n52wps #####################################################
 # change n52wps.env

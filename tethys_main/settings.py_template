@@ -237,10 +237,12 @@ GRAVATAR_DFFAULT_SECURE = True
 
 
 # Use this setting to bypass the home page
-BYPASS_TETHYS_HOME_PAGE = False
+BYPASS_TETHYS_HOME_PAGE = <TETHYS_MAIN_BYPASS_TETHYS_HOME_PAGE>
 
 # Use this setting to disable open account signup
-ENABLE_OPEN_SIGNUP = True if os.getenv('ENABLE_OPEN_SIGNUP', "False").lower() == 'true' else False
+ENABLE_OPEN_SIGNUP = <TETHYS_MAIN_ENABLE_OPEN_SIGNUP>
+
+LOGIN_URL = <TETHYS_MAIN_LOGIN_URL>
 
 # Uncomment the following lines and adjust to match your setup to enable emailing capabilities
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -258,6 +260,8 @@ SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
 SOCIAL_AUTH_SLUGIFY_USERNAMES = True
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/apps/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/accounts/login/'
+
+
 
 # OAuth Providers
 ## Google
@@ -293,3 +297,10 @@ ANONYMOUS_USER_ID = -1
 
 # django is behind a proxy server that handles https for django
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# geoserver settings
+# these settings will be used by some legacy apps that dont make use of Tethys Spatial Dataset Service
+GEOSERVER_URL_BASE = <TETHYS_GEOSERVER_URL_BASE>
+GEOSERVER_URL_SSL_BASE = <TETHYS_GEOSERVER_URL_SSL_BASE>
+GEOSERVER_USER_NAME = <TETHYS_GEOSERVER_USER_NAME>
+GEOSERVER_USER_PASSWORD = <TETHYS_GEOSERVER_USER_PASSWORD>

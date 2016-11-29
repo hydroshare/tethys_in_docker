@@ -106,6 +106,13 @@ sed -e 's/<TETHYS_MAIN_SECRET_KEY>/'"${TETHYS_MAIN_SECRET_KEY}"'/' \
     -e 's/<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_SECRET>/'"${TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_SECRET}"'/' \
     ./tethys_main/settings.py_template >./tethys_main/settings.py
 
+sed -i 's!<TETHYS_MAIN_BYPASS_TETHYS_HOME_PAGE>!'${TETHYS_MAIN_BYPASS_TETHYS_HOME_PAGE}'!' \
+        ./tethys_main/settings.py
+sed -i 's!<TETHYS_MAIN_ENABLE_OPEN_SIGNUP>!'${TETHYS_MAIN_ENABLE_OPEN_SIGNUP}'!' \
+        ./tethys_main/settings.py
+sed -i 's!<TETHYS_MAIN_LOGIN_URL>!'${TETHYS_MAIN_LOGIN_URL}'!' \
+        ./tethys_main/settings.py
+
 if [[ ${TETHYS_MAIN_HYDROSHARE_BACKEND} =~ ^[Yy]$ ]]
 then
     sed -i 's/#_#_#_#<TETHYS_MAIN_HYDROSHARE_BACKEND>#_#_#_#/'"${TETHYS_MAIN_HYDROSHARE_BACKEND_MODULE}"'/' \
@@ -117,6 +124,25 @@ then
     sed -i 's/#_#_#_#<TETHYS_MAIN_HYDROSHARE_BETA_BACKEND>#_#_#_#/'"${TETHYS_MAIN_HYDROSHARE_BETA_BACKEND_MODULE}"'/' \
         ./tethys_main/settings.py
 fi
+
+if [[ ${TETHYS_GEOSERVER_FORCE_SSL} =~ ^[Yy]$ ]]
+then
+    sed -i 's!<TETHYS_GEOSERVER_URL_BASE>!"https://'${TETHYS_NGINX_DOMAIN_NAME}:${TETHYS_GEOSERVER_SSL_ON_PORT}'"!' \
+        ./tethys_main/settings.py
+    sed -i 's!<TETHYS_GEOSERVER_URL_SSL_BASE>!"https://'${TETHYS_NGINX_DOMAIN_NAME}:${TETHYS_GEOSERVER_SSL_ON_PORT}'"!' \
+        ./tethys_main/settings.py
+else
+    sed -i 's!<TETHYS_GEOSERVER_URL_BASE>!"http://'${TETHYS_NGINX_DOMAIN_NAME}:${TETHYS_GEOSERVER_HTTP_ON_PORT}'"!' \
+        ./tethys_main/settings.py
+    sed -i 's!<TETHYS_GEOSERVER_URL_SSL_BASE>!"https://'${TETHYS_NGINX_DOMAIN_NAME}:${TETHYS_GEOSERVER_SSL_ON_PORT}'"!' \
+        ./tethys_main/settings.py
+fi
+
+sed -i 's!<TETHYS_GEOSERVER_USER_NAME>!"'${TETHYS_GEOSERVER_USER_NAME}'"!' \
+        ./tethys_main/settings.py
+sed -i 's!<TETHYS_GEOSERVER_USER_PASSWORD>!"'${TETHYS_GEOSERVER_USER_PASSWORD}'"!' \
+        ./tethys_main/settings.py
+
 
 ###############################  Tethys_N52WPS ###############################
 # n52wps.env
