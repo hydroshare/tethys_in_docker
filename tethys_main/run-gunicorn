@@ -38,5 +38,6 @@ MAX_REQUESTS=1000
 --max-requests $MAX_REQUESTS \
 --env $ENV_VARIABLES \
 --access-logfile $GUNICORN_ACCESS_LOG \
---log-level error
+--log-level error \
+--enable-stdio-inheritance
 #--log-file $GUNICORN_ERROR_LOG

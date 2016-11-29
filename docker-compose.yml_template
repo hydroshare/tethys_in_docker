@@ -21,6 +21,8 @@ services:
     container_name: tethys_in_docker_main
     build: ./tethys_main/
     image: tethys_in_docker_main
+    environment:
+        - PYTHONUNBUFFERED=TRUE
     # Do not remove following 2 lines. They are placeholders.
     #_#_#_#<TETHYS_MAIN_OPEN_PORTS>#_#_#_#
     #_#_#_#<TETHYS_MAIN_MAP_INTERNAL_8000_TO>#_#_#_#
