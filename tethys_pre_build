@@ -80,7 +80,16 @@ fi
 
 ###############################  Nginx ###############################
 # ssl.conf
-sed 's/<TETHYS_NGINX_DOMAIN_NAME>/'"${TETHYS_NGINX_DOMAIN_NAME}"'/' ./nginx/ssl.conf_template >./nginx/ssl.conf
+cp -f ./nginx/ssl.conf_template ./nginx/ssl.conf
+
+sed -i 's/<TETHYS_NGINX_DOMAIN_NAME>/'"${TETHYS_NGINX_DOMAIN_NAME}"'/' \
+       ./nginx/ssl.conf
+
+if [ ${TETHYS_MAIN_DEBUG} = False ]
+then
+    sed -i 's/#_#_ENABLE_NGINX_ERROR_PAGE_#_#//' \
+        ./nginx/ssl.conf
+fi
 
 ###############################  GeoServer ###############################
 # geoserver.env

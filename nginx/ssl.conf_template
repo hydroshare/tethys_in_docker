@@ -64,11 +64,11 @@ server {
         alias /var/www/tethys_favicon.ico;
     }
 
-    error_page 404 500 501 502 503 504 /error_500.html;
-    location = /error_500.html {
-            alias /var/www/error_500.html;
-            internal;
-    }
+    #_#_ENABLE_NGINX_ERROR_PAGE_#_#error_page 404 500 501 502 503 504 /error_500.html;
+    #_#_ENABLE_NGINX_ERROR_PAGE_#_#location = /error_500.html {
+    #_#_ENABLE_NGINX_ERROR_PAGE_#_#        alias /var/www/error_500.html;
+    #_#_ENABLE_NGINX_ERROR_PAGE_#_#        internal;
+    #_#_ENABLE_NGINX_ERROR_PAGE_#_#}
 
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;

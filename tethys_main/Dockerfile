@@ -5,6 +5,7 @@ FROM zhiyuli/tethys_base:1.4-rc-1.1
 ### Begin - App-specific Additions ###
 RUN apt-get update && apt-get install --fix-missing -y supervisor
 RUN pip install gunicorn==19.6.0
+RUN pip install django-cors-headers==1.1.0
 ### END - App-specific Additions ###
 
 RUN mkdir /tethys

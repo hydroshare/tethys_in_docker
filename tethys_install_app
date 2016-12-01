@@ -8,7 +8,7 @@ install_one_app() {
     echo "Installing" $app_folder "..."
     docker exec -it tethys_in_docker_main bash -c "cd /apps/$app_folder_name && \
                                                python setup.py develop"
-    docker exec -it tethys_in_docker_main bash -c "tethys syncstores all --manage /tethys/manage.py"
+    #docker exec -it tethys_in_docker_main bash -c "tethys syncstores all --manage /tethys/manage.py"
 }
 
 install_all_apps() {
@@ -21,7 +21,7 @@ install_all_apps() {
             echo "Installing" ${app_folder_name} "..."
             docker exec -it tethys_in_docker_main bash -c "cd /apps/$app_folder_name && \
                                                            python setup.py develop"
-            docker exec -it tethys_in_docker_main bash -c "tethys syncstores all --manage /tethys/manage.py"
+            #docker exec -it tethys_in_docker_main bash -c "tethys syncstores all --manage /tethys/manage.py"
         fi
     done
 }
@@ -40,10 +40,13 @@ else
     install_one_app  $1
 fi
 
+docker exec -it tethys_in_docker_main bash -c "tethys syncstores all --manage /tethys/manage.py"
+
 docker exec -it tethys_in_docker_main bash -c "python /tethys/manage.py collectstatic --noinput && \
                                                chown -R tethys-user:tethys-group /tethys && \
                                                chown -R tethys-user:tethys-group /apps && \
                                                chown -R tethys-user:tethys-group /var/www/tethys/static"
 echo "Restart Tethys main container"
 docker restart tethys_in_docker_main
+docker restart tethys_in_docker_nginx
 echo "Done"
