@@ -43,14 +43,14 @@ services:
       #_#_#_#<TETHYS_MAIN_MOUNT_RENCI_FOLDER>#_#_#_#
 
     # start django development server
-    #command: runuser -u tethys-user -g tethys-group /bin/bash /tethys_main/run-server
+    #_#_TETHYS_MAIN_USE_DJANGO_TESTING_SERVER_#_#command: runuser -u tethys-user -g tethys-group /bin/bash /tethys_main/run-server
     #command: python manage.py runserver 0.0.0.0:8000
 
     # start gunicore server
     #command: /tethys_main/run-gunicorn
 
     # start supervisor + gunicorn
-    command: /tethys_main/startup
+    #_#_TETHYS_MAIN_USE_GUNICORN_SERVER_#_#command: /tethys_main/startup
 
     depends_on:
       - tethys_in_docker_postgis

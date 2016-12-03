@@ -78,6 +78,15 @@ then
         ./docker-compose.yml
 fi
 
+if [ ${TETHYS_MAIN_DEBUG} = False ]
+then
+    sed -i 's/#_#_TETHYS_MAIN_USE_GUNICORN_SERVER_#_#//' \
+        ./docker-compose.yml
+else
+    sed -i 's/#_#_TETHYS_MAIN_USE_DJANGO_TESTING_SERVER_#_#//' \
+        ./docker-compose.yml
+fi
+
 ###############################  Nginx ###############################
 # ssl.conf
 cp -f ./nginx/ssl.conf_template ./nginx/ssl.conf
@@ -88,6 +97,12 @@ sed -i 's/<TETHYS_NGINX_DOMAIN_NAME>/'"${TETHYS_NGINX_DOMAIN_NAME}"'/' \
 if [ ${TETHYS_MAIN_DEBUG} = False ]
 then
     sed -i 's/#_#_ENABLE_NGINX_ERROR_PAGE_#_#//' \
+        ./nginx/ssl.conf
+fi
+
+if [ ${TETHYS_MAIN_DEBUG} = False ]
+then
+    sed -i 's/#_#_ENABLE_NGINX_STATIC_FILES_#_#//' \
         ./nginx/ssl.conf
 fi
 

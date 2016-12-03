@@ -17,4 +17,6 @@ RUN chown -R tethys-user:tethys-group /home/tethys-user
 
 WORKDIR /tethys
 
+VOLUME  ["/usr/local/lib"]
+
 CMD ["/bin/bash"]
