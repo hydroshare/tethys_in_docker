@@ -39,27 +39,43 @@ then
 fi
 
 # remove geoserver
-read -p "Remove existing geoserver container (default: No)? " -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]
+GEOSERVER_CONTAINER_STATUS=$(docker inspect --format="{{ .State.Running }}" tethys_in_docker_geoserver 2> /dev/null)
+if [ -n "$GEOSERVER_CONTAINER_STATUS" ]
 then
-    docker rm -f tethys_in_docker_geoserver
+    read -p "Remove existing geoserver container (default: No)? " -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        docker rm -f tethys_in_docker_geoserver
+    fi
 fi
+
 
 # remove n52wps
-read -p "Remove existing 52 north wps container (default: No)? " -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]
+WPS_CONTAINER_STATUS=$(docker inspect --format="{{ .State.Running }}" tethys_in_docker_n52wps 2> /dev/null)
+if [ -n "$WPS_CONTAINER_STATUS" ]
 then
-    docker rm -f tethys_in_docker_n52wps
+    read -p "Remove existing 52 north wps container (default: No)? " -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        docker rm -f tethys_in_docker_n52wps
+    fi
 fi
 
+# remove postgis
 DB_REMOVED="N"
-read -p "Remove existing DB (default: No)?" -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]
+POSTGIS_CONTAINER_STATUS=$(docker inspect --format="{{ .State.Running }}" tethys_in_docker_postgis 2> /dev/null)
+if [ -n "$POSTGIS_CONTAINER_STATUS" ]
 then
-    docker rm -f tethys_in_docker_postgis
+    read -p "Remove existing DB (default: No)?" -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        docker rm -f tethys_in_docker_postgis
+        DB_REMOVED="Y"
+    fi
+else
     DB_REMOVED="Y"
 fi
 
