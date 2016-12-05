@@ -17,6 +17,7 @@ RUN chown -R tethys-user:tethys-group /home/tethys-user
 
 WORKDIR /tethys
 
+# persist tethys-platform and apps installed by pip after restarting container(s)
 VOLUME  ["/usr/local/lib"]
 
 CMD ["/bin/bash"]

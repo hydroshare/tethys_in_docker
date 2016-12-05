@@ -8,9 +8,9 @@ server {
     listen          443 ssl;
     server_name     <TETHYS_NGINX_DOMAIN_NAME>;
 
-    if ($http_host != $server_name) {
-        rewrite ^ https://$server_name$request_uri permanent;
-    }
+    #if ($http_host != $server_name) {
+    #    rewrite ^ https://$server_name$request_uri permanent;
+    #}
 
     access_log      /logs/nginx_access.log upstreamlog;
 

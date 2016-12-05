@@ -24,8 +24,8 @@ TETHYS_POSTGIS_MAP_INTERNAL_5432_TO: 5435
 TETHYS_MAIN_SECRET_KEY: czh30tzX56F%+$v(a@&m*)*5%(p+(p1i6271i7l_63mer3m6+b
 
 # python boolean variable: True or False
-# False: use Django testing server
-# True: use Gunicorn + Nginx serves static files
+# True: use Django testing server
+# False: use Gunicorn + Nginx serves static files
 TETHYS_MAIN_DEBUG: True
 # python boolean variable: True or False
 TETHYS_MAIN_BYPASS_TETHYS_HOME_PAGE: False

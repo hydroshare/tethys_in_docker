@@ -70,7 +70,7 @@ LOGGING = {
 
 }
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["<TETHYS_NGINX_DOMAIN_NAME>"]
 
 # Application definition
 
@@ -310,7 +310,7 @@ ANONYMOUS_USER_ID = -1
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # geoserver settings
-# these settings will be used by some legacy apps that dont make use of Tethys Spatial Dataset Service
+# these settings will be used by some legacy apps that do not make use of Tethys Spatial Dataset Service
 GEOSERVER_URL_BASE = <TETHYS_GEOSERVER_URL_BASE>
 GEOSERVER_URL_SSL_BASE = <TETHYS_GEOSERVER_URL_SSL_BASE>
 GEOSERVER_USER_NAME = <TETHYS_GEOSERVER_USER_NAME>

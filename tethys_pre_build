@@ -167,6 +167,14 @@ sed -i 's!<TETHYS_GEOSERVER_USER_NAME>!"'${TETHYS_GEOSERVER_USER_NAME}'"!' \
 sed -i 's!<TETHYS_GEOSERVER_USER_PASSWORD>!"'${TETHYS_GEOSERVER_USER_PASSWORD}'"!' \
         ./tethys_main/settings.py
 
+if [ ${TETHYS_MAIN_DEBUG} = False ]
+then
+    sed -i 's!<TETHYS_NGINX_DOMAIN_NAME>!'${TETHYS_NGINX_DOMAIN_NAME}'!' \
+        ./tethys_main/settings.py
+else
+    sed -i 's!<TETHYS_NGINX_DOMAIN_NAME>!'*'!' \
+        ./tethys_main/settings.py
+fi
 
 ###############################  Tethys_N52WPS ###############################
 # n52wps.env
