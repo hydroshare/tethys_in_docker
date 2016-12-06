@@ -111,7 +111,8 @@ docker-compose build
 
 echo "Start containers...."
 docker-compose up -d
-sleep 10
+echo "Wait 15s ..."
+sleep 15
 
 DB_RESTORED="N"
 if [ $DB_REMOVED = "Y" ]

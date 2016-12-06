@@ -60,9 +60,9 @@ server {
     #_#_ENABLE_NGINX_STATIC_FILES_#_#    root /var/www/tethys;
     #_#_ENABLE_NGINX_STATIC_FILES_#_#}
 
-    #_#_ENABLE_NGINX_STATIC_FILES_#_#location = /favicon.ico {
-    #_#_ENABLE_NGINX_STATIC_FILES_#_#    alias /var/www/tethys_favicon.ico;
-    #_#_ENABLE_NGINX_STATIC_FILES_#_#}
+    location = /favicon.ico {
+        alias /var/www/tethys_favicon.ico;
+    }
 
     #_#_ENABLE_NGINX_ERROR_PAGE_#_#error_page 404 500 501 502 503 504 /error_500.html;
     #_#_ENABLE_NGINX_ERROR_PAGE_#_#location = /error_500.html {
