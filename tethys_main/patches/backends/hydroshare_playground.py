@@ -9,11 +9,11 @@
 """
 from hydroshare import HydroShareOAuth2
 
-class HydroShareBetaOAuth2(HydroShareOAuth2):
+class HydroSharePlaygroundOAuth2(HydroShareOAuth2):
 
     # override necessary settings
-    auth_server_hostname = "beta.hydroshare.org"
-    name = 'hydroshare_beta'
+    auth_server_hostname = "playground.hydroshare.org"
+    name = 'hydroshare_playground'
     http_scheme = "https"
 
     auth_server_full_url = "{0}://{1}".format(http_scheme, auth_server_hostname)
