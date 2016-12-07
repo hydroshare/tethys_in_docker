@@ -116,6 +116,8 @@ AUTHENTICATION_BACKENDS = (
     #_#_#_#<TETHYS_MAIN_HYDROSHARE_BACKEND>#_#_#_#,
     # Do not remove following line. it is placeholder for 'tethys_services.backends.hydroshare_beta.HydroShareBetaOAuth2',
     #_#_#_#<TETHYS_MAIN_HYDROSHARE_BETA_BACKEND>#_#_#_#,
+    # Do not remove following line. it is placeholder for 'tethys_services.backends.hydroshare_playground.HydroSharePlaygroundOAuth2',
+    #_#_#_#<TETHYS_MAIN_HYDROSHARE_PLAYGROUND_BACKEND>#_#_#_#,
     #'social.backends.linkedin.LinkedinOAuth2',
     #'social.backends.google.GoogleOAuth2',
     #'social.backends.facebook.FacebookOAuth2',
@@ -298,6 +300,9 @@ SOCIAL_AUTH_HYDROSHARE_SECRET = '<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_SECRET>'
 SOCIAL_AUTH_HYDROSHARE_BETA_KEY = '<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_KEY>'
 SOCIAL_AUTH_HYDROSHARE_BETA_SECRET = '<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_SECRET>'
 
+## playground-https
+SOCIAL_AUTH_HYDROSHARE_PLAYGROUND_KEY = '<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_PLAYGROUND_KEY>'
+SOCIAL_AUTH_HYDROSHARE_PLAYGROUND_SECRET = '<TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_PLAYGROUND_SECRET>'
 
 # Django Guardian Settings
 ANONYMOUS_USER_ID = -1

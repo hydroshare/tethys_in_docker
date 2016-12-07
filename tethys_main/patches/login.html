@@ -32,6 +32,11 @@
                 <i class="fa fa-hydroshare"></i> Sign in with HydroShare-beta
               </a>
             {% endif %}
+            {% if 'hydroshare_playground' in backends.not_associated %}
+              <a class="btn btn-block btn-social btn-hydroshare" href="{% url 'social:begin' 'hydroshare_playground' %}">
+                <i class="fa fa-hydroshare"></i> Sign in with HydroShare-playground
+              </a>
+            {% endif %}
             {% if 'google-oauth2' in backends.not_associated %}
               <a class="btn btn-block btn-social btn-google" href="{% url 'social:begin' 'google-oauth2' %}">
                 <i class="fa fa-google"></i> Sign in with Google

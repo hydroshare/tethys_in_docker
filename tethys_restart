@@ -13,8 +13,8 @@ restart_all_containers() {
     docker-compose stop
     echo "Starting PostGIS DB"
     docker start tethys_in_docker_postgis
-    echo "Wait 15s for PostGIS DB getting started..."
-    sleep 15
+    echo "Wait 20s for PostGIS DB getting started..."
+    sleep 20
     docker-compose up -d
 }
 
