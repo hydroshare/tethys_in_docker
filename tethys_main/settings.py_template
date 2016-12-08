@@ -255,7 +255,13 @@ BYPASS_TETHYS_HOME_PAGE = <TETHYS_MAIN_BYPASS_TETHYS_HOME_PAGE>
 # Use this setting to disable open account signup
 ENABLE_OPEN_SIGNUP = <TETHYS_MAIN_ENABLE_OPEN_SIGNUP>
 
+# The default login page when @login_required decorator is in use
 LOGIN_URL = <TETHYS_MAIN_LOGIN_URL>
+
+# User is supposed to redirect to this page once regular login (not OAuth) is done
+# https://docs.djangoproject.com/en/1.9/ref/settings/#login-redirect-url
+# Looks like it does not work in Tethys
+#LOGIN_REDIRECT_URL = "https://www.google.com/"
 
 # Uncomment the following lines and adjust to match your setup to enable emailing capabilities
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
