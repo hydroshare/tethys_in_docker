@@ -73,6 +73,7 @@ def _send_refresh_request(user_social):
        }
     data["token_dict"] = token_dict
     user_social.set_extra_data(extra_data=data)
+    user_social.save()
 
     logger.debug("------------------new token-----------------")
     logger.debug(user_social.extra_data)
