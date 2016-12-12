@@ -15,20 +15,6 @@ echo $USER_ID
 echo "Group ID"
 echo $GROUP_ID
 
-if [ -n "$TETHYS_MAIN_BRANCH_NAME" ]
-then
-    branch_name=$TETHYS_MAIN_BRANCH_NAME
-else
-    branch_name=master
-fi
-
-#if [  $# -eq 0 ]
-#then
-#    branch_name=release-candidate-140-1
-#else
-#    branch_name=$1
-#fi
-
 ./tethys_change_permission
 
 echo "Stop running containers...."
@@ -103,16 +89,24 @@ mkdir -p logs/n52wps
 mkdir -p logs/n52wps/supervisor
 mkdir -p logs/n52wps/tomcat7
 
+# generate all config files and set env variables
+# be sure to keep the two dots, otherwise env variable set by child script is inaccessible to this parent script
+. ./tethys_pre_build
+
+branch_name=master
+if [ -n "$TETHYS_MAIN_BRANCH_NAME" ]
+then
+    branch_name=$TETHYS_MAIN_BRANCH_NAME
+fi
+
 echo "Clone Tethys repo...."
 git clone https://github.com/tethysplatform/tethys.git tethys
 cd tethys
 echo "Using branch " $branch_name
 git checkout $branch_name
+git pull
 cd ..
 cp -f tethys/requirements.txt tethys_main/
-
-# generate all config files
-./tethys_pre_build
 
 echo "Build images...."
 docker-compose build
