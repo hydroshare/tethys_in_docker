@@ -19,6 +19,8 @@ TETHYS_POSTGIS_OPEN_PORTS: Y
 TETHYS_POSTGIS_MAP_INTERNAL_5432_TO: 5435
 
 ############################################## tethys_main ################################################
+TETHYS_MAIN_BRANCH_NAME: release-candidate-140-1
+
 # change settings.py
 # Do not contain 'pound sign #' or 'and sign &'
 TETHYS_MAIN_SECRET_KEY: czh30tzX56F%+$v(a@&m*)*5%(p+(p1i6271i7l_63mer3m6+b
@@ -37,7 +39,7 @@ TETHYS_MAIN_ENABLE_OPEN_SIGNUP: True
 # let user choose provider:  '/accounts/login/'
 # set to login through HydroShare OAuth by default:  '/oauth2/login/hydroshare/'
 # set to login through HydroShare-beta OAuth by default:  '/oauth2/login/hydroshare_beta/'
-TETHYS_MAIN_LOGIN_URL: '/oauth2/login/hydroshare/'
+TETHYS_MAIN_LOGIN_URL: '/accounts/login/'
 
 # OAuth Login
 # Y or N

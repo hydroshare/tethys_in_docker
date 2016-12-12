@@ -35,6 +35,7 @@ services:
       - ./tethys_main/patches/backends/hydroshare_playground.py:/tethys/tethys_services/backends/hydroshare_playground.py
       - ./tethys_main/patches/login.html:/tethys/templates/tethys_portal/accounts/login.html
       # - ./tethys_main/patches/settings.html:/tethys/templates/tethys_portal/user/settings.html
+      - ./tethys_main/patches/header.html:/tethys/templates/header.html
       - ./tethys_main/:/tethys_main
       - ./tethys_main/gunicorn-supervisor.conf:/etc/supervisor/conf.d/gunicorn-supervisor.conf
       - ./static/:/var/www/tethys/static
