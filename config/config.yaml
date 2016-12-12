@@ -5,6 +5,7 @@
 TETHYS_NGINX_DOMAIN_NAME: 10.2.115.39
 
 # Y or N
+#(must set to Y currently)
 TETHYS_NGINX_SSL_CERT_USE_PRODUCTION: Y
 TETHYS_NGINX_SSL_CERT_CHAIN_CRT: ./nginx/certs/cert-chain.crt
 TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT: ./nginx/certs/server.crt

@@ -2,7 +2,6 @@
 
 Experimental
 
-####Some usages:
 
 ####0) install latest docker-engine and docker-compose on host
 
@@ -12,13 +11,14 @@ and https://docs.docker.com/engine/installation/linux/ubuntulinux/
 
 git clone this repo
 
-####1) build tethys_in_docker in one command:
+####1) change/review settings at ./config/config.yaml:
 
-Note: this script will remove existing tethys_main, postgis and ngnix containers, so DB will be gone, apps need to re-install
+TETHYS_NGINX_DOMAIN_NAME:  (e.g. www.my-tethys-portal.com)
 
-./tethys_rebuild release-candidate-140-1
+####2) build tethys_in_docker in one command:
+./tethys_build
 
-####2) install an app:
+####3) install an app:
 
 download the app source if it is not in "apps" folder yet
 
@@ -30,14 +30,13 @@ download the app source if it is not in "apps" folder yet
 
 ./tethys_install_app (install all apps in folder 'apps')
 
-./tethys_restart
 
-####3) uninstall an existing app:
+####4) uninstall an existing app:
 
 ./tethys_uninstall_app APP_PACKAGE_NAME
 
 ./tethys_restart
 
-####4) create a new app (using tethys scaffold)
+####5) create a new app (using tethys scaffold)
 
 ./tethys_create_app NEW_APP_NAME
