@@ -1,10 +1,10 @@
 #FROM zhiyuli/ubuntu:16.04-onbuild
 #FROM python:2.7-onbuild
-FROM zhiyuli/tethys_base:1.4-rc-1.1
+FROM zhiyuli/tethys_base:1.4-release-1.0
 
 ### Begin - App-specific Additions ###
-RUN apt-get update && apt-get install --fix-missing -y supervisor
-RUN pip install django-cors-headers==1.1.0
+RUN apt-get update
+# the followings must install here as they update libs already installed in requirements.txt
 RUN pip install -U python-social-auth==0.2.21
 ### END - App-specific Additions ###
 

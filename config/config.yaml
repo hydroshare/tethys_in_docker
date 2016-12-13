@@ -20,7 +20,7 @@ TETHYS_POSTGIS_OPEN_PORTS: Y
 TETHYS_POSTGIS_MAP_INTERNAL_5432_TO: 5435
 
 ############################################## tethys_main ################################################
-TETHYS_MAIN_BRANCH_NAME: release-candidate-140-1
+TETHYS_MAIN_BRANCH_NAME: master
 
 # change settings.py
 # Do not contain 'pound sign #' or 'and sign &'
