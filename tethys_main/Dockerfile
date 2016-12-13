@@ -1,12 +1,14 @@
-#FROM zhiyuli/ubuntu:16.04-onbuild
-#FROM python:2.7-onbuild
 FROM zhiyuli/tethys_base:1.4-release-1.0
+# This dockerfile will pip install requirements.txt when it is built
 
-### Begin - App-specific Additions ###
+### Begin - App-specific Additions/Changes ###
 RUN apt-get update
-# the followings must install here as they update libs already installed in requirements.txt
+# install other libs
+
+# change/update libs that are already installed by requirements.txt
 RUN pip install -U python-social-auth==0.2.21
-### END - App-specific Additions ###
+
+### END - App-specific Additions/Changes ###
 
 RUN mkdir /tethys
 
