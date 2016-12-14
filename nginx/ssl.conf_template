@@ -55,6 +55,12 @@ server {
 
     add_header Strict-Transport-Security "max-age=31536000";
 
+    # Allow access to all User-agents:
+    #location /robots.txt {return 200 "User-agent: *\nDisallow:\n";}
+
+    # Disallow access to every User-agent:
+    location /robots.txt {return 200 "User-agent: *\nDisallow: /\n";}
+
     # serve static files
     #_#_ENABLE_NGINX_STATIC_FILES_#_#location /static/ {
     #_#_ENABLE_NGINX_STATIC_FILES_#_#    root /var/www/tethys;
