@@ -142,8 +142,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tethys_default',
-        'USER': 'tethys_default',
-        'PASSWORD': '<TETHYS_POSTGIS_TETHYS_DEFAULT_PASS>',
+        #'USER': 'tethys_default',
+        #'PASSWORD': '<TETHYS_POSTGIS_TETHYS_DEFAULT_PASS>',
+        'USER': 'tethys_super',
+        'PASSWORD': '<TETHYS_POSTGIS_TETHYS_SUPER_PASS>',
         'HOST': 'tethys_in_docker_postgis',
         'PORT': '5432'
     }

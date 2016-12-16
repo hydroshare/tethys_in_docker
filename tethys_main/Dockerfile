@@ -7,7 +7,7 @@ RUN apt-get update
 
 # change/update libs that are already installed by requirements.txt
 RUN pip install -U python-social-auth==0.2.21
-
+RUN pip install requests-mock==1.2.0
 ### END - App-specific Additions/Changes ###
 
 RUN mkdir /tethys
