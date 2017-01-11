@@ -100,7 +100,7 @@ then
 fi
 
 echo "Clone Tethys repo...."
-git clone https://github.com/tethysplatform/tethys.git tethys
+git clone $TETHYS_MAIN_GITHUB_REPO tethys
 cd tethys
 echo "Using branch " $branch_name
 git checkout $branch_name
