@@ -23,3 +23,4 @@ chown -R tethys-user:tethys-group /apps
 chown -R tethys-user:tethys-group /var/www/tethys/static
 chown -R tethys-user:tethys-group /tethys_main
 chown -R tethys-user:tethys-group /logs
+chmod -R 777 /logs

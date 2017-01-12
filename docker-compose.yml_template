@@ -8,6 +8,8 @@ services:
     #_#_#_#<TETHYS_POSTGIS_OPEN_PORTS>#_#_#_#
     #_#_#_#<TETHYS_POSTGIS_MAP_INTERNAL_5432_TO>#_#_#_#
     volumes:
+      ## logs must be writable (better have 777 permission) or it can cause failed initialization
+      ## of new db container: can not create tethys db accounts and tables
       - ./logs/:/var/log/supervisor
       - ./logs/:/var/log/postgis
       - ./logs/:/var/log/postgresql
