@@ -45,7 +45,8 @@ server {
     ssl_certificate_key     /certs/server.key;
     # ssl_trusted_certificate  /certs/cert-chain.crt;
 
-    #see: https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-load-balancing-with-ssl-termination
+    # see: https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-load-balancing-with-ssl-termination
+    # SSL safety rating A+ by https://www.ssllabs.com/ssltest/
     ssl_session_cache shared:SSL:20m;
     ssl_session_timeout 10m;
 
