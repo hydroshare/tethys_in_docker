@@ -2,7 +2,7 @@
 
 ################################################ tethys_nginx ############################################
 # change ssl.conf
-TETHYS_NGINX_DOMAIN_NAME: 10.2.115.225
+TETHYS_NGINX_DOMAIN_NAME: 10.2.115.18
 
 # Y or N
 #(must set to Y currently)
