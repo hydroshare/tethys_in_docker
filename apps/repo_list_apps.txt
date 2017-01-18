@@ -1,6 +1,5 @@
 https://github.com/gespinoza/datarodsexplorer.git --branch master
 https://github.com/msouff/nwm-forecast-viewer.git --branch master
-https://github.com/jirikadlec2/tethysapp-cuahsi-api.git --branch master
 https://github.com/hydroshare/tethysapp-hydroshare_gis.git --branch master
 https://github.com/shawncrawley/tethysapp-nwm_data_explorer.git --branch master
 https://github.com/danames/tethys_watershed_delin.git --branch master
