@@ -91,12 +91,14 @@ ENV LD_LIBRARY_PATH /usr/local/lib
 #http://demo.geo-solutions.it/share/github/imageio-ext/releases/1.1.X/1.1.12/native/gdal/linux/notes_on_ECW_and_JP2ECW.txt
 ENV GDAL_SKIP JP2ECW
 
-COPY apache-tomcat-7.tar.gz /tmp/
-COPY geoserver* /tmp/
-COPY generated/* /tmp/
-COPY netcdf4-ubuntu16-binary.tar.gz /tmp/
+RUN mkdir -p /Dockerfile/
+COPY apache-tomcat-7.tar.gz /Dockerfile/
+COPY geoserver* /Dockerfile/
+COPY generated/* /Dockerfile/
+COPY netcdf4-ubuntu16-binary.tar.gz /Dockerfile/
 
-RUN pip install --upgrade pip && \
+RUN cd /Dockerfile && \
+    pip install --upgrade pip && \
     pip install -r requirements.txt && \
     rm requirements.txt && \
     tar xvzf netcdf4-ubuntu16-binary.tar.gz && \
@@ -106,6 +108,7 @@ RUN pip install --upgrade pip && \
     tar zxf apache-tomcat-7.tar.gz && \
     mv apache-tomcat-7.0.73 $CATALINA_HOME && \
     rm apache-tomcat-7.tar.gz && \
+    mkdir -p $GEOSERVER_HOME/logs/ && \
     mkdir -p $GEOSERVER_HOME/data/ && \
     mkdir -p $GEOSERVER_HOME/tmp_data/ && \
     mkdir -p $GEOSERVER_HOME/node/ && \
@@ -119,7 +122,7 @@ RUN pip install --upgrade pip && \
     cd $GEOSERVER_HOME/node/webapps/geoserver && \
     jar -xvf geoserver.war && \
     rm geoserver.war && \
-    cd /tmp && \
+    cd /Dockerfile && \
     mv geoserver-jms-cluster-plugin.zip $GEOSERVER_HOME/node/webapps/geoserver/WEB-INF/lib && \
     mv geoserver-css-plugin.zip $GEOSERVER_HOME/node/webapps/geoserver/WEB-INF/lib && \
     mv geoserver-control-flow-plugin.zip $GEOSERVER_HOME/node/webapps/geoserver/WEB-INF/lib && \
@@ -149,17 +152,11 @@ RUN pip install --upgrade pip && \
     tar xf geoserver-gdal192-Ubuntu12-gcc4.6.3-x86_64.tar.gz && \
     rm geoserver-gdal-data.zip && \
     rm geoserver-gdal192-Ubuntu12-gcc4.6.3-x86_64.tar.gz && \
-    cd /tmp && \
+    cd /Dockerfile && \
     mv $GEOSERVER_HOME/node/webapps/geoserver/data/* $GEOSERVER_HOME/tmp_data/ && \
-    python gen_build_time_dynamic_files.py && \
-    rm -rf $GEOSERVER_HOME/node && \
-    rm template_catalina.sh && \
-    rm template_server.xml && \
-    rm template_web.xml && \
     rm /etc/nginx/nginx.conf && \
     cp nginx.conf /etc/nginx/ && \
-    rm nginx.conf && \
-    rm gen_build_time_dynamic_files.py
+    rm nginx.conf
 
 WORKDIR $GEOSERVER_HOME
 

@@ -1,3 +1,3 @@
 # This cron job is for data-rods app
-* * * * * tethys-user /usr/bin/python /apps/datarodsexplorer/tethysapp/data_rods_explorer/enddate_bounds.py
+01 02 * * tethys-user /usr/bin/python /apps/datarodsexplorer/tethysapp/data_rods_explorer/enddate_bounds.py
 # Do Not Remove This Line

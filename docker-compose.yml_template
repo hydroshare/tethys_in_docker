@@ -91,7 +91,7 @@ services:
 
   tethys_in_docker_geoserver:
 #    restart: always
-    image: zhiyuli/geoserver:2.8.2-clustered-1.7
+    image: zhiyuli/geoserver:2.8.2-clustered-1.8
     container_name: tethys_in_docker_geoserver
     # Do not remove following 6 lines. They are placeholders.
     #_#_#_#<TETHYS_GEOSERVER_OPEN_PORTS>#_#_#_#
@@ -103,10 +103,7 @@ services:
     env_file: ./geoserver/geoserver.env
     volumes:
       - ./logs/:/var/log/nginx
-      - ./logs/:/var/geoserver/node1/logs
-      - ./logs/:/var/geoserver/node2/logs
-      - ./logs/:/var/geoserver/node3/logs
-      - ./logs/:/var/geoserver/node4/logs
+      - ./logs/:/var/geoserver/logs
       - ./logs/:/var/log/supervisor
 
   tethys_in_docker_n52wps:

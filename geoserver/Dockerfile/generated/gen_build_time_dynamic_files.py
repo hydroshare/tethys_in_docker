@@ -40,6 +40,7 @@ def gen_nodes(max_nodes, data_dir, geoserver_home, default_shutdown_port, defaul
         node_dir = os.path.join(geoserver_home, 'node{0}'.format(node_id))
         sys.stdout.write('Creating GeoServer instance {0} at location {1}.\n'.format(node_id, node_dir))
 
+        shutil.rmtree(node_dir, ignore_errors=True)
         shutil.copytree(template_node_dir, node_dir)
 
         context = {
