@@ -1,5 +1,4 @@
 https://github.com/mmbayles/script_viewer.git --branch master
 https://github.com/mmbayles/HydroShare-Resource-Creator.git --branch master
 https://github.com/mmbayles/gap_filler.git --branch master
-https://github.com/CUAHSI/timeseries_viewer.git --branch master
 https://github.com/jirikadlec2/correlation_tool --branch master
