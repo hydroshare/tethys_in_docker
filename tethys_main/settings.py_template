@@ -53,7 +53,15 @@ LOGGING = {
             'formatter': 'simple',
             'stream': sys.stdout,
         },
-        'log-all': {
+        'log_all_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': '/logs/tethys_log_all_debug.log',
+            'formatter': 'verbose',
+            'maxBytes': 1024 * 1024 * 5,  # 15MB
+            'backupCount': 10,
+        },
+        'tethys_django_handler': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': '/logs/tethys_django_debug.log',
@@ -61,13 +69,64 @@ LOGGING = {
             'maxBytes': 1024*1024*5,  # 15MB
             'backupCount': 10,
         },
+        'metrics_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/logs/tethys_metrics.log',
+            'formatter': 'verbose',
+        },
     },
-    'root': {
-        'level': 'DEBUG',
-        'handlers': ['console', 'log-all'],
-        #'propagate': True,
+    'loggers': {
+        'metrics_logger': {
+                'level': 'DEBUG',
+                'handlers': ['metrics_handler'],
+                'propagate': False,
+        },
+        'tethys_apps': {
+            'level': 'DEBUG',
+            'handlers': ['tethys_django_handler'],
+        },
+        'tethys_services': {
+            'level': 'DEBUG',
+            'handlers': ['tethys_django_handler'],
+        },
+        'tethys_compute': {
+            'level': 'DEBUG',
+            'handlers': ['tethys_django_handler'],
+        },
+        'tethys_config': {
+            'level': 'DEBUG',
+            'handlers': ['tethys_django_handler'],
+        },
+        'tethys_gizmos': {
+            'level': 'DEBUG',
+            'handlers': ['tethys_django_handler'],
+        },
+        'tethys_portal': {
+            'level': 'DEBUG',
+            'handlers': ['tethys_django_handler'],
+        },
+        'tethys_sdk': {
+            'level': 'DEBUG',
+            'handlers': ['tethys_django_handler'],
+        },
+        'tethys': {
+            'level': 'DEBUG',
+            'handlers': ['tethys_django_handler'],
+        },
+        'tethyscluster': {
+            'level': 'DEBUG',
+            'handlers': ['tethys_django_handler'],
+        },
+        'django': {
+            'level': 'ERROR',
+            'handlers': ['tethys_django_handler'],
+        },
+        '': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'log_all_handler'],
+        },
     },
-
 }
 
 ALLOWED_HOSTS = ["<TETHYS_NGINX_DOMAIN_NAME>"]
@@ -96,6 +155,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'tethys_portal.middleware.MetricsTracking',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
