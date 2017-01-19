@@ -8,3 +8,4 @@ https://github.com/gantian127/tethysapp-cybergis_app --branch master
 https://github.com/gantian127/tethysapp-jupyter_notebook.git --branch master
 https://github.com/gantian127/tethysapp-swatshare_app.git --branch master
 https://github.com/mmbayles/timeseries_viewer.git --branch master
+#https://github.com/jirikadlec2/snow-inspector.git --branch master
