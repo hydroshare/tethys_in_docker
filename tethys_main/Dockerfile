@@ -20,6 +20,7 @@ RUN chown -R tethys-user:tethys-group /home/tethys-user
 WORKDIR /tethys
 
 # persist tethys-platform and apps installed by pip after restarting container(s)
-VOLUME  ["/usr/local/lib", "/tmp"]
+# persist cron jobs
+VOLUME  ["/usr/local/lib", "/tmp", "/etc/cron.d"]
 
 CMD ["/bin/bash"]
