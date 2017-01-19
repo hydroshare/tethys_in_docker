@@ -191,3 +191,5 @@ sed -i 's/<TETHYS_N52WPS_USERNAME>/'"${TETHYS_N52WPS_USERNAME}"'/' \
         ./n52wps/n52wps.env
 sed -i 's/<TETHYS_N52WPS_PASSWORD>/'"${TETHYS_N52WPS_PASSWORD}"'/' \
         ./n52wps/n52wps.env
+
+echo "All containers must restart to apply the changes: ./tethys_restart all"
