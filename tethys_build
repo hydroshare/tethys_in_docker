@@ -4,16 +4,7 @@ echo "*** Building Tethys_in_Docker ***"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPT_DIR
 
-USER_NAME=$(whoami)
-USER_ID=$(id -u)
-GROUP_ID=$(id -g)
 
-echo "User Name"
-echo $USER_NAME
-echo "User ID"
-echo $USER_ID
-echo "Group ID"
-echo $GROUP_ID
 
 ./tethys_change_permission
 
@@ -92,6 +83,19 @@ mkdir -p logs/n52wps/tomcat7
 # generate all config files and set env variables
 # be sure to keep the two dots, otherwise env variable set by child script is inaccessible to this parent script
 . ./tethys_pre_build
+
+#USER_NAME=$(whoami)
+#USER_ID=$(id -u)
+#GROUP_ID=$(id -g)
+USER_ID=$TETHYS_MAIN_SERVICE_ACCOUNT_UID
+GROUP_ID=$TETHYS_MAIN_SERVICE_ACCOUNT_GID
+
+#echo "User Name"
+#echo $USER_NAME
+echo "User ID"
+echo $USER_ID
+echo "Group ID"
+echo $GROUP_ID
 
 branch_name=master
 if [ -n "$TETHYS_MAIN_BRANCH_NAME" ]

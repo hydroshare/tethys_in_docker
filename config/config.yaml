@@ -20,6 +20,10 @@ TETHYS_POSTGIS_OPEN_PORTS: Y
 TETHYS_POSTGIS_MAP_INTERNAL_5432_TO: 5435
 
 ############################################## tethys_main ################################################
+# change the uid/gid to the user account whos runs ./tethys_build script
+TETHYS_MAIN_SERVICE_ACCOUNT_UID: 1000
+TETHYS_MAIN_SERVICE_ACCOUNT_GID: 1000
+
 TETHYS_MAIN_GITHUB_REPO: https://github.com/tethysplatform/tethys.git
 #TETHYS_MAIN_GITHUB_REPO: https://github.com/zhiyuli/tethys.git
 
