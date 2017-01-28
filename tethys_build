@@ -12,8 +12,23 @@ echo "Stop running containers...."
 docker-compose stop
 
 echo "Remove existing containers...."
-docker rm -f tethys_in_docker_main
-docker rm -f tethys_in_docker_nginx
+MAIN_CONTAINER_STATUS=$(docker inspect --format="{{ .State.Running }}" tethys_in_docker_main 2> /dev/null)
+if [ -n "MAIN_CONTAINER_STATUS" ]
+then
+    docker rm -f tethys_in_docker_main
+fi
+
+MAIN_IMAGE_STATUS=$(docker inspect --format="{{ .Id }}" tethys_in_docker_main1 2> /dev/null)
+if [ -n "MAIN_IMAGE_STATUS" ]
+then
+    docker rmi -f tethys_in_docker_main
+fi
+
+NGINX_CONTAINER_STATUS=$(docker inspect --format="{{ .State.Running }}" tethys_in_docker_nginx 2> /dev/null)
+if [ -n "NGINX_CONTAINER_STATUS" ]
+then
+    docker rm -f tethys_in_docker_nginx
+fi
 
 # remove exiting logs
 read -p "Remove existing logs (default: No)? " -n 1 -r
