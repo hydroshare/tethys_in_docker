@@ -21,6 +21,9 @@ sed -e 's/<TETHYS_POSTGIS_TETHYS_DEFAULT_PASS>/'"${TETHYS_POSTGIS_TETHYS_DEFAULT
 ############################### docker-compose.yml ####################################
 cp -f ./docker-compose.yml_template ./docker-compose.yml
 
+sed -i 's/<TETHYS_NGINX_DOMAIN_NAME>/'"${TETHYS_NGINX_DOMAIN_NAME}"'/' \
+       ./docker-compose.yml
+
 if [[ ${TETHYS_MAIN_MOUNT_RENCI_FOLDER} =~ ^[Yy]$ ]]
 then
     sed -i 's!#_#_#_#<TETHYS_MAIN_MOUNT_RENCI_FOLDER>#_#_#_#!- '${TETHYS_MAIN_MOUNT_RENCI_FOLDER_PATH}:${TETHYS_MAIN_MOUNT_RENCI_FOLDER_PATH}'!' \

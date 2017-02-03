@@ -1,0 +1,12 @@
+version: '2'
+services:
+  tethys_geoserver_cluster:
+    image: ciwater/geoserver:2.8.2-clustered
+    container_name: tethys_geoserver_cluster
+    ports:
+    - "8181:8181"
+    - "8081:8081"
+    - "8082:8082"
+    - "8083:8083"
+    - "8084:8084"
+    env_file: ./geoserver.env
