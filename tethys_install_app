@@ -42,7 +42,7 @@ fi
 
 docker exec -it tethys_in_docker_main bash -c "tethys syncstores all --manage /tethys/manage.py"
 
-docker exec -it tethys_in_docker_main bash -c "python /tethys/manage.py collectstatic --noinput && \
+docker exec -it tethys_in_docker_main bash -c "python /tethys/manage.py collectstatic -v 0 --noinput && \
                                                chown -R tethys-user:tethys-group /tethys && \
                                                chown -R tethys-user:tethys-group /apps && \
                                                chown -R tethys-user:tethys-group /var/www/tethys/static"

@@ -20,7 +20,7 @@ services:
 
   tethys_in_docker_main:
 #    restart: always
-    hostname: <TETHYS_NGINX_DOMAIN_NAME>
+#    hostname: <TETHYS_NGINX_DOMAIN_NAME>
     container_name: tethys_in_docker_main
     build: ./tethys_main/
     image: tethys_in_docker_main
