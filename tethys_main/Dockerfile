@@ -9,7 +9,17 @@ RUN apt-get update
 RUN pip install -U python-social-auth==0.2.21
 RUN pip install requests-mock==1.2.0
 RUN pip install -U hs_restclient==1.2.6
+RUN pip install python-irodsclient==0.5.0rc1
 ### END - App-specific Additions/Changes ###
+
+# install icommands
+ENV IRODS_VERSION 4.1.8
+RUN apt-get update && apt-get install -y --no-install-recommends curl libfuse2 && rm -rf /var/lib/apt/lists/* \
+    && curl ftp://ftp.renci.org/pub/irods/releases/4.1.8/ubuntu14/irods-icommands-4.1.8-ubuntu14-x86_64.deb -o irods-icommands.deb \
+    && dpkg -i irods-icommands.deb \
+    && apt-get -f install \
+    && rm irods-icommands.deb \
+    && apt-get purge -y --auto-remove curl
 
 RUN mkdir /tethys
 
