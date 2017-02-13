@@ -33,10 +33,10 @@ docker exec -it tethys_in_docker_main bash -c "python /tethys/setup.py develop"
 
 if [  $# -eq 0 ]
 then
-    # install a specific app
+    # install all apps in folder apps
     install_all_apps
 else
-    # install all apps in folder apps
+    # install a specific app
     install_one_app  $1
 fi
 

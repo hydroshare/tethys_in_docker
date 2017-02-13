@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+reset_one_app() {
+    app_name=$1
+    echo "Reset db for "$app_name "..."
+    docker exec -it tethys_in_docker_main bash -c "tethys syncstores -r $app_name --manage /tethys/manage.py"
+}
+
+reset_all_apps() {
+    echo "Reset db for all apps..."
+    docker exec -it tethys_in_docker_main bash -c "tethys syncstores -r all --manage /tethys/manage.py"
+}
+
+echo "Restarting postgis db to disconnect all connections"
+docker restart tethys_in_docker_postgis
+echo "Wait for 20s..."
+sleep 20
+
+if [  $# -eq 0 ]
+then
+    # reset db for all apps
+    reset_all_apps
+else
+    # reset db for a specific app
+    reset_one_app $1
+fi
+
+echo "Done"

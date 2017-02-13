@@ -149,9 +149,10 @@ def download_res_bag_via_rest_api(username, password, res_id_list=[]):
 if __name__ == "__main__":
 
     res_id_list = [
-                    "211fae34ae7b4d51a9b441fcdd1405ac",
-                   # "a94af692e2d1442cad3797d23ed7cdf8",
-                   #"e438bf9871ec402b8f2cf27f37f10081",
+                    "7afc283d85b64be98e41c3bcec93d4cb", # 6 mb
+                   # "a94af692e2d1442cad3797d23ed7cdf8", # 70 mb
+                   # "c813e5c26ba24222ba1b73f43943aca6", # 192 mb
+                   #"e438bf9871ec402b8f2cf27f37f10081",  # 980 mb
                    #"95d0f197254f4a35a5d5aeb5b1838eb4"  # multiple folders
                    ]
 
@@ -168,10 +169,10 @@ if __name__ == "__main__":
     result_dict["icommands"] = []
     result_dict["rest"]=[]
 
-    rest_username = ""
-    rest_password = ""
+    rest_username = "drew"
+    rest_password = "123456"
 
-    run_rounds = 1
+    run_rounds = 10
 
     for i in range(run_rounds):
         download_list, time_elapesed = download_res_bag_via_icommands(host=host,

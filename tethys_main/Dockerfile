@@ -6,6 +6,8 @@ RUN apt-get update
 # install other libs
 
 # change/update libs that are already installed by requirements.txt
+RUN pip install -U plotly==2.0.0  # 2.0.1 breaks things
+RUN pip install -U bokeh==0.12.4
 RUN pip install -U python-social-auth==0.2.21
 RUN pip install requests-mock==1.2.0
 RUN pip install -U hs_restclient==1.2.6
