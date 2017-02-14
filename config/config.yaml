@@ -4,6 +4,9 @@
 # change ssl.conf
 TETHYS_NGINX_DOMAIN_NAME: 10.2.115.215
 
+# enable maintenance page (Y or N)
+TETHYS_NGINX_MAINTENANCE_ON: N
+
 # Y or N
 #(must set to Y currently)
 TETHYS_NGINX_SSL_CERT_USE_PRODUCTION: Y

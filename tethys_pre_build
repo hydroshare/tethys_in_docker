@@ -109,6 +109,12 @@ then
         ./nginx/ssl.conf
 fi
 
+if [[ ${TETHYS_NGINX_MAINTENANCE_ON} =~ ^[Yy]$ ]]
+then
+    sed -i 's/#_#TETHYS_NGINX_MAINTENANCE_ON#_#//' \
+        ./nginx/ssl.conf
+fi
+
 ###############################  GeoServer ###############################
 # geoserver.env
 sed -e 's/<TETHYS_GEOSERVER_ENABLED_NODES>/'"${TETHYS_GEOSERVER_ENABLED_NODES}"'/' \

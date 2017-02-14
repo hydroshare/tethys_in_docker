@@ -71,11 +71,17 @@ server {
         alias /var/www/tethys_favicon.ico;
     }
 
-    #_#_ENABLE_NGINX_ERROR_PAGE_#_#error_page 404 500 501 502 503 504 /error_500.html;
+    #_#_ENABLE_NGINX_ERROR_PAGE_#_#error_page 404 500 501 502 504 /error_500.html;
     #_#_ENABLE_NGINX_ERROR_PAGE_#_#location = /error_500.html {
     #_#_ENABLE_NGINX_ERROR_PAGE_#_#        alias /var/www/error_500.html;
     #_#_ENABLE_NGINX_ERROR_PAGE_#_#        internal;
     #_#_ENABLE_NGINX_ERROR_PAGE_#_#}
+
+    error_page 503 /error_maintenance.html;
+    location = /error_maintenance.html {
+            alias /var/www/error_maintenance.html;
+            internal;
+    }
 
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
@@ -93,6 +99,15 @@ server {
     proxy_connect_timeout 300s;
     proxy_read_timeout 300;
 
+    # gunicorn django server
+    location / {
+        # maintenance page switch
+        #_#TETHYS_NGINX_MAINTENANCE_ON#_#return 503;
+
+        proxy_pass http://tethys_in_docker_main:8000;
+        proxy_redirect off;
+    }
+
     # geoserver
     location /geoserver/ {
         proxy_pass http://tethys_in_docker_geoserver:8181;
@@ -103,12 +118,6 @@ server {
     location /wps/ {
         proxy_pass http://tethys_in_docker_n52wps:8080;
         proxy_redirect http://$server_name:8080/ https://$server_name/;
-    }
-
-    # gunicorn django server
-    location / {
-        proxy_pass http://tethys_in_docker_main:8000;
-        proxy_redirect off;
     }
 
 }
