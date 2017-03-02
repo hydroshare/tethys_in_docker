@@ -163,4 +163,5 @@ fi
 echo "Restarting main container...."
 docker restart tethys_in_docker_main
 wait
+./tethys_change_permission
 echo "Done."
