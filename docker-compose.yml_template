@@ -50,7 +50,15 @@ services:
       - ./static/:/var/www/tethys/static
       - ./apps/:/apps
       - ./logs/:/logs
+
+      ## Development mode: MOUNT NWM data and subsetting query db
+      # - /media/sf_nwm_new_data:/projects/water/nwm/data/nomads
+      # - /home/drew/Desktop/nwm.sqlite:/nwm.sqlite
+
+      ## Production mode: MOUNT NWM data and subsetting query db
       # - /projects/water/nwm/:/projects/water/nwm
+      # - /home/hydroapp/nwm.sqlite:/nwm.sqlite
+
       # Do not remove following line. it is placeholder
       #_#_#_#<TETHYS_MAIN_MOUNT_RENCI_FOLDER>#_#_#_#
 

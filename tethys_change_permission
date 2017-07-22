@@ -5,3 +5,7 @@ docker exec -it tethys_in_docker_main bash -c "chown -R tethys-user:tethys-group
                                                chown -R tethys-user:tethys-group /logs && \
                                                chown -R tethys-user:tethys-group /home/tethys-user && \
                                                chmod -R 777 /logs"
+
+## /projects/* files are mounted into Ubuntu VM first, then get mounted into container,
+## these files are owned by root:999, which tethys-user cannot access
+## chown -R tethys-user:tethys-group /projects
