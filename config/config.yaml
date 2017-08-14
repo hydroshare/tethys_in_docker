@@ -2,7 +2,7 @@
 
 ################################################ tethys_nginx ############################################
 # change ssl.conf
-TETHYS_NGINX_DOMAIN_NAME: 127.0.0.1
+TETHYS_NGINX_DOMAIN_NAME: 10.2.115.24
 
 # enable maintenance page (Y or N)
 TETHYS_NGINX_MAINTENANCE_ON: N
@@ -57,8 +57,8 @@ TETHYS_MAIN_LOGIN_URL: '/accounts/login/'
 TETHYS_MAIN_HYDROSHARE_BACKEND: Y
 # python string
 TETHYS_MAIN_HYDROSHARE_BACKEND_MODULE: "tethys_services.backends.hydroshare.HydroShareOAuth2"
-TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_KEY: 4lmgtEoHJUVI3jwcKzsAEi7qaxvMFAKYBEuXKzpR
-TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_SECRET: fzReMSDBdDbnayT5ghbr8fvutkI5asTlPebIMBpRw6yGKC1XmHTIUJOAz9rjEKQubh5q8y7AcWoyDz0LXq1w1ypsvhP6I6cs4KXpWnMdkSmrz0utsueorDQwkdaJ9Uqi
+TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_KEY: y8w6FPhW1c5jGMsSfkkNyZ5LPt1v3SaLibkktRHz
+TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_SECRET: yWGer4UOwkUyTYzpP15BU7SNzRZRt7H0iwxO5YhnC1bNJLyWU0eB0iPFRAhr9b4TM8tQdDOUvD5kqg86I3gxhiUjU5ay7kqN3VbnwNs1B9BCeXiVkMRRqvfiXYcYgMLP
 
 # Y or N
 TETHYS_MAIN_HYDROSHARE_BETA_BACKEND: N
@@ -80,7 +80,7 @@ TETHYS_MAIN_MOUNT_RENCI_FOLDER: N
 TETHYS_MAIN_MOUNT_RENCI_FOLDER_PATH: /projects/water/nwm/
 TETHYS_MAIN_OPEN_PORTS: Y
 TETHYS_MAIN_MAP_INTERNAL_8000_TO: 8000
-
+TETHYS_MAIN_MAP_INTERNAL_5555_TO: 5555
 ############################################## tethys_geoserver ##############################################
 # change geoserver.env
 TETHYS_GEOSERVER_ENABLED_NODES: 1

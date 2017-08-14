@@ -8,4 +8,8 @@ docker exec -it tethys_in_docker_main bash -c "chown -R tethys-user:tethys-group
 
 ## /projects/* files are mounted into Ubuntu VM first, then get mounted into container,
 ## these files are owned by root:999, which tethys-user cannot access
-## chown -R tethys-user:tethys-group /projects
+## ls -al /projects/water/nwm/data/nomads/
+## groupadd -g 999 vm-mounted-group
+## usermod -a -G vm-mounted-group tethys-user
+## id tethys-user
+

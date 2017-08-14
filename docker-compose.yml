@@ -5,8 +5,8 @@ services:
     container_name: tethys_in_docker_postgis
     image: ciwater/postgis:2.1.2
     # Do not remove following 2 lines. They are placeholders.
-    #_#_#_#<TETHYS_POSTGIS_OPEN_PORTS>#_#_#_#
-    #_#_#_#<TETHYS_POSTGIS_MAP_INTERNAL_5432_TO>#_#_#_#
+    ports:
+    - "5435:5432"
     volumes:
       ## logs must be writable (better have 777 permission) or it can cause failed initialization
       ## of new db container: can not create tethys db accounts and tables
@@ -20,16 +20,16 @@ services:
 
   tethys_in_docker_main:
 #    restart: always
-#    hostname: <TETHYS_NGINX_DOMAIN_NAME>
+#    hostname: 10.2.115.24
     container_name: tethys_in_docker_main
     build: ./tethys_main/
     image: tethys_in_docker_main
     environment:
         - PYTHONUNBUFFERED=TRUE
     # Do not remove following 2 lines. They are placeholders.
-    #_#_#_#<TETHYS_MAIN_OPEN_PORTS>#_#_#_#
-    #_#_#_#<TETHYS_MAIN_MAP_INTERNAL_8000_TO>#_#_#_#
-    #_#_#_#<TETHYS_MAIN_MAP_INTERNAL_5555_TO>#_#_#_#
+    ports:
+    - "8000:8000"
+    - "5555:5555"
     volumes:
       - ./tethys/:/tethys
       - ./tethys_main/settings.py:/tethys/tethys_apps/settings.py
@@ -73,7 +73,7 @@ services:
     #command: /tethys_main/run-gunicorn
 
     # start supervisor + gunicorn
-    #_#_TETHYS_MAIN_USE_GUNICORN_SERVER_#_#command: /tethys_main/startup
+    command: /tethys_main/startup
 
     depends_on:
       - tethys_in_docker_postgis
@@ -89,9 +89,9 @@ services:
     volumes:
       - ./nginx/certs/:/certs
        # Do not remove following 3 lines. they are placeholders
-      #_#_#_#<TETHYS_NGINX_SSL_CERT_CHAIN_CRT>#_#_#_#:/certs/cert-chain.crt
-      #_#_#_#<TETHYS_NGINX_SSL_CERT_FILE_SERVER_CRT>#_#_#_#:/certs/server.crt
-      #_#_#_#<TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY>#_#_#_#:/certs/server.key
+      - ./nginx/certs/cert-chain.crt:/certs/cert-chain.crt
+      - ./nginx/certs/server.crt:/certs/server.crt
+      - ./nginx/certs/server.key:/certs/server.key
       - ./nginx/ssl.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/files/tethys_favicon.ico:/var/www/tethys_favicon.ico
@@ -110,12 +110,12 @@ services:
     image: zhiyuli/geoserver:2.8.2-clustered-1.8
     container_name: tethys_in_docker_geoserver
     # Do not remove following 6 lines. They are placeholders.
-    #_#_#_#<TETHYS_GEOSERVER_OPEN_PORTS>#_#_#_#
-    #_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8181_TO>#_#_#_#
-    #_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8081_TO>#_#_#_#
-    #_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8082_TO>#_#_#_#
-    #_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8083_TO>#_#_#_#
-    #_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8084_TO>#_#_#_#
+    ports:
+    - "8181:8181"
+    - "8081:8081"
+    - "8082:8082"
+    - "8083:8083"
+    - "8084:8084"
     env_file: ./geoserver/geoserver.env
     volumes:
       - ./logs/:/var/log/nginx
@@ -127,8 +127,8 @@ services:
     image: ciwater/n52wps:3.3.0
     container_name: tethys_in_docker_n52wps
     # Do not remove following 2 lines. They are placeholders.
-    #_#_#_#<TETHYS_N52WPS_OPEN_PORTS>#_#_#_#
-    #_#_#_#<TETHYS_N52WPS_MAP_INTERNAL_8080_TO>#_#_#_#
+    ports:
+    - "8282:8080"
     env_file: ./n52wps/n52wps.env
     #volumes:
     #  - ./logs/n52wps/tomcat7/:/var/log/tomcat7

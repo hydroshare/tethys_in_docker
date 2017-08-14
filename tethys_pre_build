@@ -57,6 +57,14 @@ then
         ./docker-compose.yml
 fi
 
+if [[ ${TETHYS_MAIN_OPEN_PORTS} =~ ^[Yy]$ ]]
+then
+    sed -i 's!#_#_#_#<TETHYS_MAIN_OPEN_PORTS>#_#_#_#!ports:!' \
+        ./docker-compose.yml
+    sed -i 's!#_#_#_#<TETHYS_MAIN_MAP_INTERNAL_5555_TO>#_#_#_#!- "'${TETHYS_MAIN_MAP_INTERNAL_5555_TO}':5555"!' \
+        ./docker-compose.yml
+fi
+
 if [[ ${TETHYS_GEOSERVER_OPEN_PORTS} =~ ^[Yy]$ ]]
 then
     sed -i 's!#_#_#_#<TETHYS_GEOSERVER_OPEN_PORTS>#_#_#_#!ports:!' \

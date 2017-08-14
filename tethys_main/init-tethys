@@ -25,3 +25,6 @@ chown -R tethys-user:tethys-group /tethys_main
 chown -R tethys-user:tethys-group /home/tethys-user
 chown -R tethys-user:tethys-group /logs
 chmod -R 777 /logs
+
+groupadd -g 999 vm-mounted-group
+usermod -a -G vm-mounted-group tethys-user
