@@ -39,8 +39,8 @@ RUN pip install -U subset_nwm_netcdf==1.1.7
 RUN apt-get install -y --no-install-recommends rabbitmq-server
 RUN pip install -U celery==4.1.0
 RUN pip install -U django-celery-results==1.0.1
-#RUN pip install -U django-celery-beat==1.0.1
-#RUN pip install -U flower
+RUN pip install -U django-celery-beat==1.0.1
+RUN pip install -U flower
 
 RUN mkdir /tethys
 

@@ -151,7 +151,7 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'guardian',
     'corsheaders',
-    #'django_celery_beat',
+    'django_celery_beat',
     'django_celery_results',
 )
 
