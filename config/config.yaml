@@ -17,7 +17,7 @@ TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY: ./nginx/certs/server.key
 ################################################ tethys_postgis ##################################################
 # change postgis.env
 TETHYS_POSTGIS_TETHYS_DEFAULT_PASS: pass_default
-TETHYS_POSTGIS_TETHYS_DB_MANAGER_PASS: pass_db_manageer
+TETHYS_POSTGIS_TETHYS_DB_MANAGER_PASS: pass_db_manager
 TETHYS_POSTGIS_TETHYS_SUPER_PASS: pass_super
 TETHYS_POSTGIS_OPEN_PORTS: Y
 TETHYS_POSTGIS_MAP_INTERNAL_5432_TO: 5435
