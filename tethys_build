@@ -90,6 +90,7 @@ rm -rf static/*
 
 mkdir -p tethys
 mkdir -p static
+mkdir -p workspaces
 mkdir -p logs
 mkdir -p logs/n52wps
 mkdir -p logs/n52wps/supervisor

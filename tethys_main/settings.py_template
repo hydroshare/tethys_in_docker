@@ -296,8 +296,9 @@ STATICFILES_FINDERS = (
 # Uncomment the next line for production installation
 STATIC_ROOT = '/var/www/tethys/static'
 
+# Uncomment the next line for production installation
 # Tethys Workspaces
-#TETHYS_WORKSPACES_ROOT = '/var/www/tethys/workspaces'
+TETHYS_WORKSPACES_ROOT = '/var/www/tethys/workspaces'
 
 # Messaging settings
 MESSAGE_TAGS = {message_constants.DEBUG: 'alert-danger',

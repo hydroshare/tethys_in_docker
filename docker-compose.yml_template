@@ -51,6 +51,7 @@ services:
       - ./tethys_main/patches/tethys_apps/__init__.py:/tethys/tethys_apps/__init__.py
       - ./tethys_main/patches/tethys_apps/celery.py:/tethys/tethys_apps/celery.py
       - ./static/:/var/www/tethys/static
+      - ./workspaces/:/var/www/tethys/workspaces
       - ./apps/:/apps
       - ./logs/:/logs
 
