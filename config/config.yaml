@@ -27,8 +27,8 @@ TETHYS_POSTGIS_MAP_INTERNAL_5432_TO: 5435
 TETHYS_MAIN_SERVICE_ACCOUNT_UID: 1000
 TETHYS_MAIN_SERVICE_ACCOUNT_GID: 1000
 
-#TETHYS_MAIN_GITHUB_REPO: https://github.com/tethysplatform/tethys.git
-TETHYS_MAIN_GITHUB_REPO: https://github.com/zhiyuli/tethys.git
+TETHYS_MAIN_GITHUB_REPO: https://github.com/tethysplatform/tethys.git
+#TETHYS_MAIN_GITHUB_REPO: https://github.com/zhiyuli/tethys.git
 
 TETHYS_MAIN_BRANCH_NAME: 2d70c2dca6224be3f9b11465d1e32ab4c6fb5f2f
 
