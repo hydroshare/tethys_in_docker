@@ -33,17 +33,8 @@ services:
     volumes:
       - ./tethys/:/tethys
       - ./tethys_main/settings.py:/tethys/tethys_apps/settings.py
-      #- ./tethys_main/patches/backends/hs_restclient_helper.py:/tethys/tethys_services/backends/hs_restclient_helper.py
-      #- ./tethys_main/patches/backends/hydroshare.py:/tethys/tethys_services/backends/hydroshare.py
-      #- ./tethys_main/patches/backends/hydroshare_beta.py:/tethys/tethys_services/backends/hydroshare_beta.py
-      #- ./tethys_main/patches/backends/hydroshare_playground.py:/tethys/tethys_services/backends/hydroshare_playground.py
-      #- ./tethys_main/patches/login.html:/tethys/templates/tethys_portal/accounts/login.html
-      #- ./tethys_main/patches/settings.html:/tethys/templates/tethys_portal/user/settings.html
-      #- ./tethys_main/patches/profile.html:/tethys/templates/tethys_portal/user/profile.html
-      #- ./tethys_main/patches/disconnect.html:/tethys/templates/tethys_portal/user/disconnect.html
       - ./tethys_main/patches/header.html:/tethys/templates/header.html
       - ./tethys_main/patches/footer.html:/tethys/templates/footer.html
-      #- ./tethys_main/patches/test_hydroshare_backend.py:/tethys/tethys_portal/unit_tests/test_tethys_services/test_hydroshare_backend.py
       - ./tethys_main/patches/middleware.py:/tethys/tethys_portal/middleware.py
       - ./tethys_main/patches/hydroshare-logo-75.png:/tethys/static/tethys_portal/images/hydroshare-logo-75.png
       - ./tethys_main/:/tethys_main
@@ -56,15 +47,24 @@ services:
       - ./logs/:/logs
 
       ## Development mode: MOUNT NWM data and subsetting query db
-      - /media/sf_nwm_new_data:/projects/water/nwm/data/nomads
-      - /home/drew/Desktop/nwm.sqlite:/nwm.sqlite
+      #- /media/sf_nwm_new_data:/projects/water/nwm/data/nomads
+      #- /home/drew/Desktop/nwm.sqlite:/nwm.sqlite
 
       ## Production mode: MOUNT NWM data and subsetting query db
       # - /projects/water/nwm/:/projects/water/nwm
-      # - /home/hydroapp/nwm.sqlite:/nwm.sqlite
+      # - ./nwm.sqlite:/nwm.sqlite
 
       # Do not remove following line. it is placeholder
-      #_#_#_#<TETHYS_MAIN_MOUNT_RENCI_FOLDER>#_#_#_#
+      #_#_#_#<TETHYS_MAIN_MOUNT_OTHER_FOLDER_0>#_#_#_#
+      #_#_#_#<TETHYS_MAIN_MOUNT_OTHER_FOLDER_1>#_#_#_#
+      #_#_#_#<TETHYS_MAIN_MOUNT_OTHER_FOLDER_2>#_#_#_#
+      #_#_#_#<TETHYS_MAIN_MOUNT_OTHER_FOLDER_3>#_#_#_#
+      #_#_#_#<TETHYS_MAIN_MOUNT_OTHER_FOLDER_4>#_#_#_#
+      #_#_#_#<TETHYS_MAIN_MOUNT_OTHER_FOLDER_5>#_#_#_#
+      #_#_#_#<TETHYS_MAIN_MOUNT_OTHER_FOLDER_6>#_#_#_#
+      #_#_#_#<TETHYS_MAIN_MOUNT_OTHER_FOLDER_7>#_#_#_#
+      #_#_#_#<TETHYS_MAIN_MOUNT_OTHER_FOLDER_8>#_#_#_#
+      #_#_#_#<TETHYS_MAIN_MOUNT_OTHER_FOLDER_9>#_#_#_#
 
     # start django development server
     #_#_TETHYS_MAIN_USE_DJANGO_TESTING_SERVER_#_#command: runuser -u tethys-user -g tethys-group /bin/bash /tethys_main/run-server
@@ -110,7 +110,7 @@ services:
 #    restart: always
     image: zhiyuli/geoserver:2.8.2-clustered-1.8
     container_name: tethys_in_docker_geoserver
-    # Do not remove following 6 lines. They are placeholders.
+    # Do not remove following lines started with "#_#_#_#"". They are placeholders.
     #_#_#_#<TETHYS_GEOSERVER_OPEN_PORTS>#_#_#_#
     #_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8181_TO>#_#_#_#
     #_#_#_#<TETHYS_GEOSERVER_MAP_INTERNAL_8081_TO>#_#_#_#

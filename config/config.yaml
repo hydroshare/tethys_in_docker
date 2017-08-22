@@ -76,8 +76,19 @@ TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_PLAYGROUND_SECRET: iFLgfSmbi9aXJh5e6EubvPo7ld
 
 # change docker-compose.yml
 # Y or N
-TETHYS_MAIN_MOUNT_RENCI_FOLDER: N
-TETHYS_MAIN_MOUNT_RENCI_FOLDER_PATH: /projects/water/nwm/
+TETHYS_MAIN_MOUNT_OTHER_FOLDER: Y
+# Max 10 folders (Folder ID 0-9)
+TETHYS_MAIN_MOUNT_OTHER_FOLDER_COUNT: 2
+
+## Local Development Mode
+TETHYS_MAIN_MOUNT_OTHER_FOLDER_0: /media/sf_nwm_new_data:/projects/water/nwm/data/nomads
+TETHYS_MAIN_MOUNT_OTHER_FOLDER_1: /home/drew/Desktop/nwm.sqlite:/nwm.sqlite
+
+# Production Mode
+#TETHYS_MAIN_MOUNT_OTHER_FOLDER_0: /projects/water/nwm/:/projects/water/nwm
+#TETHYS_MAIN_MOUNT_OTHER_FOLDER_1: ./nwm.sqlite:/nwm.sqlite
+
+
 TETHYS_MAIN_OPEN_PORTS: Y
 TETHYS_MAIN_MAP_INTERNAL_8000_TO: 8000
 TETHYS_MAIN_MAP_INTERNAL_5555_TO: 5555

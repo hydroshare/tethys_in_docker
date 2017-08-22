@@ -6,7 +6,7 @@ RUN apt-get update
 # install other libs
 
 # change/update libs that are already installed by requirements.txt
-
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3
 # force to re-install libs that are downgraded by tethys requirements.txt
 RUN pip install -U hs_restclient==1.2.9
 RUN pip install -U pyOpenSSL==17.2.0
