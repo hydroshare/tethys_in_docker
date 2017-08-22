@@ -86,7 +86,7 @@ TETHYS_MAIN_MOUNT_OTHER_FOLDER_1: /home/drew/Desktop/nwm.sqlite:/nwm.sqlite
 
 # Production Mode
 #TETHYS_MAIN_MOUNT_OTHER_FOLDER_0: /projects/water/nwm/:/projects/water/nwm
-#TETHYS_MAIN_MOUNT_OTHER_FOLDER_1: ./nwm.sqlite:/nwm.sqlite
+#TETHYS_MAIN_MOUNT_OTHER_FOLDER_1: /projects/hydroshare/apps/apps_common_files/nwm.sqlite:/nwm.sqlite
 
 
 TETHYS_MAIN_OPEN_PORTS: Y
