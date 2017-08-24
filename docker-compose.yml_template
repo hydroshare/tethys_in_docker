@@ -41,6 +41,7 @@ services:
       - ./tethys_main/gunicorn-supervisor.conf:/etc/supervisor/conf.d/gunicorn-supervisor.conf
       - ./tethys_main/patches/tethys_apps/__init__.py:/tethys/tethys_apps/__init__.py
       - ./tethys_main/patches/tethys_apps/celery.py:/tethys/tethys_apps/celery.py
+      - ./tethys_main/patches/tethys_portal/urls.py:/tethys/tethys_portal/urls.py
       - ./static/:/var/www/tethys/static
       - ./workspaces/:/var/www/tethys/workspaces
       - ./apps/:/apps

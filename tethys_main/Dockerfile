@@ -7,9 +7,11 @@ RUN apt-get update
 
 # change/update libs that are already installed by requirements.txt
 RUN apt-get update && apt-get install -y --no-install-recommends sqlite3
-# force to re-install libs that are downgraded by tethys requirements.txt
-RUN pip install -U hs_restclient==1.2.9
-RUN pip install -U pyOpenSSL==17.2.0
+# force to re-install libs that have been downgraded by tethys requirements.txt
+RUN pip install hs_restclient==1.2.9
+RUN pip install pyOpenSSL==17.2.0
+# install other libs
+RUN pip install django-heartbeat==2.0.2
 
 ### END - App-specific Additions/Changes ###
 
