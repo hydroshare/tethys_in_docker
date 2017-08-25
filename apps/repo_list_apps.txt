@@ -1,11 +1,10 @@
 https://github.com/gespinoza/datarodsexplorer.git --branch master
-https://github.com/msouff/nwm-forecast-viewer.git --branch master
-https://github.com/hydroshare/tethysapp-hydroshare_gis.git --branch master
-https://github.com/shawncrawley/tethysapp-nwm_data_explorer.git --branch master
-https://github.com/danames/tethys_watershed_delin.git --branch master
+https://github.com/jirikadlec2/snow-inspector.git --branch master
+https://github.com/gantian127/tethysapp-jupyter_notebook.git --branch master
 https://github.com/cpkesler/gaugeview.git --branch master
 https://github.com/gantian127/tethysapp-cybergis_app --branch master
-https://github.com/gantian127/tethysapp-jupyter_notebook.git --branch master
 https://github.com/gantian127/tethysapp-swatshare_app.git --branch master
-https://github.com/mmbayles/timeseries_viewer.git --branch master
-#https://github.com/jirikadlec2/snow-inspector.git --branch master
+https://github.com/danames/tethys_watershed_delin.git --branch master
+https://github.com/BYU-Hydroinformatics/nwm-forecast-viewer.git --branch async-request
+#https://github.com/hydroshare/tethysapp-hydroshare_gis.git --branch master
+#https://github.com/mmbayles/timeseries_viewer.git --branch master
