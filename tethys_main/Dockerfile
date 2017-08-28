@@ -1,4 +1,4 @@
-FROM zhiyuli/tethys_base:1.4-release-1.2
+FROM zhiyuli/tethys_base:1.4-release-1.3
 # This dockerfile will pip install requirements.txt when it is built
 
 ### Begin - App-specific Additions/Changes ###
@@ -6,9 +6,11 @@ RUN apt-get update
 # install other libs
 
 # change/update libs that are already installed by requirements.txt
-RUN apt-get update && apt-get install -y --no-install-recommends sqlite3
+#RUN apt-get update && apt-get install -y --no-install-recommends sqlite3
+
 # force to re-install libs that have been downgraded by tethys requirements.txt
 #RUN pip install hs_restclient==1.2.9
+
 # install other libs
 #RUN pip install django-heartbeat==2.0.2
 

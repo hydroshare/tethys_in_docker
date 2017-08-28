@@ -9,7 +9,6 @@ RUN apt update && apt install --fix-missing -y ca-certificates \
                                      build-essential \
                                      wget \
                                      python-dev \
-                                 #    python-pip \
                                      libpq-dev \
                                      libxml2-dev \
                                      libxslt1-dev \
@@ -109,12 +108,13 @@ RUN cp /usr/lib/libiphreeqc.so /usr/local/lib/python2.7/dist-packages/phreeqpy-0
 
 
 # install netCDF4 dependencies
-RUN apt-get install --fix-missing -y zlib1g-dev \
+RUN apt-get update && apt-get install --fix-missing -y zlib1g-dev \
                                      libhdf5-serial-dev \
                                      libnetcdf-dev \
                                      libproj-dev \
                                      netcdf-bin \
                                      nco \
+                                     sqlite3 \
                                      libsqlite3-dev \
                                      libsqlite3-mod-spatialite \
                                      rabbitmq-server
