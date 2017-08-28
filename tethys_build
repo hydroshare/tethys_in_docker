@@ -126,7 +126,7 @@ echo "Using branch " $branch_name
 git checkout $branch_name
 git pull
 cd ..
-cp -f tethys/requirements.txt tethys_main/
+#cp -f tethys/requirements.txt tethys_main/
 
 echo "Build images...."
 docker-compose build

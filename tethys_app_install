@@ -48,6 +48,8 @@ docker exec -it tethys_in_docker_main bash -c "python /tethys/manage.py collects
                                                chown -R tethys-user:tethys-group /apps && \
                                                chown -R tethys-user:tethys-group /var/www/tethys/workspaces && \
                                                chown -R tethys-user:tethys-group /var/www/tethys/static"
+
+./tethys_change_permission
 echo "Restart Tethys main container"
 docker restart tethys_in_docker_main
 docker restart tethys_in_docker_nginx
