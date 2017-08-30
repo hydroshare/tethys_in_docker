@@ -1,10 +1,11 @@
-FROM zhiyuli/tethys_base:1.5-release-1.0
+FROM zhiyuli/tethys_base:1.5-release-1.1
 # This dockerfile will pip install requirements.txt when it is built
 
 ### Begin - App-specific Additions/Changes ###
 RUN apt-get update
 # install other libs
 
+RUN git clone https://github.com/xhqiao89/pywps.git --branch tethys_fix /tmp/pywps && cd /tmp/pywps && python setup.py install && rm -rf /tmp/pywps
 # change/update libs that are already installed by requirements.txt
 #RUN apt-get update && apt-get install -y --no-install-recommends sqlite3
 
