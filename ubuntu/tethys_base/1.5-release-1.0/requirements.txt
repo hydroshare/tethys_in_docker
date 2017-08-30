@@ -22,7 +22,7 @@ django-guardian>=1.4.4,<1.5.0
 django-termsandconditions>=1.1.9,<1.2.0
 selenium>=3.0.0,<3.0.2
 coverage>=4.0,<4.2
-hs_restclient>=1.2.9,<1.2.10
+hs_restclient>=1.2.10,<1.2.11
 requests_mock>=1.2.0, <1.2.1
 python-irodsclient==0.5.0rc1
 pyproj==1.9.5.1

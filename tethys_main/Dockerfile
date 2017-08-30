@@ -1,4 +1,4 @@
-FROM zhiyuli/tethys_base:1.4-release-1.3
+FROM zhiyuli/tethys_base:1.5-release-1.0
 # This dockerfile will pip install requirements.txt when it is built
 
 ### Begin - App-specific Additions/Changes ###
