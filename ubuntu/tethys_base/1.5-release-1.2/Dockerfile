@@ -118,13 +118,35 @@ RUN apt-get update && apt-get install --fix-missing -y zlib1g-dev \
                                      libsqlite3-dev \
                                      libsqlite3-mod-spatialite \
                                      rabbitmq-server
-
+# install grass7.2.1
 RUN add-apt-repository ppa:ubuntugis/ubuntugis-unstable -y && apt-get update && apt-get install -y --no-install-recommends grass=7.2.1-1~xenial4
 
-# install tethys system requirements.txt
+
+#install icommands
+#ENV IRODS_VERSION 4.1.8
+#RUN apt-get update && apt-get install -y --no-install-recommends curl libfuse2 && rm -rf /var/lib/apt/lists/* \
+#    && curl ftp://ftp.renci.org/pub/irods/releases/4.1.8/ubuntu14/irods-icommands-4.1.8-ubuntu14-x86_64.deb -o irods-icommands.deb \
+#    && dpkg -i irods-icommands.deb \
+#    && apt-get -f install \
+#    && rm irods-icommands.deb \
+#    && apt-get purge -y --auto-remove curl
+
+# Install iRODS v.4.2.1
+ENV IRODS_VERSION 4.2.1
+RUN apt-get update && apt-get install -y apt-transport-https && wget -qO - https://packages.irods.org/irods-signing-key.asc | apt-key add - \
+    && echo "deb [arch=amd64] https://packages.irods.org/apt/ trusty main" | \
+    tee /etc/apt/sources.list.d/renci-irods.list \
+    && apt-get update && apt-get install -y \
+    irods-runtime=4.2.1 \
+    irods-icommands=4.2.1
+
+# install tethys and other requirements.txt
 COPY requirements.txt /tmp/
 RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
     rm -f /tmp/requirements.txt
+
+# install sherry's pywps
+RUN git clone https://github.com/xhqiao89/pywps.git --branch tethys_fix /tmp/pywps && cd /tmp/pywps && python setup.py install && rm -rf /tmp/pywps
 
 ## install extra common python libs used by apps
 #COPY extra_requirements.txt /tmp/
