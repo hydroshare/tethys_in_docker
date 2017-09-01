@@ -1,15 +1,13 @@
-# This Dockerfile is using the requirements.txt files from Tethys 1.4.0-candidate
-# https://github.com/tethysplatform/tethys/commit/2f4f7f7d3a01313a50d5b09d7b9b520ba9475cae
+#tethys_base:1.5-release-1.2
 
 FROM ubuntu:16.04
-RUN apt-get update && apt-get upgrade -y && apt-get install -y software-properties-common
+RUN apt update && apt upgrade -y && apt install -y software-properties-common
 
-RUN apt-get install --fix-missing -y ca-certificates \
+RUN apt update && apt install --fix-missing -y ca-certificates \
                                      apt-utils \
                                      build-essential \
                                      wget \
                                      python-dev \
-                                 #    python-pip \
                                      libpq-dev \
                                      libxml2-dev \
                                      libxslt1-dev \
@@ -34,42 +32,7 @@ RUN wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py  && \
 
 ENV PATH /usr/local/bin:$PATH
 
-## compile and install GDAL and its python wrapper
-#COPY lib_src/gdal-2.1.2.tar.gz /tmp/
-#RUN tar xzvf /tmp/gdal-2.1.2.tar.gz --directory /tmp && \
-#    rm -f /tmp/gdal-2.1.2.tar.gz && \
-#    cd /tmp/gdal-2.1.2 && \
-#    ./configure --with-python --prefix=/usr && \
-#    make && \
-#    make install && \
-#    ldconfig && \
-#    rm -rf /tmp/gdal-2.1.2
-#
-## compile and install phreeqc
-#COPY lib_src/iphreeqc-3.3.3-10424.tar.gz /tmp/
-#RUN tar xzvf /tmp/iphreeqc-3.3.3-10424.tar.gz --directory /tmp && \
-#    rm -f /tmp/iphreeqc-3.3.3-10424.tar.gz && \
-#    cd /tmp/iphreeqc-3.3.3-10424 && \
-#    ./configure --prefix=/usr && \
-#    make && \
-#    make install && \
-#    ldconfig && \
-#    rm -rf /tmp/iphreeqc-3.3.3-10424
-#
-## install iphreeqc python wrapper
-#COPY lib_src/phreeqpy-0.2.0.tar.gz /tmp/
-#RUN tar xzvf /tmp/phreeqpy-0.2.0.tar.gz --directory /tmp && \
-#    rm -f /tmp/phreeqpy-0.2.0.tar.gz && \
-#    cd /tmp/phreeqpy-0.2.0 && \
-#    python setup.py install && \
-#    rm -rf /tmp/phreeqpy-0.2.0
-#
-## link iphreeqc python wrapper to iphreeqc lib
-#RUN cp /usr/lib/libiphreeqc.so /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg/phreeqpy/iphreeqc && \
-#    rm /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg/phreeqpy/iphreeqc/libiphreeqc.so.0.0.0 && \
-#    mv /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg/phreeqpy/iphreeqc/libiphreeqc.so /usr/local/lib/python2.7/dist-packages/phreeqpy-0.2.0-py2.7.egg/phreeqpy/iphreeqc/libiphreeqc.so.0.0.0
-
-# install gdal binary
+# install pre-built gdal binary
 ENV GDAL_DATA /usr/share/gdal
 # COPY lib_src/gdal-2.1.2-ubuntu16-binary.tar.gz /tmp/
 RUN cd /tmp && \
@@ -83,7 +46,7 @@ RUN cd /tmp && \
     rm -rf gdal && \
     ldconfig
 
-# install iphreeqc binary
+# install iphreeqc pre-built binary
 COPY lib_src/iphreeqc-3.3.9-11951-ubuntu16-binary.tar.gz /tmp/
 RUN cd /tmp && \
     tar xzvf iphreeqc-3.3.9-11951-ubuntu16-binary.tar.gz && \
@@ -109,19 +72,46 @@ RUN cp /usr/lib/libiphreeqc.so /usr/local/lib/python2.7/dist-packages/phreeqpy-0
 
 
 # install netCDF4 dependencies
-RUN apt-get install --fix-missing -y zlib1g-dev \
+RUN apt-get update && apt-get install --fix-missing -y zlib1g-dev \
                                      libhdf5-serial-dev \
-                                     libnetcdf-dev
+                                     libnetcdf-dev \
+                                     libproj-dev \
+                                     netcdf-bin \
+                                     nco \
+                                     sqlite3 \
+                                     libsqlite3-dev \
+                                     libsqlite3-mod-spatialite \
+                                     rabbitmq-server
+# install grass7.2.1
+RUN add-apt-repository ppa:ubuntugis/ubuntugis-unstable -y && apt-get update && apt-get install -y --no-install-recommends grass=7.2.1-1~xenial4
 
-# install tethys system requirements.txt
+
+#install icommands
+#ENV IRODS_VERSION 4.1.8
+#RUN apt-get update && apt-get install -y --no-install-recommends curl libfuse2 && rm -rf /var/lib/apt/lists/* \
+#    && curl ftp://ftp.renci.org/pub/irods/releases/4.1.8/ubuntu14/irods-icommands-4.1.8-ubuntu14-x86_64.deb -o irods-icommands.deb \
+#    && dpkg -i irods-icommands.deb \
+#    && apt-get -f install \
+#    && rm irods-icommands.deb \
+#    && apt-get purge -y --auto-remove curl
+
+# Install iRODS v.4.2.1
+ENV IRODS_VERSION 4.2.1
+RUN apt-get update && apt-get install -y apt-transport-https && wget -qO - https://packages.irods.org/irods-signing-key.asc | apt-key add - \
+    && echo "deb [arch=amd64] https://packages.irods.org/apt/ trusty main" | \
+    tee /etc/apt/sources.list.d/renci-irods.list \
+    && apt-get update && apt-get install -y \
+    irods-runtime=4.2.1 \
+    irods-icommands=4.2.1
+
+# install tethys and other requirements.txt
 COPY requirements.txt /tmp/
 RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
     rm -f /tmp/requirements.txt
 
-# install extra common python libs used by apps
-COPY extra_requirements.txt /tmp/
-RUN pip install --no-cache-dir -r /tmp/extra_requirements.txt && \
-    rm -f /tmp/extra_requirements.txt
+# install sherry's pywps
+RUN git clone https://github.com/xhqiao89/pywps.git --branch tethys_fix /tmp/pywps && cd /tmp/pywps && python setup.py install && rm -rf /tmp/pywps
+
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
