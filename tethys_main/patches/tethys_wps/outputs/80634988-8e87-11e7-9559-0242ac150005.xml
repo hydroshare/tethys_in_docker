@@ -1,0 +1,17 @@
+<wps:ExecuteResponse xmlns:gml="http://www.opengis.net/gml" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsExecute_response.xsd" service="WPS" version="1.0.0" xml:lang="en-US" serviceInstance="http://10.2.115.24:8000/tethys_wps?service=WPS&amp;request=GetCapabilities" statusLocation="http://10.2.115.24:8000/tethys_wps/outputs/80634988-8e87-11e7-9559-0242ac150005.xml">
+  <wps:Process wps:processVersion="0.1">
+    <ows:Identifier>watersheddelinservice</ows:Identifier>
+    <ows:Title>Watershed delineation process</ows:Title>
+    <ows:Abstract>This process provides watershed delineation function using GRASS</ows:Abstract>
+  </wps:Process>
+  <wps:Status creationTime="2017-08-31T20:04:19Z">
+    <wps:ProcessSucceeded>PyWPS Process Watershed delineation process finished</wps:ProcessSucceeded>
+  </wps:Status>
+  <wps:ProcessOutputs>
+    <wps:Output>
+      <ows:Identifier>watershed</ows:Identifier>
+      <ows:Title>Delineated Watershed</ows:Title>
+      <wps:Reference xlink:href="http://10.2.115.24:8000/tethys_wps/outputs/dr_srtm_30_3857_basin_627777feMJ9vnH.GEOJSON" mimeType="application/gml+xml"/>
+    </wps:Output>
+  </wps:ProcessOutputs>
+</wps:ExecuteResponse>

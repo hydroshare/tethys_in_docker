@@ -17,6 +17,8 @@ from tethys_portal.views import accounts as tethys_portal_accounts, developer as
     error as tethys_portal_error, home as tethys_portal_home, user as tethys_portal_user
 from tethys_apps import views as tethys_apps_views
 from django.conf import settings
+from tethys_wps import wps_wsgi
+from tethys_wps import outputs
 
 account_urls = [
     url(r'^login/$', tethys_portal_accounts.login_view, name='login'),
@@ -59,6 +61,8 @@ urlpatterns = [
     url(r'^oauth2/', include('social.apps.django_app.urls', namespace='social')),
     url(r'^user/(?P<username>[\w.@+-]+)/', include(user_urls, namespace='user')),
     url(r'^apps/', include('tethys_apps.urls')),
+    url(r'^tethys_wps/$', wps_wsgi.wps_wsgi),
+    url(r'^tethys_wps/outputs/(?P<fn>.*)/$', outputs.outputs),
     url(r'^developer/', include(developer_urls)),
     url(r'^handoff/(?P<app_name>[\w-]+)/$', tethys_apps_views.handoff_capabilities, name='handoff_capabilities'),
     url(r'^handoff/(?P<app_name>[\w-]+)/(?P<handler_name>[\w-]+)/$', tethys_apps_views.handoff, name='handoff'),
