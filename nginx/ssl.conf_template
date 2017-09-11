@@ -117,4 +117,11 @@ server {
         proxy_redirect http://$server_name:8080/ https://$server_name/;
     }
 
+    # flower
+    location /flower/ {
+        rewrite ^/flower/(.*)$ /$1 break;
+        proxy_pass http://tethys_in_docker_main:5555;
+        proxy_redirect off;
+    }
+
 }

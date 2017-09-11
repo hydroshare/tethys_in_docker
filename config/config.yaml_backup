@@ -2,7 +2,7 @@
 
 ################################################ tethys_nginx ############################################
 # change ssl.conf
-TETHYS_NGINX_DOMAIN_NAME: 10.2.115.215
+TETHYS_NGINX_DOMAIN_NAME: 10.2.115.24
 
 # enable maintenance page (Y or N)
 TETHYS_NGINX_MAINTENANCE_ON: N
@@ -17,7 +17,7 @@ TETHYS_NGINX_SSL_CERT_FILE_SERVER_KEY: ./nginx/certs/server.key
 ################################################ tethys_postgis ##################################################
 # change postgis.env
 TETHYS_POSTGIS_TETHYS_DEFAULT_PASS: pass_default
-TETHYS_POSTGIS_TETHYS_DB_MANAGER_PASS: pass_db_manageer
+TETHYS_POSTGIS_TETHYS_DB_MANAGER_PASS: pass_db_manager
 TETHYS_POSTGIS_TETHYS_SUPER_PASS: pass_super
 TETHYS_POSTGIS_OPEN_PORTS: Y
 TETHYS_POSTGIS_MAP_INTERNAL_5432_TO: 5435
@@ -27,10 +27,10 @@ TETHYS_POSTGIS_MAP_INTERNAL_5432_TO: 5435
 TETHYS_MAIN_SERVICE_ACCOUNT_UID: 1000
 TETHYS_MAIN_SERVICE_ACCOUNT_GID: 1000
 
-#TETHYS_MAIN_GITHUB_REPO: https://github.com/tethysplatform/tethys.git
-TETHYS_MAIN_GITHUB_REPO: https://github.com/zhiyuli/tethys.git
+TETHYS_MAIN_GITHUB_REPO: https://github.com/tethysplatform/tethys.git
+#TETHYS_MAIN_GITHUB_REPO: https://github.com/zhiyuli/tethys.git
 
-TETHYS_MAIN_BRANCH_NAME: dev
+TETHYS_MAIN_BRANCH_NAME: 2d70c2dca6224be3f9b11465d1e32ab4c6fb5f2f
 
 # change settings.py
 # Do not contain 'pound sign #' or 'and sign &'
@@ -61,14 +61,14 @@ TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_KEY: y8w6FPhW1c5jGMsSfkkNyZ5LPt1v3SaLibkktRHz
 TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_SECRET: yWGer4UOwkUyTYzpP15BU7SNzRZRt7H0iwxO5YhnC1bNJLyWU0eB0iPFRAhr9b4TM8tQdDOUvD5kqg86I3gxhiUjU5ay7kqN3VbnwNs1B9BCeXiVkMRRqvfiXYcYgMLP
 
 # Y or N
-TETHYS_MAIN_HYDROSHARE_BETA_BACKEND: Y
+TETHYS_MAIN_HYDROSHARE_BETA_BACKEND: N
 # python string
 TETHYS_MAIN_HYDROSHARE_BETA_BACKEND_MODULE: "tethys_services.backends.hydroshare_beta.HydroShareBetaOAuth2"
 TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_KEY: NBv1zGvR1Gdw07QZMPvC3NvCOwPf2ch8uebTtMLI
 TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_BETA_SECRET: 0gXWPZxPJBHLcA8JHkjztjtUuNp1LDhpoIWSrxBUo32bZerbU5b1ujuU80yhsfdOJEzQqQO6Wvad7O5W71JZqzvoHXp6CjFmPirpv8r6K3IJhBI0GvIJ4qD9x4SXqELt
 
 # Y or N
-TETHYS_MAIN_HYDROSHARE_PLAYGROUND_BACKEND: Y
+TETHYS_MAIN_HYDROSHARE_PLAYGROUND_BACKEND: N
 # python string
 TETHYS_MAIN_HYDROSHARE_PLAYGROUND_BACKEND_MODULE: "tethys_services.backends.hydroshare_playground.HydroSharePlaygroundOAuth2"
 TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_PLAYGROUND_KEY: B9SekrmKRpEhqaMOSUD883ExbT55e2Snbyrnk3A9
@@ -76,14 +76,33 @@ TETHYS_MAIN_SOCIAL_AUTH_HYDROSHARE_PLAYGROUND_SECRET: iFLgfSmbi9aXJh5e6EubvPo7ld
 
 # change docker-compose.yml
 # Y or N
-TETHYS_MAIN_MOUNT_RENCI_FOLDER: N
-TETHYS_MAIN_MOUNT_RENCI_FOLDER_PATH: /projects/water/nwm/
+TETHYS_MAIN_MOUNT_OTHER_FOLDER: Y
+# Max 10 folders (Folder ID 0-9)
+TETHYS_MAIN_MOUNT_OTHER_FOLDER_COUNT: 2
+
+## Local Development Mode
+TETHYS_MAIN_MOUNT_OTHER_FOLDER_0: /media/sf_nwm_new_data:/projects/water/nwm/data/nomads
+TETHYS_MAIN_MOUNT_OTHER_FOLDER_1: /home/drew/Desktop/nwm.sqlite:/nwm.sqlite
+
+# Production Mode
+#TETHYS_MAIN_MOUNT_OTHER_FOLDER_0: /projects/water/nwm/:/projects/water/nwm
+#TETHYS_MAIN_MOUNT_OTHER_FOLDER_1: /projects/hydroshare/apps/apps_common_files/nwm.sqlite:/nwm.sqlite
+
+
 TETHYS_MAIN_OPEN_PORTS: Y
 TETHYS_MAIN_MAP_INTERNAL_8000_TO: 8000
+TETHYS_MAIN_MAP_INTERNAL_5555_TO: 5555
 
+# celery
+# number of concurrent task
+TETHYS_MAIN_CELERY_TASK_CONCURRENCY: 2
+
+# celery Flower admin
+TETHYS_MAIN_FLOWER_USERNAME: admin
+TETHYS_MAIN_FLOWER_PASSWORD: HydroShare
 ############################################## tethys_geoserver ##############################################
 # change geoserver.env
-TETHYS_GEOSERVER_ENABLED_NODES: 2
+TETHYS_GEOSERVER_ENABLED_NODES: 1
 TETHYS_GEOSERVER_REST_NODES: 1
 TETHYS_GEOSERVER_NUM_CORES: 2
 # discard a request from queue after given seconds

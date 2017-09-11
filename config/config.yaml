@@ -92,6 +92,14 @@ TETHYS_MAIN_MOUNT_OTHER_FOLDER_1: /home/drew/Desktop/nwm.sqlite:/nwm.sqlite
 TETHYS_MAIN_OPEN_PORTS: Y
 TETHYS_MAIN_MAP_INTERNAL_8000_TO: 8000
 TETHYS_MAIN_MAP_INTERNAL_5555_TO: 5555
+
+# celery
+# number of concurrent task
+TETHYS_MAIN_CELERY_TASK_CONCURRENCY: 2
+
+# celery Flower admin
+TETHYS_MAIN_FLOWER_USERNAME: admin
+TETHYS_MAIN_FLOWER_PASSWORD: HydroShare
 ############################################## tethys_geoserver ##############################################
 # change geoserver.env
 TETHYS_GEOSERVER_ENABLED_NODES: 1

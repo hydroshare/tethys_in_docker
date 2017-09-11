@@ -30,6 +30,7 @@ services:
     #_#_#_#<TETHYS_MAIN_OPEN_PORTS>#_#_#_#
     #_#_#_#<TETHYS_MAIN_MAP_INTERNAL_8000_TO>#_#_#_#
     #_#_#_#<TETHYS_MAIN_MAP_INTERNAL_5555_TO>#_#_#_#
+
     volumes:
       - ./tethys/:/tethys
       - ./tethys_main/settings.py:/tethys/tethys_apps/settings.py
@@ -104,6 +105,7 @@ services:
       - tethys_in_docker_main
       - tethys_in_docker_geoserver
       - tethys_in_docker_n52wps
+      #- tethys_in_docker_flower
 
   tethys_in_docker_geoserver:
 #    restart: always
@@ -133,3 +135,26 @@ services:
     #volumes:
     #  - ./logs/n52wps/tomcat7/:/var/log/tomcat7
     #  - ./logs/n52wps/supervisor/:/var/log/supervisor
+
+
+  #tethys_in_docker_rabbitmq:
+  #  image: rabbitmq:3.6
+  #  container_name: tethys_in_docker_rabbitmq
+  #  ports:
+  #    - "15672:15672"
+  #  depends_on:
+  #    - tethys_in_docker_main
+
+  #tethys_in_docker_flower:
+  #  image: njordr/celery-flower
+  #  container_name: tethys_in_docker_flower
+  #  ports:
+  #    - "5556:5555"
+  #  volumes:
+  #    - ./flower/:/var/flower/db
+  #    - ./flower/flowerconfig.py:/etc/flower/flowerconfig.py
+  #  depends_on:
+  #    - tethys_in_docker_rabbitmq
+
+
+

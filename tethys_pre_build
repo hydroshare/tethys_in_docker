@@ -215,6 +215,12 @@ else
         ./tethys_main/settings.py
 fi
 
+#gunicorn-supervisor.conf
+sed -e 's/##CELERY_TASK_CONCURRENCY##/'"${TETHYS_MAIN_CELERY_TASK_CONCURRENCY}"'/' \
+    -e 's/##FLOWER_USERNAME##/'"${TETHYS_MAIN_FLOWER_USERNAME}"'/' \
+    -e 's/##FLOWER_PASSWORD##/'"${TETHYS_MAIN_FLOWER_PASSWORD}"'/' \
+    ./tethys_main/gunicorn-supervisor.conf_template >./tethys_main/gunicorn-supervisor.conf
+
 ###############################  Tethys_N52WPS ###############################
 # n52wps.env
 cp -f ./n52wps/n52wps.env_template ./n52wps/n52wps.env

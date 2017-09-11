@@ -156,11 +156,13 @@ INSTALLED_APPS = (
     'heartbeat',
 )
 
-# celery settings
+# Celery settings
 BROKER_URL = 'amqp://myuser:mypassword@localhost:5672/myvhost'
+#BROKER_URL = 'amqp://guest:guest@tethys_in_docker_rabbitmq:5672/'
 CELERY_RESULT_BACKEND = 'django-db'
-CELERY_TASK_RESULT_EXPIRES = 1209600  # 14 days = 60*60*24*14
-# CELERY_RESULT_PERSISTENT = True
+result_expires = 0  # in seconds; 0: never delete records
+task_track_started = True  # report "job started" status
+# result_persistent = True
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -211,10 +213,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tethys_default',
-        #'USER': 'tethys_default',
-        #'PASSWORD': '<TETHYS_POSTGIS_TETHYS_DEFAULT_PASS>',
-        'USER': 'tethys_super',
-        'PASSWORD': '<TETHYS_POSTGIS_TETHYS_SUPER_PASS>',
+        'USER': 'tethys_default',
+        'PASSWORD': '<TETHYS_POSTGIS_TETHYS_DEFAULT_PASS>',
+        #'USER': 'tethys_super',
+        #'PASSWORD': '<TETHYS_POSTGIS_TETHYS_SUPER_PASS>',
         'HOST': 'tethys_in_docker_postgis',
         'PORT': '5432'
     }
@@ -319,8 +321,6 @@ GRAVATAR_DEFAULT_IMAGE = 'retro'
 GRAVATAR_DEFAULT_RATING = 'g'
 GRAVATAR_DFFAULT_SECURE = True
 
-
-
 # Use this setting to bypass the home page
 BYPASS_TETHYS_HOME_PAGE = <TETHYS_MAIN_BYPASS_TETHYS_HOME_PAGE>
 
@@ -343,7 +343,6 @@ LOGIN_URL = <TETHYS_MAIN_LOGIN_URL>
 #EMAIL_HOST_PASSWORD = ''
 #EMAIL_USE_TLS = False
 #DEFAULT_FROM_EMAIL = 'Example <noreply@exmaple.com>'
-
 
 # OAuth Settings
 # http://psa.matiasaguirre.net/docs/configuration/index.html
@@ -396,3 +395,12 @@ GEOSERVER_URL_BASE = <TETHYS_GEOSERVER_URL_BASE>
 GEOSERVER_URL_SSL_BASE = <TETHYS_GEOSERVER_URL_SSL_BASE>
 GEOSERVER_USER_NAME = <TETHYS_GEOSERVER_USER_NAME>
 GEOSERVER_USER_PASSWORD = <TETHYS_GEOSERVER_USER_PASSWORD>
+
+
+# celery settings for NWM Viewer app
+NWM_VIEWER_SUBSETTING_SOFT_TIME_LIMIT=1200  # 20 Min in seconds
+NWM_VIEWER_SUBSETTING_TIME_LIMIT=1800  # 30 Min in seconds
+NWM_VIEWER_SUBSETTING_RATE_LIMIT="10/m"  # number of request pre min
+NWM_VIEWER_SUBSETTING_CLEAN_UP_MINUTE="1" # cleanup - "1" every 1st minute
+NWM_VIEWER_SUBSETTING_CLEAN_UP_HOUR="*/2" # cleanup - "*/2" every 2 hour
+NWM_VIEWER_SUBSETTING_RESULT_LIFE_MINUTE=1440  # 1 day in minutes
