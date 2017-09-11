@@ -9,7 +9,7 @@ RUN apt-get update
 ### END - App-specific Additions/Changes ###
 
 # Enable rabbitmq api
-RUN rabbitmq-plugins enable rabbitmq_management
+RUN rabbitmq-plugins enable --offline rabbitmq_management
 
 RUN mkdir /tethys
 
