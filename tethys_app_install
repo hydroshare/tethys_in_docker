@@ -24,6 +24,7 @@ install_all_apps() {
             #docker exec -it tethys_in_docker_main bash -c "tethys syncstores all --manage /tethys/manage.py"
         fi
     done
+    cd ..
 }
 
 echo $#

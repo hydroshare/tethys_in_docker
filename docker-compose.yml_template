@@ -53,6 +53,7 @@ services:
       - ./workspaces/:/var/www/tethys/workspaces
       - ./apps/:/apps
       - ./logs/:/logs
+      - ./tethys_main/patches/django_celery_beat/schedulers.py:/usr/local/lib/python2.7/dist-packages/django_celery_beat/schedulers.py
 
       # Do not remove following lines.
       #_#_#_#<TETHYS_MAIN_MOUNT_OTHER_FOLDER_0>#_#_#_#

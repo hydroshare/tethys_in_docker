@@ -13,4 +13,5 @@ docker exec -it tethys_in_docker_main bash -c "chown -R tethys-user:tethys-group
 ## groupadd -g 999 vm-mounted-group
 ## usermod -a -G vm-mounted-group tethys-user
 ## id tethys-user
+echo "Changing permission done"
 
