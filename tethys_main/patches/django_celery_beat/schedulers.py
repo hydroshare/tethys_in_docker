@@ -253,18 +253,18 @@ class DatabaseScheduler(Scheduler):
         self.schedule.update(s)
 
     def install_default_entries(self, data):
-        # entries = {}
-        # if self.app.conf.result_expires:
-        #     entries.setdefault(
-        #         'celery.backend_cleanup', {
-        #             'task': 'celery.backend_cleanup',
-        #             'schedule': schedules.crontab('*', '*', '*'),
-        #             #'options': {'expires': 12 * 3600},
-        #             #'options': {'expires': self.app.conf.result_expires},
-        #             'options': {'expires': 180},
-        #         },
-        #     )
-        # self.update_from_dict(entries)
+        entries = {}
+        if self.app.conf.result_expires:
+            entries.setdefault(
+                'celery.backend_cleanup', {
+                    'task': 'celery.backend_cleanup',
+                    'schedule': schedules.crontab('*', '*', '*'),
+                    #'options': {'expires': 12 * 3600},
+                    #'options': {'expires': self.app.conf.result_expires},
+                    'options': {'expires': 180},
+                },
+            )
+        self.update_from_dict(entries)
         pass
 
     @property

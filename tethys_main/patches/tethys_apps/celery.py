@@ -15,9 +15,10 @@ app = Celery('tethys_apps')
 
 ## celery 4.1
 app.config_from_object('django.conf:settings', namespace='CELERY')
-# Load task modules from all registered Django app configs.
-app.autodiscover_tasks()
 
+# Load task modules from all registered Django app configs.
+app.conf.result_expires = 30 * 24 * 3600  # remove results from db after 1 month (in seconds)
+app.autodiscover_tasks()
 # celery 3.1
 #app.config_from_object('django.conf:settings')
 #app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
