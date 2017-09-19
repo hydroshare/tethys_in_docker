@@ -151,7 +151,8 @@ fi
 echo "Running init-tethys script"
 docker exec -it tethys_in_docker_main /bin/bash /tethys_main/init-tethys $USER_ID $GROUP_ID
 
-if [ $DB_RESTORED = "N" ] && [ $DB_REMOVED = "Y" ]
+#if [ $DB_RESTORED = "N" ] && [ $DB_REMOVED = "Y" ]
+if [ $DB_REMOVED = "Y" ]
 then
     read -p "Create a new Tethys Admin user (default: No)? " -n 1 -r
     echo    # (optional) move to a new line

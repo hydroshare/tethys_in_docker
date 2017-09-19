@@ -107,18 +107,27 @@ server {
 
     # geoserver
     location /geoserver/ {
+        # maintenance page switch
+        #_#TETHYS_NGINX_MAINTENANCE_ON#_#return 503;
+
         proxy_pass http://tethys_in_docker_geoserver:8181;
         proxy_redirect http://$server_name:8181/ https://$server_name/;
     }
 
     # n52wps
     location /wps/ {
+        # maintenance page switch
+        #_#TETHYS_NGINX_MAINTENANCE_ON#_#return 503;
+
         proxy_pass http://tethys_in_docker_n52wps:8080;
         proxy_redirect http://$server_name:8080/ https://$server_name/;
     }
 
     # flower
     location /flower/ {
+        # maintenance page switch
+        #_#TETHYS_NGINX_MAINTENANCE_ON#_#return 503;
+
         rewrite ^/flower/(.*)$ /$1 break;
         proxy_pass http://tethys_in_docker_main:5555;
         proxy_redirect off;
