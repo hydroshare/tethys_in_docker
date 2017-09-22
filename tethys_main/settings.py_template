@@ -161,7 +161,7 @@ BROKER_URL = 'amqp://myuser:mypassword@localhost:5672/myvhost'
 #BROKER_URL = 'amqp://guest:guest@tethys_in_docker_rabbitmq:5672/'
 CELERY_RESULT_BACKEND = 'django-db'
 #result_expires = 30 * 24 * 3600   # Remove records after 1 month. This setting does not work. A workaround is set in celery.py
-task_track_started = True  # report "job started" status
+CELERY_TRACK_STARTED = True  # report "job started" status
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
