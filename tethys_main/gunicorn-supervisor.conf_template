@@ -26,7 +26,7 @@ redirect_stderr=true
 priority=20
 
 [program:celery]
-command=celery -A tethys_apps worker --loglevel=WARNING --concurrency ##CELERY_TASK_CONCURRENCY## -E
+command=celery -A tethys_apps worker --loglevel=DEBUG --concurrency ##CELERY_TASK_CONCURRENCY## -E
 user=tethys-user
 ; see: https://stackoverflow.com/questions/9034709/incorrect-user-for-supervisord-celeryd
 environment=HOME="/home/tethys-user",USER="tethys-user"
@@ -38,8 +38,8 @@ priority=1001
 killasgroup=true
 
 [program:celery-beat]
-;command=celery beat -A tethys_apps --loglevel=WARNING -s /tethys/celerybeat-schedule
-command=celery beat -A tethys_apps --loglevel=WARNING --scheduler django_celery_beat.schedulers:DatabaseScheduler
+;command=celery beat -A tethys_apps --loglevel=DEBUG -s /tethys/celerybeat-schedule
+command=celery beat -A tethys_apps --loglevel=DEBUG --scheduler django_celery_beat.schedulers:DatabaseScheduler
 user=tethys-user
 ; see: https://stackoverflow.com/questions/9034709/incorrect-user-for-supervisord-celeryd
 environment=HOME="/home/tethys-user",USER="tethys-user"

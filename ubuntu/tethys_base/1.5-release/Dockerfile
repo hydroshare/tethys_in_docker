@@ -82,8 +82,11 @@ RUN apt-get update && apt-get install --fix-missing -y zlib1g-dev \
                                      libsqlite3-dev \
                                      libsqlite3-mod-spatialite \
                                      rabbitmq-server
+
+RUN rabbitmq-plugins enable --offline rabbitmq_management
+
 # install grass7.2.1
-RUN add-apt-repository ppa:ubuntugis/ubuntugis-unstable -y && apt-get update && apt-get install -y --no-install-recommends grass=7.2.1-1~xenial4
+RUN add-apt-repository ppa:ubuntugis/ubuntugis-unstable -y && apt-get update && apt-get install -y --no-install-recommends grass=7.2.2-1~xenial1
 
 
 #install icommands
@@ -112,9 +115,19 @@ RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
 # install sherry's pywps
 RUN git clone https://github.com/xhqiao89/pywps.git --branch tethys_fix /tmp/pywps && cd /tmp/pywps && python setup.py install && rm -rf /tmp/pywps
 
+RUN mkdir /tethys
+
+RUN groupadd tethys-group
+RUN useradd -g tethys-group tethys-user
+RUN mkdir -p /home/tethys-user
+RUN chown -R tethys-user:tethys-group /home/tethys-user
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 ONBUILD COPY requirements.txt /usr/src/app/
 ONBUILD RUN pip install --no-cache-dir -r requirements.txt
+
+# persist tethys-platform and apps installed by pip after restarting container(s)
+# persist /etc/cron jobs and /etc/passwd
+VOLUME  ["/usr/local", "/tmp", "/etc"]

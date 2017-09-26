@@ -31,7 +31,7 @@ pysqlite==2.8.3
 fiona==1.7.5
 shapely==1.5.17
 netCDF4==1.2.9
-subset_nwm_netcdf==1.1.7
+subset_nwm_netcdf>=1.1.8
 celery==4.1.0
 django-celery-results==1.0.1
 django-celery-beat==1.0.1
@@ -57,3 +57,4 @@ werkzeug==0.12.2
 jsonschema==2.6.0
 functools32==3.2.3.post2
 termcolor==1.1.0
+ciso8601==1.0.5
