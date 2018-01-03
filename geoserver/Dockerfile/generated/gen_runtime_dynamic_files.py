@@ -33,7 +33,7 @@ def move_data_dir(geoserver_home, geoserver_data_dir):
         dir_list = os.listdir(tmp_data_dir)
         for item in dir_list:
             shutil.move(os.path.join(tmp_data_dir, item), geoserver_data_dir)
-    except shutil.Error:
+    except Exception:
         sys.stdout.write('WARNING: Could not copy sample data into data dir because the data already exists.')
     try:
         shutil.rmtree(tmp_data_dir)

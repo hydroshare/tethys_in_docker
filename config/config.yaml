@@ -102,7 +102,7 @@ TETHYS_MAIN_FLOWER_USERNAME: admin
 TETHYS_MAIN_FLOWER_PASSWORD: HydroShare
 ############################################## tethys_geoserver ##############################################
 # change geoserver.env
-TETHYS_GEOSERVER_ENABLED_NODES: 1
+TETHYS_GEOSERVER_ENABLED_NODES: 2
 TETHYS_GEOSERVER_REST_NODES: 1
 TETHYS_GEOSERVER_NUM_CORES: 2
 # discard a request from queue after given seconds

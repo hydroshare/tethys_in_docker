@@ -1,0 +1,89 @@
+./configure --with-python
+GDAL is now configured for x86_64-pc-linux-gnu
+
+  Installation directory:    /root/gdal_23_dev_bb4c395_binary
+  C compiler:                gcc -DHAVE_AVX_AT_COMPILE_TIME -DHAVE_SSSE3_AT_COMPILE_TIME -DHAVE_SSE_AT_COMPILE_TIME -g -O2
+  C++ compiler:              g++ -std=c++11 -DHAVE_AVX_AT_COMPILE_TIME -DHAVE_SSSE3_AT_COMPILE_TIME -DHAVE_SSE_AT_COMPILE_TIME -g -O2
+  C++14 support:             no
+
+  LIBTOOL support:           yes
+
+  LIBZ support:              external
+  LIBLZMA support:           no
+  cryptopp support:          no
+  crypto/openssl support:    yes
+  GRASS support:             no
+  CFITSIO support:           no
+  PCRaster support:          internal
+  LIBPNG support:            internal
+  DDS support:               no
+  GTA support:               no
+  LIBTIFF support:           internal (BigTIFF=yes)
+  LIBGEOTIFF support:        internal
+  LIBJPEG support:           external
+  12 bit JPEG:               no
+  12 bit JPEG-in-TIFF:       no
+  LIBGIF support:            internal
+  JPEG-Lossless/CharLS:      no
+  OGDI support:              no
+  HDF4 support:              no
+  HDF5 support:              yes
+  Kea support:               no
+  NetCDF support:            yes
+  Kakadu support:            no
+  JasPer support:            no
+  OpenJPEG support:          no
+  ECW support:               no
+  MrSID support:             no
+  MrSID/MG4 Lidar support:   no
+  JP2Lura support:           no
+  MSG support:               no
+  GRIB support:              yes
+  EPSILON support:           no
+  WebP support:              no
+  cURL support (wms/wcs/...):yes
+  PostgreSQL support:        yes
+  MRF support:               yes
+  MySQL support:             no
+  Ingres support:            no
+  Xerces-C support:          no
+  NAS support:               no
+  Expat support:             yes
+  libxml2 support:           yes
+  Google libkml support:     no
+  ODBC support:              no
+  PGeo support:              no
+  FGDB support:              no
+  MDB support:               no
+  PCIDSK support:            internal
+  OCI support:               no
+  GEORASTER support:         no
+  SDE support:               no
+  Rasdaman support:          no
+  DODS support:              no
+  SQLite support:            yes
+  PCRE support:              no
+  SpatiaLite support:        no
+  RasterLite2 support:       no
+  Teigha (DWG and DGNv8):    no
+  INFORMIX DataBlade support:no
+  GEOS support:              yes
+  SFCGAL support:            no
+  QHull support:             internal
+  Poppler support:           no
+  Podofo support:            no
+  PDFium support:            no
+  OpenCL support:            no
+  Armadillo support:         no
+  FreeXL support:            no
+  SOSI support:              no
+  MongoDB support:           no
+
+
+  SWIG Bindings:             python
+
+  Statically link PROJ.4:    no
+  enable GNM building:       yes
+  enable pthread support:    yes
+  enable POSIX iconv support:yes
+  hide internal symbols:     no

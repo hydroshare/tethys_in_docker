@@ -1,4 +1,4 @@
-FROM zhiyuli/tethys_base:1.5-release-1.3
+FROM zhiyuli/tethys_base:1.5-release-1.6
 
 ### Begin - App-specific Additions/Changes ###
 RUN apt-get update
