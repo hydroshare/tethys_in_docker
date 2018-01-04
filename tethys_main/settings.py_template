@@ -84,43 +84,43 @@ LOGGING = {
         },
         'tethys_apps': {
             'level': 'DEBUG',
-            'handlers': ['tethys_django_handler'],
+            'handlers': ['console', 'tethys_django_handler'],
         },
         'tethys_services': {
-            'level': 'DEBUG',
-            'handlers': ['tethys_django_handler'],
+            'level': 'ERROR',
+            'handlers': ['console', 'tethys_django_handler'],
         },
         'tethys_compute': {
-            'level': 'DEBUG',
-            'handlers': ['tethys_django_handler'],
+            'level': 'ERROR',
+            'handlers': ['console', 'tethys_django_handler'],
         },
         'tethys_config': {
-            'level': 'DEBUG',
-            'handlers': ['tethys_django_handler'],
+            'level': 'ERROR',
+            'handlers': ['console', 'tethys_django_handler'],
         },
         'tethys_gizmos': {
-            'level': 'DEBUG',
-            'handlers': ['tethys_django_handler'],
+            'level': 'ERROR',
+            'handlers': ['console', 'tethys_django_handler'],
         },
         'tethys_portal': {
-            'level': 'DEBUG',
-            'handlers': ['tethys_django_handler'],
+            'level': 'ERROR',
+            'handlers': ['console', 'tethys_django_handler'],
         },
         'tethys_sdk': {
-            'level': 'DEBUG',
-            'handlers': ['tethys_django_handler'],
+            'level': 'ERROR',
+            'handlers': ['console', 'tethys_django_handler'],
         },
+        # 'tethyscluster': {
+        #     'level': 'ERROR',
+        #     'handlers': ['tethys_django_handler'],
+        # },
         'tethys': {
-            'level': 'DEBUG',
-            'handlers': ['tethys_django_handler'],
-        },
-        'tethyscluster': {
-            'level': 'DEBUG',
-            'handlers': ['tethys_django_handler'],
+            'level': 'ERROR',
+            'handlers': ['console', 'tethys_django_handler'],
         },
         'django': {
-            'level': 'ERROR',
-            'handlers': ['tethys_django_handler'],
+            'level': 'DEBUG',
+            'handlers': ['console', 'tethys_django_handler'],
         },
         '': {
             'level': 'DEBUG',
