@@ -1,4 +1,4 @@
-#tethys_base:1.5-release-1.5
+#tethys_base:1.5-release-1.7
 
 FROM ubuntu:16.04
 RUN apt update && apt upgrade -y && apt install -y software-properties-common
@@ -34,6 +34,69 @@ RUN wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py  && \
     pip install --upgrade pip
 
 ENV PATH /usr/local/bin:$PATH
+
+RUN apt-get update \
+    && apt-get install -y --install-recommends \
+        autoconf2.13 \
+        autotools-dev \
+        bison \
+        flex \
+        g++ \
+        gettext \
+        libblas-dev \
+        libbz2-dev \
+        libcairo2-dev \
+        libfftw3-dev \
+        libfreetype6-dev \
+        libgdal-dev \
+        libgeos-dev \
+        libglu1-mesa-dev \
+        libjpeg-dev \
+        liblapack-dev \
+        liblas-c-dev \
+        libncurses5-dev \
+        libnetcdf-dev \
+        libpng-dev \
+        libpq-dev \
+        libproj-dev \
+        libreadline-dev \
+        libsqlite3-dev \
+        libtiff-dev \
+        libxmu-dev \
+        make \
+        netcdf-bin \
+        proj-bin \
+        python \
+        python-dev \
+        python-numpy \
+        python-pil \
+        python-ply \
+        unixodbc-dev \
+        zlib1g-dev \
+    && apt-get autoremove \
+    && apt-get clean
+
+
+RUN git clone https://github.com/GRASS-GIS/grass-ci.git /tmp/grass && cd /tmp/grass && \
+./configure \
+    --enable-largefile=yes \
+    --with-nls \
+    --with-cxx \
+    --with-readline \
+    --with-bzlib \
+    --with-pthread \
+    --with-proj-share=/usr/share/proj \
+    --with-geos=/usr/bin/geos-config \
+    --with-cairo \
+    --with-opengl-libs=/usr/include/GL \
+    --with-freetype=yes --with-freetype-includes="/usr/include/freetype2/" \
+    --with-sqlite=yes \
+    --with-liblas=yes --with-liblas-config=/usr/bin/liblas-config \
+    && make -j8 && make install && ldconfig && rm -rvf /tmp/grass
+
+# enable simple grass command regardless of version number
+RUN ln -s /usr/local/bin/grass* /usr/local/bin/grass && \
+    grass --text -c EPSG:4326 -e /tmp/grassdata/newLocation --exec g.extension --q extension=r.stream.snap prefix=/usr
 
 # install iphreeqc pre-built binary
 COPY lib_src/iphreeqc-3.3.9-11951-ubuntu16-binary.tar.gz /tmp/
@@ -74,6 +137,17 @@ RUN apt-get update && apt-get install --fix-missing -y zlib1g-dev \
                                      libsqlite3-dev \
                                      libsqlite3-mod-spatialite \
                                      rabbitmq-server
+
+RUN rabbitmq-plugins enable --offline rabbitmq_management
+
+# install grass7.2.1 and grass-dev (required for grass addons/extensions installation, like r.stream.snap)
+# install addon/extension r.stream.snap to /usr/bin/
+#RUN add-apt-repository ppa:ubuntugis/ppa -y && \
+#    apt-get update && \
+#    apt-get install -y --no-install-recommends grass=7.2.1-1~xenial1 grass-dev=7.2.1-1~xenial1 && \
+#    grass --text -c EPSG:4326 -e /tmp/grassdata/newLocation --exec g.extension --q extension=r.stream.snap prefix=/usr
+
+
 # install pre-built GDAL binary
 ENV GDAL_DATA /usr/share/gdal
 # COPY lib_src/gdal-2.3-dev-bb4c395-ubuntu16-binary.tar.gz /tmp/
@@ -87,16 +161,6 @@ RUN cd /tmp && \
     cp -rf gdal/lib/* /usr/lib/ && \
     rm -rf gdal && \
     ldconfig
-
-RUN rabbitmq-plugins enable --offline rabbitmq_management
-
-# install grass7.2.1 and grass-dev (required for grass addons/extensions installation, like r.stream.snap)
-# install addon/extension r.stream.snap to /usr/bin/
-RUN add-apt-repository ppa:ubuntugis/ppa -y && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends grass=7.2.1-1~xenial1 grass-dev=7.2.1-1~xenial1 && \
-    grass --text -c EPSG:4326 -e /tmp/grassdata/newLocation --exec g.extension --q extension=r.stream.snap prefix=/usr
-
 
 #install icommands
 #ENV IRODS_VERSION 4.1.8
